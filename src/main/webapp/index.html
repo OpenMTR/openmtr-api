@@ -1,5 +1,171 @@
+<!DOCTYPE html>
 <html>
+<!-- 2019 Capstone Project -->
+<!-- Jenny Franklin, James Willhoite, Matthew Thomas -->
+<!-- NOTE: Logo colors:
+    open MAIN H:212 S:90 L:50 ; R:13 G:121 B:242
+    MTR  MAIN H:233 S:60 L:50 ; R:51 G:69 B:204
+    -->
+
+<head>
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous">
+    </script>
+
+    <script src="semantic/dist/semantic.min.js"></script>
+</head>
+
 <body>
-<h2>Hello World!</h2>
+    <!-- Navbar -->
+    <!-- NOTE:
+         Semantic doesn't seem to have any built in menu collapse/responsive features.
+         I found a sort of example at https://jsfiddle.net/1712/g6agpoy9/
+         In order for this to be mobile friendly, this is a MUST.
+    -->
+    <div class="ui huge inverted menu">
+        <a class="item">
+            <div class="ui small image">
+                <img src="/image/logo-1-text.png">
+            </div>
+        </a>
+        <a class="active item">
+            Home
+        </a>
+        <!-- Split to right -->
+        <div class="right menu">
+            <a class="ui black massive icon button"
+               data-tooltip="Check out the project on Github"
+               data-position="bottom right"
+               data-inverted="">
+                <i class="github icon"></i>
+                <!-- LINK TO GITHUB -->
+            </a>
+            <a class="ui black massive icon button"
+               data-tooltip="Submit Bug Report"
+               data-position="bottom right"
+               data-inverted="">
+                <i class="bug icon"></i>
+                <!-- MODAL POP: BUG REPORT FORM -->
+            </a>
+            <a class="item">
+                Try it Yourself!
+            </a>
+            <a class="item">
+                Documentation
+            </a>
+            <!-- Dropdown -->
+            <div class="ui simple dropdown item">
+                Other
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item">About</div>
+                    <div class="item">Blog</div>
+                    <div class="item">Contact</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Navbar -->
+    <!-- Hero Image -->
+    <img class="ui fluid image" src="/image/grass-placeholder.png">
+    <!-- End Hero Image -->
+    <!-- Grid "Feature Boxes" -->
+    <div class="ui equal width center aligned padded grid">
+        <!-- Divider Row
+        <div class="row">
+            <div class="black column"> </div>
+        </div>-->
+        <!-- Boxes -->
+        <div class="row">
+            <div class="olive column">
+                <div class="ui small image">
+                    <img src="/image/cloud-api-feat-ph.png">
+                </div>
+            </div>
+            <div class="green column">
+                <div class="ui small image">
+                    <img src="/image/open-source-feat-ph.png">
+                </div>
+            </div>
+            <div class="teal column">
+                <div class="ui small image">
+                    <img src="/image/instant-read-feat-ph.png">
+                </div>
+            </div>
+            <div class="blue column">
+                <div class="ui small image">
+                    <img src="/image/user-friendly-feat-ph.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Feature Boxes -->
+
+    <h2>Hello World!</h2>
+
+    <!-- Start Footer -->
+    <div class="ui grid container">
+        <div class="ui four column centered divided grid">
+            <div class="row">
+                <div class="right aligned column">
+                    <h3>Column Title</h3>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                </div>
+                <div class="right aligned column">
+                    <h3>Column Title 2</h3>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                </div>
+                <div class="right aligned column">
+                    <h3>Column Title 3</h3>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                    <div class="item">
+                        <i class="right triangle icon"></i>
+                        Inline Text
+                    </div>
+                </div>
+                <div class="right aligned column">
+                    <div class="ui small image">
+                        <img src="/image/logo-1.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer -->
+
 </body>
 </html>
