@@ -1,0 +1,10 @@
+﻿.feature-box
+{
+    display: flex !important;
+
+}
+
+.feature-box .segment 
+{
+    flex-grow: 1;
+}
