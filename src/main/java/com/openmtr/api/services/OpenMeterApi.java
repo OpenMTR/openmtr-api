@@ -5,7 +5,12 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.File;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,6 +19,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,6 +29,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.servlet.ServletContext;
+
+import com.mattclinard.openmtr.*;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
 import javax.servlet.ServletContext;
 
 import com.mattclinard.openmtr.*;
@@ -91,8 +105,68 @@ public class OpenMeterApi {
 	
 	@POST
 	@Produces("application/json")
-	public Response putImage() {
-		return Response.ok().entity("{\"Response\" : \"POST Ok\"}").build();
+	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
+	public Response uploadImage(
+			@FormDataParam("file") InputStream inputStream,
+			@FormDataParam("file") FormDataContentDisposition fileDetail
+			) {
+		
+		//set the main folder location
+		this.saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
+		
+		//Create the Response Class
+		ReturnResponse rr = new ReturnResponse();
+		
+		//Check for empty file
+		try {
+			if(fileDetail.getFileName().isEmpty())
+				return rr.error("No file was uploaded", 400);
+			
+		} catch (Exception ex) {
+			return rr.error("No file was uploaded", 400);
+		}
+		
+		//The file location
+		String imageLocation = this.saveImageFolder + fileDetail.getFileName();
+		
+		//save the file to the imageLocation
+		try {
+			this.saveImage(inputStream, imageLocation);
+		} catch (Exception ex) {
+			return rr.error(ex.getMessage(), this.statusCode);
+		}
+		
+		//check to make sure the file exists
+		File image = new File(imageLocation);
+		if(!image.exists())
+			return rr.error("The image could not be found", 404);
+		
+		//check to make sure the file is an image
+		if(!this.testIfImage(imageLocation))
+			return rr.error("File is not an Image", 400);
+
+		
+		//Read the image into the byte[]
+		byte[] imageBytes = null;
+		try {
+			imageBytes = this.extractByteArray(imageLocation);
+		} catch (Exception ex) {
+			return rr.error(ex.getMessage(), this.statusCode);
+		}
+		
+		//test the image against Matt's Library
+		String meterRead = "";
+		try {
+			meterRead = OpenMeter.getMeterRead(imageBytes);
+		} catch (Exception ex) {
+			return rr.error("Could not read meter", 400);
+		}
+		
+		//Set the data
+		rr.setData("POST SUCCESS " + meterRead);
+		
+		// return the ok
+		return rr.success();
 	}
 	
 	/**
@@ -195,4 +269,32 @@ public class OpenMeterApi {
 		
 		return true;
 	}
+
+	/**
+	 * Will save the uploaded file to the given path
+	 * @param InputStream inputStream
+	 * @param String imagePath
+	 * @throws Exception
+	 * Thanks to https://www.mkyong.com/webservices/jax-rs/file-upload-example-in-jersey/
+	 */
+	private void saveImage(InputStream inputStream, String imagePath) throws Exception {
+		try {
+			//create the stream
+			OutputStream out = new FileOutputStream(new File(imagePath));
+			int read = 0;
+			//grab 1024 bytes at a time
+			byte[] bytes = new byte[1024];
+			//loop through the image stream in 1024 byte chunks
+			while((read = inputStream.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+			//flush out the buffer and close the file
+			out.flush();
+			out.close();
+		} catch (IOException ex) {
+			this.statusCode = 500;
+			throw new Exception("Could not save file");
+		}
+	}
+
 }
