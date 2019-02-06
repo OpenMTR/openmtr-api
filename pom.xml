@@ -33,7 +33,7 @@
 
 		<dependency>
 			<groupId>com.mattclinard.OpenMeter</groupId>
-			<artifactId>openmeter</artifactId>
+			<artifactId>OpenMeter</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
