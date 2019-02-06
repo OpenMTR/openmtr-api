@@ -13,7 +13,10 @@ var openMtrDemo = {
     buildBaseURL: function() {
         var base = document.location.origin;
 
-        window.baseURL = base + "/openmtr-api";
+        //Test on localhost
+        //window.baseURL = base + "/openmtr-api";
+        //for Azure
+        window.baseURL = base;
     },
 
     demoListeners: function() {
