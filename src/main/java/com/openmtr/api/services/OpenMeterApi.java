@@ -15,16 +15,15 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -39,9 +38,7 @@ import com.mattclinard.openmtr.*;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import javax.servlet.ServletContext;
-
-import com.mattclinard.openmtr.*;
+import java.util.logging.*;
 
 @Path("/read_meter")
 public class OpenMeterApi {
@@ -56,10 +53,13 @@ public class OpenMeterApi {
 	}
 	
 	
-	
+
 	@GET
 	@Produces("application/json")
-	public Response downloadFromUrl(@QueryParam("url") String url) {
+	public Response downloadFromUrl(
+			@QueryParam("url") String url, 
+			@QueryParam("numberOfDigits") String digits
+			) {
 		//Init the Return Response Class
 		ReturnResponse rr = new ReturnResponse();
 		
@@ -74,6 +74,10 @@ public class OpenMeterApi {
 		//Make sure the URL is a valid URL
 		if(!this.validateURL(url))
         	return rr.error("The given url is invalid. Please provide a format of http(s)://domain.com/image.extension", 400);
+		
+		String validateDigits = this.validateDigitsOnMeterFace(digits);
+		if(!validateDigits.isEmpty())
+			return rr.error(validateDigits, 400);
 		
 		//Download the image from the URL
 		String imagePath = null;
@@ -93,11 +97,15 @@ public class OpenMeterApi {
 		
 		//Test the byte[] against Matt C's library
 		String meterRead = "";
+		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = OpenMeter.getMeterRead(image);
-		} catch (Exception ex) {
-			return rr.error("Could not get Meter Read", 400);
+			meterRead = om.getMeterRead(image, "9999");
+		} catch (IOException ex) {
+			return rr.error("Could not Read Meter. ", 400);
+		} catch (NullPointerException ex) {
+			return rr.error("Problem with AI, fix comming", 500);
 		}
+		
 		
 		//All good, return the ok
 		rr.setData(meterRead);
@@ -111,14 +119,25 @@ public class OpenMeterApi {
 	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
 	public Response uploadImage(
 			@FormDataParam("file") InputStream inputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail
+			@FormDataParam("file") FormDataContentDisposition fileDetail,
+			@FormDataParam("numberOfDigits") String numberOfDigits
 			) {
+
 		
 		//set the main folder location
 		this.saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
 		
 		//Create the Response Class
 		ReturnResponse rr = new ReturnResponse();
+		
+		//For testing purpose only, show root directory
+		//return rr.error(System.getProperty("user.dir"), 400);
+		
+		//Check to make sure the numberOfDigits was supplied
+		String validateDigits = this.validateDigitsOnMeterFace(numberOfDigits);
+		if(!validateDigits.isEmpty())
+			return rr.error(validateDigits, 400);
+		
 		
 		//Check for empty file
 		try {
@@ -140,14 +159,14 @@ public class OpenMeterApi {
 			return rr.error(ex.getMessage(), this.statusCode);
 		}
 		
-		//check to make sure the file exists
-		File image = new File(imageLocation);
-		if(!image.exists())
-			return rr.error("The image could not be found", 404);
 		
 		//check to make sure the file is an image
-		if(!this.testIfImage(imageLocation))
-			return rr.error("File is not an Image", 400);
+		
+		try {
+			imageLocation = this.determineFileType(imageLocation);
+		} catch (Exception ex) {
+			return rr.error(ex.getMessage(), 400);
+		}
 
 		
 		//Read the image into the byte[]
@@ -160,10 +179,13 @@ public class OpenMeterApi {
 		
 		//test the image against Matt's Library
 		String meterRead = "";
+		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = OpenMeter.getMeterRead(imageBytes);
-		} catch (Exception ex) {
-			return rr.error("Could not read meter", 400);
+			meterRead = om.getMeterRead(imageBytes, "9999");
+		} catch (IOException ex) {
+			return rr.error("Could not Read Meter", 400);
+		} catch (NullPointerException ex) {
+			return rr.error("Porblem with AI, fix coming", 500);
 		}
 		
 		//Set the data
@@ -188,6 +210,26 @@ public class OpenMeterApi {
 	}
 	
 	/**
+	 * Will check to make sure the number of digits supplied is valid for a Meter Face
+	 * @param String numberOfDigits
+	 * @return String
+	 */
+	private String validateDigitsOnMeterFace(String numberOfDigits) {
+		try {
+			if(numberOfDigits.isEmpty())
+				return "Please supply the number of digits/dials on the face of the meter represented as 9999 (4 digits on Meter Face)";
+		} catch (NullPointerException ex) {
+			return "Parameter numberOfDigits not provided.";
+		}
+		
+		//Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
+		if(numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
+			return "The number of digits allowed on the Meter Face is between 3 and 6 digits.";
+		
+		return "";
+	}
+	
+	/**
 	 * Download the image from the given URL
 	 * @param String url
 	 * @return String Image File Location
@@ -205,6 +247,7 @@ public class OpenMeterApi {
 		//Get the file name from the url
 		String fileName = url.split("/")[url.split("/").length-1];
 		
+		
 		//Do the actual downloading of the image
 		try {
 			InputStream in = new URL(url).openStream();
@@ -221,14 +264,20 @@ public class OpenMeterApi {
 			throw new Exception("Image was not downloaded.");
 		}
 		
-		//Make sure the downloaded file is a image
-		if(!this.testIfImage(this.saveImageFolder + fileName)) {
+		//Make sure the downloaded file is a image and has the correct file type extension
+		String imagePath;
+		try {
+			imagePath = this.determineFileType(this.saveImageFolder + fileName);
+		} catch (Exception ex) {
 			this.statusCode = 400;
-			throw new Exception("The given URL was not an Image");
+			throw new Exception(ex.getMessage());
 		}
 		
+		
+		
+		
 		//return the image location
-		return this.saveImageFolder + fileName;
+		return imagePath;
 		
 	}
 
@@ -251,7 +300,7 @@ public class OpenMeterApi {
 	    	data = (DataBufferByte) raster.getDataBuffer();
     	} catch (Exception ex) {
     		this.statusCode = 400;
-    		throw new Exception(ex.getMessage());
+    		throw new Exception("Could not read image " + ex.getMessage());
     	}
     	
     	return data.getData();
@@ -299,6 +348,88 @@ public class OpenMeterApi {
 			this.statusCode = 500;
 			throw new Exception("Could not save file");
 		}
+		
+		//check to make sure the file exists
+		File image = new File(imagePath);
+		if(!image.exists()) {
+			this.statusCode = 404;
+			throw new Exception("The image could not be found");
+		}
 	}
 
+	/**
+	 * Will determine what type of format the image is, and if no extension is given to the file name, one will be appended
+	 * @param String imagePath
+	 * @return String
+	 * @throws Exception
+	 */
+	private String determineFileType(String imagePath) throws Exception{
+		
+		//Quick check to see if the image is an image
+		if(!this.testIfImage(imagePath))
+			throw new Exception("File is not an image");
+		
+		
+		//create the File Class
+		File file = new File(imagePath);
+		
+		//create the stream
+		ImageInputStream iis = ImageIO.createImageInputStream(file);
+		
+		//get all the iterators 
+		Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
+		
+		if(!iter.hasNext())
+			throw new Exception("Could not determine image format");
+		
+		//get the first reader
+		ImageReader reader = iter.next();
+		
+		//Get the image format
+		String format = reader.getFormatName();
+		
+		//Close the Stream
+		iis.close();
+		
+		//check for the extension on the image
+		Pattern extension = Pattern.compile("(?i)^[\\w\\/\\\\\\.\\-]*\\.(jpg|png)$");
+        Matcher m = extension.matcher(imagePath);
+        
+		//Check to see what type of format the image is and if there is no extension on the file, then add the correct extension
+		switch(format) {
+			case "JPEG":
+			case "jpeg":
+				if(!m.find()) {
+					imagePath += ".jpg";
+					if(!this.renameImage(file, imagePath)) {
+						System.out.println("Could not rename the file");
+					}
+				}
+				break;
+			case "PNG":
+			case "png":
+				file.delete();
+				throw new Exception("Only JPEG images are supported at this time.");
+			default:
+				file.delete();
+				throw new Exception("Could not determine the image format. Only .jpg and .png format allowed. Format given: " + format);
+		}
+		
+		return imagePath;
+		
+	}
+	
+	/**
+	 * Will rename a file to the given string
+	 * @param File file
+	 * @param String imagePathAndName
+	 * @return boolean
+	 */
+	private boolean renameImage(File file, String imagePathAndName) {
+		File changeTo = new File(imagePathAndName);
+		if(file.renameTo(changeTo))
+			return true;
+		else
+			return false;
+	}
 }
