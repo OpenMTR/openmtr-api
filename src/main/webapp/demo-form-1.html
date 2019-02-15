@@ -15,9 +15,8 @@
      Found some demos for drag and drop forms:
         https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
         https://css-tricks.com/drag-and-drop-file-uploading/
-
-
      -->
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous">
@@ -25,7 +24,13 @@
 
     <script src="semantic/dist/semantic.min.js"></script>
 
-    <title>Demo Page Form</title>
+    <title>openMTR Demo</title>
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 
 
@@ -106,13 +111,10 @@
         </div>
     </div>
     <!-- End Feature Boxes -->
-    <!-- Divider Row
-    <div class="row">
-        <div class="black column"> </div>
-    </div>-->
-    <!-- Image Inputs -->
+    <!-- Demo Form -->
     <div class="ui raised segment">
         <div class="ui two column very relaxed stackable grid">
+            <!--Left-hand Column - User Inputs-->
             <div class="column">
                 <div class="ui form">
                     <div id="drop-area">
@@ -120,8 +122,7 @@
                             <div class="field">
                                 <p>Upload an image or drag and drop it here</p>
                                 <!-- UPLOAD IMAGE HERE -->
-                                <input type="file" id="fileElem" multiple accept="image/*" >
-                                <!-- took out onchange="handleFiles(this.files)" as I am having a listener on the submit take care of this -->
+                                <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
                                 <h3>Or</h3>
                             </div>
                             <div class="field">
@@ -131,10 +132,10 @@
                                     <div class="ui label">
                                         http://
                                     </div>
-                                    <input id="url" type="text" placeholder="my_image_url.com">
+                                    <input type="text" placeholder="my_image_url.com">
                                 </div>
                             </div>
-                            <div id="formSubmit" class="ui animated fade button" type="submit">
+                            <div class="ui animated fade button" type="submit">
                                 <div class="visible content">
                                     <i class="right arrow icon"></i>
                                 </div>
@@ -142,16 +143,42 @@
                                     Submit
                                 </div>
                             </div>
-                            <!-- <label class="button" for="fileElem">Select an image</label> I DON'T KNOW WHAT THIS MEANS YET-->
                         </form>
                     </div>
                 </div>
             </div>
-            <div id="readMeterResults" class="middle aligned column">
-                Result will appear here
-            </div>
+            <!-- Right-hand Column - Results -->
+            <div class="middle aligned column">
+                <!-- REQUIREMENTS:
+                    Photo Thumbnail
+                    openMTR Read:
+                    MeterType:
+                    Total Processing Time:
+                    OR
+                    Error: Something Went Wrong, Try Again
+                    -->
+                <div class="ui four column very relaxed stackable grid">
+                    <div class="doubling four column row">
+                        <div class="column">
+                            <img class="ui small image" src="https://via.placeholder.com/300x300">
+                        </div>
+                        <div class="column">
+                            <h3>openMTR Read:</h3>
+                            <p>Result</p>
+                        </div>                    
+                        <div class="column">
+                            <h3>Meter Type:</h3>
+                            <p>Result</p>
+                        </div>
+                        <div class="column">
+                            <h3>Total Processing Time:</h3>
+                            <p>Result</p>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
+    <!-- End Demo Form -->
     <!-- Colored Footer -->
     <div class="ui equal width center aligned padded very relaxed stackable grid">
         <!-- Boxes -->
@@ -211,9 +238,6 @@
         </div>
     </div>
     <!-- End Colored Footer -->
-    <script src="js/openMtr-demo.js"></script>
-    <script>
-        openMtrDemo.init();
-    </script>
+
 </body>
 </html>
