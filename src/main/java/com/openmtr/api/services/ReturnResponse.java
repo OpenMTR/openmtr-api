@@ -8,6 +8,7 @@ public class ReturnResponse {
 
     boolean error;
     String error_msg;
+    int status_code = 400;
     String data;
 
 
@@ -24,14 +25,12 @@ public class ReturnResponse {
      * @return Response
      */
     public Response error(String message, Integer statusCode ) {
-        if(statusCode == null) {
-            statusCode = 400;
-        }
+        this.status_code = statusCode;
         this.error = true;
         this.error_msg = message;
 
         return Response
-                .status(statusCode)
+                .status(this.status_code)
                 .entity("{" +
                         "\"error\" : \"" + this.error + "\", " +
                         "\"error_msg\" : \"" + this.error_msg + "\" " +
@@ -39,6 +38,30 @@ public class ReturnResponse {
                 )
                 .build();
 
+    }
+    
+    /**
+     * Will return a error Response
+     * @return Response
+     */
+    public Response error() {
+    	return Response
+                .status(this.status_code)
+                .entity("{" +
+                        "\"error\" : \"" + this.error + "\", " +
+                        "\"error_msg\" : \"" + this.error_msg + "\" " +
+                        "}"
+                )
+                .build();
+    }
+    
+    public void setErrorMessage(String errorMsg) {
+    	this.error_msg = errorMsg;
+    	this.error = true;
+    }
+    
+    public void setStatusCode(int statusCode) {
+    	this.status_code = statusCode;
     }
 
 
@@ -52,7 +75,7 @@ public class ReturnResponse {
     
     public Response success() {
     	return Response
-    			.status(200)
+    			.ok()
     			.entity("{" +
                 "\"error\" : \"" + this.error + "\", " +
                 "\"error_msg\" : \"" + this.error_msg + "\", " +
