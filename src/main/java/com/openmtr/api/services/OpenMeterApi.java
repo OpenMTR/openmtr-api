@@ -45,6 +45,18 @@ public class OpenMeterApi {
 	private String saveImageFolder;
 	private int statusCode;
 	
+	/**
+	 * Holds the Email Address to record in the Database
+	 */
+	private String emailAddress;
+	
+	/**
+	 * Holds the Number of digits on Meter Face for the Meter Read
+	 */
+	private String numberOfDigits;
+	
+	private ReturnResponse rr = new ReturnResponse();
+	
 	@Context
 	ServletContext servletContext;
 	
@@ -57,14 +69,11 @@ public class OpenMeterApi {
 	@GET
 	@Produces("application/json")
 	public Response downloadFromUrl(
-			@QueryParam("url") String url, 
-			@QueryParam("numberOfDigits") String digits,
-			@QueryParam("email") String emailAddress
+			@QueryParam("url") String url
 			) {
-		//Init the Return Response Class
-		ReturnResponse rr = new ReturnResponse();
-		//For Testing
-		//return rr.error(System.getProperty("user.dir"), 400);
+		
+		if(rr.error)
+			return rr.error();
 		
 		try {
 		//Check to see if a URL was provided
@@ -78,17 +87,6 @@ public class OpenMeterApi {
 		if(!this.validateURL(url))
         	return rr.error("The given url is invalid. Please provide a format of http(s)://domain.com/image.extension", 400);
 		
-		String validateDigits = this.validateDigitsOnMeterFace(digits);
-		if(!validateDigits.isEmpty())
-			return rr.error(validateDigits, 400);
-		
-		//Check to make sure a email address was given
-		try {
-			if(emailAddress.isEmpty() || ! this.validateEmailAdress(emailAddress))
-				return rr.error("Please provide a vaild Email Address", 400);
-		} catch (NullPointerException ex) {
-			return rr.error("Parameter email is required", 400);
-		}
 		
 		//Download the image from the URL
 		String imagePath = null;
@@ -125,39 +123,37 @@ public class OpenMeterApi {
 		
 	}
 	
+	@QueryParam("email")
+	@FormDataParam("email")
+	/**
+	 * Set the email address
+	 * @param email
+	 */
+	public void setEmailAddress(String email) {
+		try {
+			if(email.isEmpty())
+				rr.setErrorMessage("Email address is required");
+		} catch (NullPointerException ex) {
+			rr.setErrorMessage("The parameter email is missing");
+		}
+		
+		this.emailAddress = email;
+	}
+	
+
+	
 	@POST
 	@Produces("application/json")
 	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
 	public Response uploadImage(
 			@FormDataParam("file") InputStream inputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail,
-			@FormDataParam("numberOfDigits") String numberOfDigits,
-			@FormDataParam("email") String emailAddress
+			@FormDataParam("file") FormDataContentDisposition fileDetail
 			) {
 
 		
 		//set the main folder location
 		this.saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
 		
-		//Create the Response Class
-		ReturnResponse rr = new ReturnResponse();
-		
-		//For testing purpose only, show root directory
-		//return rr.error(System.getProperty("user.dir"), 400);
-		
-		//Check to make sure the numberOfDigits was supplied
-		String validateDigits = this.validateDigitsOnMeterFace(numberOfDigits);
-		if(!validateDigits.isEmpty())
-			return rr.error(validateDigits, 400);
-		
-		//Check to make sure a email address was given
-		try {
-			if(emailAddress.isEmpty() || ! this.validateEmailAdress(emailAddress))
-				return rr.error("Please provide a vaild Email Address", 400);
-		} catch (NullPointerException ex) {
-			return rr.error("Parameter email is required", 400);
-		}
-
 		
 		//Check for empty file
 		try {
@@ -215,6 +211,7 @@ public class OpenMeterApi {
 		return rr.success();
 	}
 	
+	
 	/**
 	 * Validate a URL
 	 * @param String url
@@ -229,24 +226,28 @@ public class OpenMeterApi {
         return true;
 	}
 	
+	@QueryParam("numberOfDigits")
+	@FormDataParam("numberOfDigits")
 	/**
 	 * Will check to make sure the number of digits supplied is valid for a Meter Face
 	 * @param String numberOfDigits
 	 * @return String
 	 */
-	private String validateDigitsOnMeterFace(String numberOfDigits) {
+	private void validateDigitsOnMeterFace(String numberOfDigits) {
 		try {
 			if(numberOfDigits.isEmpty())
-				return "Please supply the number of digits/dials on the face of the meter represented as 9999 (4 digits on Meter Face)";
+				rr.setErrorMessage("The parameter numberOfDigits is empty");
+			//Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
+			if(numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
+				rr.setErrorMessage("The number of digits allowed on the Meter Face is between 3 and 6 digits.");
+
+			this.numberOfDigits = numberOfDigits;
 		} catch (NullPointerException ex) {
-			return "Parameter numberOfDigits not provided.";
+			rr.setErrorMessage("Parameter numberOfDigits not provided.");
 		}
 		
-		//Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
-		if(numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
-			return "The number of digits allowed on the Meter Face is between 3 and 6 digits.";
 		
-		return "";
+		
 	}
 	
 	/**
