@@ -58,10 +58,13 @@ public class OpenMeterApi {
 	@Produces("application/json")
 	public Response downloadFromUrl(
 			@QueryParam("url") String url, 
-			@QueryParam("numberOfDigits") String digits
+			@QueryParam("numberOfDigits") String digits,
+			@QueryParam("email") String emailAddress
 			) {
 		//Init the Return Response Class
 		ReturnResponse rr = new ReturnResponse();
+		//For Testing
+		//return rr.error(System.getProperty("user.dir"), 400);
 		
 		try {
 		//Check to see if a URL was provided
@@ -78,6 +81,14 @@ public class OpenMeterApi {
 		String validateDigits = this.validateDigitsOnMeterFace(digits);
 		if(!validateDigits.isEmpty())
 			return rr.error(validateDigits, 400);
+		
+		//Check to make sure a email address was given
+		try {
+			if(emailAddress.isEmpty() || ! this.validateEmailAdress(emailAddress))
+				return rr.error("Please provide a vaild Email Address", 400);
+		} catch (NullPointerException ex) {
+			return rr.error("Parameter email is required", 400);
+		}
 		
 		//Download the image from the URL
 		String imagePath = null;
@@ -120,7 +131,8 @@ public class OpenMeterApi {
 	public Response uploadImage(
 			@FormDataParam("file") InputStream inputStream,
 			@FormDataParam("file") FormDataContentDisposition fileDetail,
-			@FormDataParam("numberOfDigits") String numberOfDigits
+			@FormDataParam("numberOfDigits") String numberOfDigits,
+			@FormDataParam("email") String emailAddress
 			) {
 
 		
@@ -138,6 +150,14 @@ public class OpenMeterApi {
 		if(!validateDigits.isEmpty())
 			return rr.error(validateDigits, 400);
 		
+		//Check to make sure a email address was given
+		try {
+			if(emailAddress.isEmpty() || ! this.validateEmailAdress(emailAddress))
+				return rr.error("Please provide a vaild Email Address", 400);
+		} catch (NullPointerException ex) {
+			return rr.error("Parameter email is required", 400);
+		}
+
 		
 		//Check for empty file
 		try {
@@ -227,6 +247,17 @@ public class OpenMeterApi {
 			return "The number of digits allowed on the Meter Face is between 3 and 6 digits.";
 		
 		return "";
+	}
+	
+	/**
+	 * Will validate an email address
+	 * @param String email
+	 * @return boolean
+	 */
+	private boolean validateEmailAdress(String email) {
+		Pattern reg = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?){1,}$");
+		Matcher m = reg.matcher(email);
+		return (m.find()) ? true : false;
 	}
 	
 	/**
