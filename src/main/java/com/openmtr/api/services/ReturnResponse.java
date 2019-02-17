@@ -29,14 +29,7 @@ public class ReturnResponse {
         this.error = true;
         this.error_msg = message;
 
-        return Response
-                .status(this.status_code)
-                .entity("{" +
-                        "\"error\" : \"" + this.error + "\", " +
-                        "\"error_msg\" : \"" + this.error_msg + "\" " +
-                        "}"
-                )
-                .build();
+        return this.error();
 
     }
     
