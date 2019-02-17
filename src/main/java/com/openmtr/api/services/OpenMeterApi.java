@@ -23,8 +23,11 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import com.mattclinard.openmtr.*;
+
+import javax.servlet.ServletContext;
+
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -32,18 +35,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.servlet.ServletContext;
-
-import com.mattclinard.openmtr.*;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import java.util.logging.*;
-
 @Path("/read_meter")
 public class OpenMeterApi {
-	private String saveImageFolder;
+  @Context
+	ServletContext servletContext;
+	
+	private final String saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
 	private int statusCode;
 	
 	/**
@@ -57,9 +58,6 @@ public class OpenMeterApi {
 	private String numberOfDigits;
 	
 	private ReturnResponse rr = new ReturnResponse();
-	
-	@Context
-	ServletContext servletContext;
 	
 	public OpenMeterApi() {
 		
@@ -129,53 +127,25 @@ public class OpenMeterApi {
 			@FormDataParam("file") FormDataContentDisposition fileDetail, 
 			@FormDataParam("email") String email,
 			@FormDataParam("numberOfDigits") String numberOfDigits
-			) {
-		
+			) {	
 		this.setEmailAddress(email);
 		this.validateDigitsOnMeterFace(numberOfDigits);
-		
+		this.validateFile(fileDetail);
 		//Check for any errors
 		if(rr.error) {
 			return rr.error();
-		}
-		
-		//set the main folder location
-		this.saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
-		
-		
-		//Check for empty file
-		try {
-
-			if(fileDetail.getFileName().isEmpty())
-				return rr.error("No file was uploaded", 400);
-			
-		} catch (Exception ex) {
-			return rr.error("No file was uploaded", 400);
-		}
-		
+		}	
+	
 		//The file location
 		String imageLocation = this.saveImageFolder + fileDetail.getFileName();
+		byte[] imageBytes = null;
 		
 		//save the file to the imageLocation
 		try {
 			this.saveImage(inputStream, imageLocation);
-		} catch (Exception ex) {
-			return rr.error(ex.getMessage(), this.statusCode);
-		}
-		
-		
-		//check to make sure the file is an image
-		
-		try {
+			//Check and make sure the file is an image
 			imageLocation = this.determineFileType(imageLocation);
-		} catch (Exception ex) {
-			return rr.error(ex.getMessage(), 400);
-		}
-
-		
-		//Read the image into the byte[]
-		byte[] imageBytes = null;
-		try {
+			//Read the image into the byte[]
 			imageBytes = this.extractByteArray(imageLocation);
 		} catch (Exception ex) {
 			return rr.error(ex.getMessage(), this.statusCode);
@@ -185,7 +155,7 @@ public class OpenMeterApi {
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(imageBytes, "9999");
+			meterRead = om.getMeterRead(imageBytes, this.numberOfDigits);
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter", 400);
 		} catch (NullPointerException ex) {
@@ -200,12 +170,22 @@ public class OpenMeterApi {
 	}
 	
 	
-	
+	private void validateFile(FormDataContentDisposition fileDetail) { 
+		//Check for empty file
+		try {
+
+			if (fileDetail.getFileName().isEmpty())
+				rr.setErrorMessage("No File was uploaded.");
+
+		} catch (Exception ex) {
+			rr.setErrorMessage("No file was uploaded");
+		}
+	}
 	/**
 	 * Validate a URL
 	 * @param String url
 	 */
-	private void validateURL(String url) {
+ 	private void validateURL(String url) {
 		//Check to see if the Url was provided
 		try {
 			if(url.isEmpty()) {
@@ -225,10 +205,6 @@ public class OpenMeterApi {
         	return;
         }
 	}
-	
-	
-	
-	
 	/**
 	 * Set the email address
 	 * @param email
@@ -247,7 +223,6 @@ public class OpenMeterApi {
 			rr.setErrorMessage("The parameter email is missing");
 			return;
 		}
-		
 		this.emailAddress = email;
 	}
 	
@@ -288,7 +263,6 @@ public class OpenMeterApi {
 	 * @throws Exception
 	 */
 	private String downloadImage(String url) throws Exception{
-		this.saveImageFolder = this.servletContext.getRealPath("/") + "uploadedImages/";
 		//Need to make sure the Images folder exists
 		File dir = new File(this.saveImageFolder);
 		if(!dir.exists()) {
