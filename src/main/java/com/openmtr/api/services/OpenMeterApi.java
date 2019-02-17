@@ -131,7 +131,8 @@ public class OpenMeterApi {
 	public Response uploadImage(
 			@FormDataParam("file") InputStream inputStream,
 			@FormDataParam("file") FormDataContentDisposition fileDetail,
-			@FormDataParam("numberOfDigits") String numberOfDigits
+			@FormDataParam("numberOfDigits") String numberOfDigits,
+			@FormDataParam("email") String emailAddress
 			) {
 
 		
@@ -149,6 +150,14 @@ public class OpenMeterApi {
 		if(!validateDigits.isEmpty())
 			return rr.error(validateDigits, 400);
 		
+		//Check to make sure a email address was given
+		try {
+			if(emailAddress.isEmpty() || ! this.validateEmailAdress(emailAddress))
+				return rr.error("Please provide a vaild Email Address", 400);
+		} catch (NullPointerException ex) {
+			return rr.error("Parameter email is required", 400);
+		}
+
 		
 		//Check for empty file
 		try {
