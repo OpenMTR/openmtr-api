@@ -23,6 +23,10 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import com.mattclinard.openmtr.*;
+
+import javax.servlet.ServletContext;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,22 +35,29 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.servlet.ServletContext;
-
-import com.mattclinard.openmtr.*;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import java.util.logging.*;
-
 @Path("/read_meter")
 public class OpenMeterApi {
-	private String saveImageFolder;
+  @Context
+	ServletContext servletContext;
+	
+	private final String saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
 	private int statusCode;
 	
-	@Context
-	ServletContext servletContext;
+	/**
+	 * Holds the Email Address to record in the Database
+	 */
+	private String emailAddress;
+	
+	/**
+	 * Holds the Number of digits on Meter Face for the Meter Read
+	 */
+	private String numberOfDigits;
+	
+	private ReturnResponse rr = new ReturnResponse();
 	
 	public OpenMeterApi() {
 		
@@ -57,27 +68,19 @@ public class OpenMeterApi {
 	@GET
 	@Produces("application/json")
 	public Response downloadFromUrl(
-			@QueryParam("url") String url, 
-			@QueryParam("numberOfDigits") String digits
+			@QueryParam("url") String url,
+			@QueryParam("email") String email,
+			@QueryParam("numberOfDigits") String numberOfDigits
 			) {
-		//Init the Return Response Class
-		ReturnResponse rr = new ReturnResponse();
 		
-		try {
-		//Check to see if a URL was provided
-		if(url.isEmpty())
-			return rr.error("URL is missing", 400);
-		} catch(NullPointerException ex) {
-			return rr.error("URL is missing", 400);
-		}
+		this.setEmailAddress(email);
+		this.validateDigitsOnMeterFace(numberOfDigits);
+		this.validateURL(url);
 		
-		//Make sure the URL is a valid URL
-		if(!this.validateURL(url))
-        	return rr.error("The given url is invalid. Please provide a format of http(s)://domain.com/image.extension", 400);
+		//If there is an error, then return back the error
+		if(rr.error)
+			return rr.error();
 		
-		String validateDigits = this.validateDigitsOnMeterFace(digits);
-		if(!validateDigits.isEmpty())
-			return rr.error(validateDigits, 400);
 		
 		//Download the image from the URL
 		String imagePath = null;
@@ -99,7 +102,7 @@ public class OpenMeterApi {
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(image, "9999");
+			meterRead = om.getMeterRead(image, this.numberOfDigits);
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter. ", 400);
 		} catch (NullPointerException ex) {
@@ -114,64 +117,35 @@ public class OpenMeterApi {
 		
 	}
 	
+
+	
 	@POST
 	@Produces("application/json")
 	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
 	public Response uploadImage(
 			@FormDataParam("file") InputStream inputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail,
+			@FormDataParam("file") FormDataContentDisposition fileDetail, 
+			@FormDataParam("email") String email,
 			@FormDataParam("numberOfDigits") String numberOfDigits
-			) {
-
-		
-		//set the main folder location
-		this.saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
-		
-		//Create the Response Class
-		ReturnResponse rr = new ReturnResponse();
-		
-		//For testing purpose only, show root directory
-		//return rr.error(System.getProperty("user.dir"), 400);
-		
-		//Check to make sure the numberOfDigits was supplied
-		String validateDigits = this.validateDigitsOnMeterFace(numberOfDigits);
-		if(!validateDigits.isEmpty())
-			return rr.error(validateDigits, 400);
-		
-		
-		//Check for empty file
-		try {
-
-			if(fileDetail.getFileName().isEmpty())
-				return rr.error("No file was uploaded", 400);
-			
-		} catch (Exception ex) {
-			return rr.error("No file was uploaded", 400);
-		}
-		
+			) {	
+		this.setEmailAddress(email);
+		this.validateDigitsOnMeterFace(numberOfDigits);
+		this.validateFile(fileDetail);
+		//Check for any errors
+		if(rr.error) {
+			return rr.error();
+		}	
+	
 		//The file location
 		String imageLocation = this.saveImageFolder + fileDetail.getFileName();
+		byte[] imageBytes = null;
 		
 		//save the file to the imageLocation
 		try {
 			this.saveImage(inputStream, imageLocation);
-		} catch (Exception ex) {
-			return rr.error(ex.getMessage(), this.statusCode);
-		}
-		
-		
-		//check to make sure the file is an image
-		
-		try {
+			//Check and make sure the file is an image
 			imageLocation = this.determineFileType(imageLocation);
-		} catch (Exception ex) {
-			return rr.error(ex.getMessage(), 400);
-		}
-
-		
-		//Read the image into the byte[]
-		byte[] imageBytes = null;
-		try {
+			//Read the image into the byte[]
 			imageBytes = this.extractByteArray(imageLocation);
 		} catch (Exception ex) {
 			return rr.error(ex.getMessage(), this.statusCode);
@@ -181,11 +155,11 @@ public class OpenMeterApi {
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(imageBytes, "9999");
+			meterRead = om.getMeterRead(imageBytes, this.numberOfDigits);
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter", 400);
 		} catch (NullPointerException ex) {
-			return rr.error("Porblem with AI, fix coming", 500);
+			return rr.error("Problem with AI, fix coming", 500);
 		}
 		
 		//Set the data
@@ -195,18 +169,61 @@ public class OpenMeterApi {
 		return rr.success();
 	}
 	
+	
+	private void validateFile(FormDataContentDisposition fileDetail) { 
+		//Check for empty file
+		try {
+
+			if (fileDetail.getFileName().isEmpty())
+				rr.setErrorMessage("No File was uploaded.");
+
+		} catch (Exception ex) {
+			rr.setErrorMessage("No file was uploaded");
+		}
+	}
 	/**
 	 * Validate a URL
 	 * @param String url
-	 * @return boolean
 	 */
-	private boolean validateURL(String url) {
+ 	private void validateURL(String url) {
+		//Check to see if the Url was provided
+		try {
+			if(url.isEmpty()) {
+				rr.setErrorMessage("The required parameter url is empty. Please provide a URL to be downloaded");
+				return;
+			}
+		} catch (NullPointerException ex) {
+			rr.setErrorMessage("The required parameter url is missing");
+			return;
+		}
+		
 		//Must start with http(s):// for a valid URL
         Pattern urlReg = Pattern.compile("^((http[s]?|ftp):\\/\\/){1,1}\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$");
         Matcher m = urlReg.matcher(url);
-        if(!m.find())
-        	return false;
-        return true;
+        if(!m.find()) {
+        	rr.setErrorMessage("The given url is invalid. Please provide a format of http(s)://domain.com/image.extension");
+        	return;
+        }
+	}
+	/**
+	 * Set the email address
+	 * @param email
+	 */
+	public void setEmailAddress(String email) {
+		try {
+			if(email.isEmpty()) {
+				rr.setErrorMessage("Email address is required");
+				return;
+			}
+			if(!this.validateEmailAdress(email)) {
+				rr.setErrorMessage("There email address " + email + " is not valid");
+				return;
+			}
+		} catch (NullPointerException ex) {
+			rr.setErrorMessage("The parameter email is missing");
+			return;
+		}
+		this.emailAddress = email;
 	}
 	
 	/**
@@ -214,19 +231,29 @@ public class OpenMeterApi {
 	 * @param String numberOfDigits
 	 * @return String
 	 */
-	private String validateDigitsOnMeterFace(String numberOfDigits) {
+	private void validateDigitsOnMeterFace(String numberOfDigits) {
 		try {
 			if(numberOfDigits.isEmpty())
-				return "Please supply the number of digits/dials on the face of the meter represented as 9999 (4 digits on Meter Face)";
+				rr.setErrorMessage("The parameter numberOfDigits is empty");
+			//Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
+			if(numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
+				rr.setErrorMessage("The number of digits allowed on the Meter Face is between 3 and 6 digits.");
+
+			this.numberOfDigits = numberOfDigits;
 		} catch (NullPointerException ex) {
-			return "Parameter numberOfDigits not provided.";
+			rr.setErrorMessage("Parameter numberOfDigits not provided.");
 		}
-		
-		//Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
-		if(numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
-			return "The number of digits allowed on the Meter Face is between 3 and 6 digits.";
-		
-		return "";
+	}
+	
+	/**
+	 * Will validate an email address
+	 * @param String email
+	 * @return boolean
+	 */
+	private boolean validateEmailAdress(String email) {
+		Pattern reg = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?){1,}$");
+		Matcher m = reg.matcher(email);
+		return (m.find()) ? true : false;
 	}
 	
 	/**
@@ -236,7 +263,6 @@ public class OpenMeterApi {
 	 * @throws Exception
 	 */
 	private String downloadImage(String url) throws Exception{
-		this.saveImageFolder = this.servletContext.getRealPath("/") + "uploadedImages/";
 		//Need to make sure the Images folder exists
 		File dir = new File(this.saveImageFolder);
 		if(!dir.exists()) {
