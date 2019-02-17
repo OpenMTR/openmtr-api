@@ -24,6 +24,7 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -69,23 +70,18 @@ public class OpenMeterApi {
 	@GET
 	@Produces("application/json")
 	public Response downloadFromUrl(
-			@QueryParam("url") String url
+			@QueryParam("url") String url,
+			@QueryParam("email") String email,
+			@QueryParam("numberOfDigits") String numberOfDigits
 			) {
 		
+		this.setEmailAddress(email);
+		this.validateDigitsOnMeterFace(numberOfDigits);
+		this.validateURL(url);
+		
+		//If there is an error, then return back the error
 		if(rr.error)
 			return rr.error();
-		
-		try {
-		//Check to see if a URL was provided
-		if(url.isEmpty())
-			return rr.error("URL is missing", 400);
-		} catch(NullPointerException ex) {
-			return rr.error("URL is missing", 400);
-		}
-		
-		//Make sure the URL is a valid URL
-		if(!this.validateURL(url))
-        	return rr.error("The given url is invalid. Please provide a format of http(s)://domain.com/image.extension", 400);
 		
 		
 		//Download the image from the URL
@@ -108,7 +104,7 @@ public class OpenMeterApi {
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(image, "9999");
+			meterRead = om.getMeterRead(image, this.numberOfDigits);
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter. ", 400);
 		} catch (NullPointerException ex) {
@@ -123,23 +119,6 @@ public class OpenMeterApi {
 		
 	}
 	
-	@QueryParam("email")
-	@FormDataParam("email")
-	/**
-	 * Set the email address
-	 * @param email
-	 */
-	public void setEmailAddress(String email) {
-		try {
-			if(email.isEmpty())
-				rr.setErrorMessage("Email address is required");
-		} catch (NullPointerException ex) {
-			rr.setErrorMessage("The parameter email is missing");
-		}
-		
-		this.emailAddress = email;
-	}
-	
 
 	
 	@POST
@@ -147,9 +126,18 @@ public class OpenMeterApi {
 	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
 	public Response uploadImage(
 			@FormDataParam("file") InputStream inputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail
+			@FormDataParam("file") FormDataContentDisposition fileDetail, 
+			@FormDataParam("email") String email,
+			@FormDataParam("numberOfDigits") String numberOfDigits
 			) {
-
+		
+		this.setEmailAddress(email);
+		this.validateDigitsOnMeterFace(numberOfDigits);
+		
+		//Check for any errors
+		if(rr.error) {
+			return rr.error();
+		}
 		
 		//set the main folder location
 		this.saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
@@ -201,7 +189,7 @@ public class OpenMeterApi {
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter", 400);
 		} catch (NullPointerException ex) {
-			return rr.error("Porblem with AI, fix coming", 500);
+			return rr.error("Problem with AI, fix coming", 500);
 		}
 		
 		//Set the data
@@ -212,22 +200,57 @@ public class OpenMeterApi {
 	}
 	
 	
+	
 	/**
 	 * Validate a URL
 	 * @param String url
-	 * @return boolean
 	 */
-	private boolean validateURL(String url) {
+	private void validateURL(String url) {
+		//Check to see if the Url was provided
+		try {
+			if(url.isEmpty()) {
+				rr.setErrorMessage("The required parameter url is empty. Please provide a URL to be downloaded");
+				return;
+			}
+		} catch (NullPointerException ex) {
+			rr.setErrorMessage("The required parameter url is missing");
+			return;
+		}
+		
 		//Must start with http(s):// for a valid URL
         Pattern urlReg = Pattern.compile("^((http[s]?|ftp):\\/\\/){1,1}\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$");
         Matcher m = urlReg.matcher(url);
-        if(!m.find())
-        	return false;
-        return true;
+        if(!m.find()) {
+        	rr.setErrorMessage("The given url is invalid. Please provide a format of http(s)://domain.com/image.extension");
+        	return;
+        }
 	}
 	
-	@QueryParam("numberOfDigits")
-	@FormDataParam("numberOfDigits")
+	
+	
+	
+	/**
+	 * Set the email address
+	 * @param email
+	 */
+	public void setEmailAddress(String email) {
+		try {
+			if(email.isEmpty()) {
+				rr.setErrorMessage("Email address is required");
+				return;
+			}
+			if(!this.validateEmailAdress(email)) {
+				rr.setErrorMessage("There email address " + email + " is not valid");
+				return;
+			}
+		} catch (NullPointerException ex) {
+			rr.setErrorMessage("The parameter email is missing");
+			return;
+		}
+		
+		this.emailAddress = email;
+	}
+	
 	/**
 	 * Will check to make sure the number of digits supplied is valid for a Meter Face
 	 * @param String numberOfDigits
@@ -245,9 +268,6 @@ public class OpenMeterApi {
 		} catch (NullPointerException ex) {
 			rr.setErrorMessage("Parameter numberOfDigits not provided.");
 		}
-		
-		
-		
 	}
 	
 	/**
