@@ -38,8 +38,6 @@ import com.mattclinard.openmtr.*;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import java.util.logging.*;
-
 @Path("/read_meter")
 public class OpenMeterApi {
 	private String saveImageFolder;
@@ -88,17 +86,11 @@ public class OpenMeterApi {
         	return rr.error("The given url is invalid. Please provide a format of http(s)://domain.com/image.extension", 400);
 		
 		
-		//Download the image from the URL
+		//Download the image from the URL and extract byte[]
 		String imagePath = null;
-		try {
-			imagePath = this.downloadImage(url);
-		} catch (Exception ex) {
-			return rr.error(ex.getMessage(), this.statusCode);
-		}
-		
-		//Extract the byte[] from the downloaded image
 		byte[] image = null;
 		try {
+			imagePath = this.downloadImage(url);
 			image = this.extractByteArray(imagePath);
 		} catch (Exception ex) {
 			return rr.error(ex.getMessage(), this.statusCode);
@@ -108,7 +100,7 @@ public class OpenMeterApi {
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(image, "9999");
+			meterRead = om.getMeterRead(image, this.numberOfDigits);
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter. ", 400);
 		} catch (NullPointerException ex) {
@@ -150,6 +142,8 @@ public class OpenMeterApi {
 			@FormDataParam("file") FormDataContentDisposition fileDetail
 			) {
 
+		if(rr.error)
+			return rr.error();
 		
 		//set the main folder location
 		this.saveImageFolder = servletContext.getRealPath("/") + "uploadedImages/";
@@ -157,37 +151,20 @@ public class OpenMeterApi {
 		
 		//Check for empty file
 		try {
-
 			if(fileDetail.getFileName().isEmpty())
-				return rr.error("No file was uploaded", 400);
-			
+				return rr.error("No file was uploaded", 400);	
 		} catch (Exception ex) {
 			return rr.error("No file was uploaded", 400);
 		}
 		
 		//The file location
 		String imageLocation = this.saveImageFolder + fileDetail.getFileName();
+		byte[] imageBytes = null;
 		
 		//save the file to the imageLocation
 		try {
 			this.saveImage(inputStream, imageLocation);
-		} catch (Exception ex) {
-			return rr.error(ex.getMessage(), this.statusCode);
-		}
-		
-		
-		//check to make sure the file is an image
-		
-		try {
 			imageLocation = this.determineFileType(imageLocation);
-		} catch (Exception ex) {
-			return rr.error(ex.getMessage(), 400);
-		}
-
-		
-		//Read the image into the byte[]
-		byte[] imageBytes = null;
-		try {
 			imageBytes = this.extractByteArray(imageLocation);
 		} catch (Exception ex) {
 			return rr.error(ex.getMessage(), this.statusCode);
@@ -197,11 +174,11 @@ public class OpenMeterApi {
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(imageBytes, "9999");
+			meterRead = om.getMeterRead(imageBytes, this.numberOfDigits);
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter", 400);
 		} catch (NullPointerException ex) {
-			return rr.error("Porblem with AI, fix coming", 500);
+			return rr.error("Problem with AI, fix coming", 500);
 		}
 		
 		//Set the data
