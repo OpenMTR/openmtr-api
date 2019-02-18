@@ -66,7 +66,7 @@ public class OpenMeterApi {
 	@GET
 	@Produces("application/json")
 	public Response downloadFromUrl(@QueryParam("url") String url, @QueryParam("email") @DefaultValue("") String email,
-			@QueryParam("numberOfDigits") @DefaultValue("99999") String numberOfDigits) {
+			@DefaultValue("99999") @QueryParam("numberOfDigits") String numberOfDigits) {
 
 		this.validateURL(url);
 		this.setEmailAddress(email);
@@ -198,8 +198,10 @@ public class OpenMeterApi {
 		if (numberOfDigits.isEmpty())
 			rr.setErrorMessage("The parameter numberOfDigits is empty");
 		// Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
-		if (numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
-			rr.setErrorMessage("The number of digits allowed on the Meter Face is between 3 and 6 digits.");
+		Pattern reg = Pattern.compile("^[9]{3,6}$");
+		Matcher m = reg.matcher(numberOfDigits);
+		if (!m.find())
+			rr.setErrorMessage("The number of digits allowed on the Meter Face is between 3 and 6 digits and represented by 9's");
 
 		this.numberOfDigits = numberOfDigits;
 
@@ -283,7 +285,6 @@ public class OpenMeterApi {
 		try {
 			image = new File(imagePath);
 			bufferedImage = ImageIO.read(image);
-
 			raster = bufferedImage.getRaster();
 			data = (DataBufferByte) raster.getDataBuffer();
 		} catch (Exception ex) {
