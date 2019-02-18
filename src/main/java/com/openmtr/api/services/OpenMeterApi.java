@@ -24,6 +24,7 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -64,9 +65,12 @@ public class OpenMeterApi {
 
 	@GET
 	@Produces("application/json")
-	public Response downloadFromUrl(@QueryParam("url") String url) {
-		
+	public Response downloadFromUrl(@QueryParam("url") String url, @QueryParam("email") @DefaultValue("") String email,
+			@QueryParam("numberOfDigits") @DefaultValue("99999") String numberOfDigits) {
+
 		this.validateURL(url);
+		this.setEmailAddress(email);
+		this.validateDigitsOnMeterFace(numberOfDigits);
 
 		if (rr.error)
 			return rr.error();
@@ -96,24 +100,6 @@ public class OpenMeterApi {
 		rr.setData(meterRead);
 		return rr.success();
 
-	}
-
-	@QueryParam("email")
-	@FormDataParam("email")
-	/**
-	 * Set the email address
-	 * 
-	 * @param email
-	 */
-	public void setEmailAddress(String email) {
-		try {
-			if (email.isEmpty())
-				rr.setErrorMessage("Email address is required");
-		} catch (NullPointerException ex) {
-			rr.setErrorMessage("The parameter email is missing");
-		}
-
-		this.emailAddress = email;
 	}
 
 	@POST
@@ -165,6 +151,24 @@ public class OpenMeterApi {
 	}
 
 	/**
+	 * Set the email address
+	 * 
+	 * @param email
+	 */
+	public void setEmailAddress(String email) {
+		if (email.isEmpty()) {
+			rr.setErrorMessage("Required parameter email is missing or invalid");
+			return;
+		}
+		if (!this.validateEmailAdress(email)) {
+			rr.setErrorMessage("Email Address " + email + " is invalid");
+			return;
+		}
+
+		this.emailAddress = email;
+	}
+
+	/**
 	 * Validate a URL
 	 * 
 	 * @param String url
@@ -184,27 +188,20 @@ public class OpenMeterApi {
 		}
 	}
 
-	@QueryParam("numberOfDigits")
-	@FormDataParam("numberOfDigits")
 	/**
 	 * Will check to make sure the number of digits supplied is valid for a Meter
 	 * Face
 	 * 
 	 * @param String numberOfDigits
-	 * @return String
 	 */
 	private void validateDigitsOnMeterFace(String numberOfDigits) {
-		try {
-			if (numberOfDigits.isEmpty())
-				rr.setErrorMessage("The parameter numberOfDigits is empty");
-			// Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
-			if (numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
-				rr.setErrorMessage("The number of digits allowed on the Meter Face is between 3 and 6 digits.");
+		if (numberOfDigits.isEmpty())
+			rr.setErrorMessage("The parameter numberOfDigits is empty");
+		// Check to make sure that the numberOfDigits is in the range of 3 to 6 digits
+		if (numberOfDigits.length() < 3 || numberOfDigits.length() > 6)
+			rr.setErrorMessage("The number of digits allowed on the Meter Face is between 3 and 6 digits.");
 
-			this.numberOfDigits = numberOfDigits;
-		} catch (NullPointerException ex) {
-			rr.setErrorMessage("Parameter numberOfDigits not provided.");
-		}
+		this.numberOfDigits = numberOfDigits;
 
 	}
 
@@ -256,7 +253,7 @@ public class OpenMeterApi {
 			throw new Exception("Image was not downloaded.");
 		}
 
-		// Make sure the downloaded file is a image and has the correct file type
+		// Make sure the download file is a image and has the correct file type
 		// extension
 		String imagePath;
 		try {
