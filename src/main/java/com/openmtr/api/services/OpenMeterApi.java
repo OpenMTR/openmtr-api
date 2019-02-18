@@ -361,13 +361,9 @@ public class OpenMeterApi {
 		if (!this.testIfImage(imagePath))
 			throw new Exception("File is not an image");
 
-		// create the File Class
+		// Create the variables
 		File file = new File(imagePath);
-
-		// create the stream
 		ImageInputStream iis = ImageIO.createImageInputStream(file);
-
-		// get all the iterators
 		Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
 
 		if (!iter.hasNext())
@@ -393,19 +389,12 @@ public class OpenMeterApi {
 		case "jpeg":
 			if (!m.find()) {
 				imagePath += ".jpg";
-				if (!this.renameImage(file, imagePath)) {
-					System.out.println("Could not rename the file");
-				}
+				this.renameImage(file, imagePath);
 			}
-			break;
-		case "PNG":
-		case "png":
-			file.delete();
-			throw new Exception("Only JPEG images are supported at this time.");
+			break;	
 		default:
 			file.delete();
-			throw new Exception(
-					"Could not determine the image format. Only .jpg and .png format allowed. Format given: " + format);
+			throw new Exception("Only JPEG images are supported at this time.");
 		}
 
 		return imagePath;
