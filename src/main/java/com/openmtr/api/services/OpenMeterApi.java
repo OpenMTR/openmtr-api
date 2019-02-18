@@ -106,7 +106,12 @@ public class OpenMeterApi {
 	@Produces("application/json")
 	@Consumes({ "multipart/form-data", "application/x-www-form-urlencoded" })
 	public Response uploadImage(@FormDataParam("file") InputStream inputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail) {
+			@FormDataParam("file") FormDataContentDisposition fileDetail,
+			@FormDataParam("email") @DefaultValue("") String email,
+			@FormDataParam("numberOfDigits") @DefaultValue("99999") String numberOfDigits) {
+		
+		this.setEmailAddress(email);
+		this.validateDigitsOnMeterFace(numberOfDigits);
 
 		if (rr.error)
 			return rr.error();
