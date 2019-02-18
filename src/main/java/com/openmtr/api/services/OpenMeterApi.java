@@ -109,7 +109,7 @@ public class OpenMeterApi {
 			@FormDataParam("file") FormDataContentDisposition fileDetail,
 			@FormDataParam("email") @DefaultValue("") String email,
 			@FormDataParam("numberOfDigits") @DefaultValue("99999") String numberOfDigits) {
-		
+
 		this.setEmailAddress(email);
 		this.validateDigitsOnMeterFace(numberOfDigits);
 
@@ -130,8 +130,7 @@ public class OpenMeterApi {
 
 		// save the file to the imageLocation
 		try {
-			this.saveImage(inputStream, imageLocation);
-			imageLocation = this.determineFileType(imageLocation);
+			imageLocation = this.saveImage(inputStream, imageLocation);
 			imageBytes = this.extractByteArray(imageLocation);
 		} catch (Exception ex) {
 			return rr.error(ex.getMessage(), this.statusCode);
@@ -206,7 +205,8 @@ public class OpenMeterApi {
 		Pattern reg = Pattern.compile("^[9]{3,6}$");
 		Matcher m = reg.matcher(numberOfDigits);
 		if (!m.find())
-			rr.setErrorMessage("The number of digits allowed on the Meter Face is between 3 and 6 digits and represented by 9's");
+			rr.setErrorMessage(
+					"The number of digits allowed on the Meter Face is between 3 and 6 digits and represented by 9's");
 
 		this.numberOfDigits = numberOfDigits;
 
@@ -326,7 +326,7 @@ public class OpenMeterApi {
 	 * @throws Exception Thanks to
 	 *                   https://www.mkyong.com/webservices/jax-rs/file-upload-example-in-jersey/
 	 */
-	private void saveImage(InputStream inputStream, String imagePath) throws Exception {
+	private String saveImage(InputStream inputStream, String imagePath) throws Exception {
 		try {
 			// create the stream
 			OutputStream out = new FileOutputStream(new File(imagePath));
@@ -351,6 +351,8 @@ public class OpenMeterApi {
 			this.statusCode = 404;
 			throw new Exception("The image could not be found");
 		}
+		
+		return this.determineFileType(imagePath);
 	}
 
 	/**
@@ -397,7 +399,7 @@ public class OpenMeterApi {
 				imagePath += ".jpg";
 				this.renameImage(file, imagePath);
 			}
-			break;	
+			break;
 		default:
 			file.delete();
 			throw new Exception("Only JPEG images are supported at this time.");
