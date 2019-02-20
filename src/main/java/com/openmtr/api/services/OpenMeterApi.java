@@ -64,9 +64,10 @@ public class OpenMeterApi {
 		ReturnResponse rr = new ReturnResponse();
 		
 		try {
+			String testVar = System.getenv("TEST");
 		//Check to see if a URL was provided
 		if(url.isEmpty())
-			return rr.error("URL is missing", 400);
+			return rr.error("URL is missing (Environment Variable = " + testVar + ")", 400);
 		} catch(NullPointerException ex) {
 			return rr.error("URL is missing", 400);
 		}
