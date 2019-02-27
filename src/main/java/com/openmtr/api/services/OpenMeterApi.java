@@ -182,9 +182,9 @@ public class OpenMeterApi {
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(imageBytes, "9999");
+			meterRead = om.getMeterRead(imageBytes, "999999");
 		} catch (IOException ex) {
-			return rr.error("Could not Read Meter", 400);
+			return rr.error("Could not Read Meter. " + ex.getMessage(), 400);
 		} catch (NullPointerException ex) {
 			return rr.error("Porblem with AI, fix coming", 500);
 		}
