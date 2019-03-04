@@ -6,16 +6,11 @@ import javax.ws.rs.core.Response;
 
 public class ReturnResponse {
 
-    boolean error;
-    String error_msg;
-    String data;
 
+    private boolean error = false;
+    private String error_msg = "";
+    private String data = null;
 
-    public ReturnResponse() {
-    	this.error_msg = "";
-    	this.data = null;
-    	this.error = false;
-    }
 
     /**
      * Will return a JSON response with the error message given
@@ -34,7 +29,10 @@ public class ReturnResponse {
                 .status(statusCode)
                 .entity("{" +
                         "\"error\" : \"" + this.error + "\", " +
-                        "\"error_msg\" : \"" + this.error_msg + "\" " +
+                        "\"error_msg\" : \"" + this.error_msg + "\", " +
+                        "\"Environment_Variables\" : {" +
+                        	"\"TENSORFLOW_PREFIX\" : \"" + System.getenv("TENSORFLOW_PREFIX") + "\", " +
+                        	"\"TESSDATA_PREFIX\" : \"" + System.getenv("TESSDATA_PREFIX") + "\"} " +
                         "}"
                 )
                 .build();
@@ -56,7 +54,10 @@ public class ReturnResponse {
     			.entity("{" +
                 "\"error\" : \"" + this.error + "\", " +
                 "\"error_msg\" : \"" + this.error_msg + "\", " +
-                "\"data\" : \"" + this.data + "\" " +
+                "\"data\" : " + this.data + ", " +
+                "\"Environment_Variables\" : {" +
+	            	"\"TENSORFLOW_PREFIX\" : \"" + System.getenv("TENSORFLOW_PREFIX") + "\", " +
+	            	"\"TESSDATA_PREFIX\" : \"" + System.getenv("TESSDATA_PREFIX") + "\"} " +
                 "}")
     			.build();
     }
