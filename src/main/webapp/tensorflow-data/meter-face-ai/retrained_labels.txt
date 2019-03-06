@@ -1,8 +1,0 @@
-fivedialelectric
-fourdialgas
-gaugeodowater
-lcdelectric
-lcdwater
-notmeterfaces
-odogas
-opencenter
