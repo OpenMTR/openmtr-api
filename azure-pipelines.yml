@@ -6,6 +6,7 @@
 
 trigger:
 - master
+- deploy-to-test
 
 pool:
   vmImage: 'Ubuntu-16.04'
@@ -21,14 +22,9 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: CopyFiles@2
-  inputs:
-    sourceFolder: $(Build.SourcesDirectory)
-    contents: '/**/*'
-    targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.SourcesDirectory)/target/ROOT.war'
     artifactName: 'drop'
     publishLocation: Container
     targetPath: ''
