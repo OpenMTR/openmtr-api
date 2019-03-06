@@ -1,0 +1,51 @@
+﻿/*  
+    StyleSheet for Responsive Menu
+    openMTR Project Spring 2019
+    Jenny Franklin - code tweaked from Zach ...
+*/
+
+@media (max-width: 640px) {
+    .desktop-header-menu.desktop-header-menu {
+        display: none;
+    }
+}
+
+@media (min-width: 641px) {
+    .mobile-header-menu.mobile-header-menu {
+        display: none;
+    }
+}
+
+.mobile-nav-menu.mobile-nav-menu.mobile-nav-menu {
+    background-color: #1B1C1D;
+    text-align: center;
+    padding: 0 !important;
+    max-height: 0;
+    -webkit-transition: max-height 1s;
+    transition: max-height 1s;
+}
+
+.mobile-nav-menu.mobile-nav-menu:not(.open) {
+    border-bottom: none !important;
+}
+
+.mobile-nav-menu.open.open.open {
+    max-height: 179px;
+}
+
+.mobile-nav-menu .nav-list {
+    margin: 0 !important;
+    padding: 1em 0 !important;
+    list-style: none;
+}
+
+    .mobile-nav-menu .nav-list .nav-link {
+        color: whitesmoke;
+        font-size: 1.3rem;
+        padding: 0.2em 0.5em;
+    }
+
+.mobile-nav-menu .item {
+    display: block;
+    line-height: 1.7;
+}
