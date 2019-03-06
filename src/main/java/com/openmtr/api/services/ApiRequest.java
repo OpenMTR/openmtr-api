@@ -3,6 +3,7 @@ package com.openmtr.api.services;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.regex.Matcher;
@@ -13,6 +14,8 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.Context;
+
+import org.apache.commons.io.IOUtils;
 
 public abstract class ApiRequest {
 
@@ -32,6 +35,14 @@ public abstract class ApiRequest {
 	protected ServletContext servletContext;
 	
 	
+	/* Implement in extended classes */
+	public abstract void setEmailAddress(String email);
+	
+	public abstract void setDialsOnMeter(String dialsOnMeter);
+	
+	protected abstract boolean processImage();
+	
+	
 	protected void setErrorMsg(String error_msg) {
 		this.error = true;
 		this.error_msg = error_msg;
@@ -45,7 +56,6 @@ public abstract class ApiRequest {
 		return this.error_msg;
 	}
 	
-	public abstract void setEmailAddress(String email);
 	
 	public String getEmailAddress() {
 		return this.email;
@@ -55,7 +65,6 @@ public abstract class ApiRequest {
 		return this.validateEmailAdress(this.email);
 	}
 	
-	public abstract void setDialsOnMeter(String dialsOnMeter);
 	
 	public String getDialsOnMeter() {
 		return this.dialsOnMeter;
@@ -63,10 +72,6 @@ public abstract class ApiRequest {
 	
 	public boolean isValidDialsOnMeter() {
 		return this.validateDigitsOnMeterFace(this.dialsOnMeter);
-	}
-	
-	public void setImageByteArray(byte[] imageByteArray) {
-		this.imageByteArray = imageByteArray;
 	}
 	
 	public byte[] getImageByteArray() {
@@ -85,7 +90,7 @@ public abstract class ApiRequest {
 		return this.image;
 	}
 	
-	protected abstract boolean savedImage();
+	
 	
 	protected boolean validateEmailAdress(String email) {
 		Pattern reg = Pattern.compile(
@@ -95,9 +100,13 @@ public abstract class ApiRequest {
 	}
 	
 	protected boolean validateDigitsOnMeterFace(String numberOfDials) {
+		try {
 		Pattern pat = Pattern.compile("^[9]{3,6}$");
 		Matcher m = pat.matcher(numberOfDials);
 		return m.find();
+		} catch (NullPointerException ex) {
+			return false;
+		}
 	}
 	
 	protected String determineFileType(String imagePath) {
@@ -136,17 +145,31 @@ public abstract class ApiRequest {
 		}
 	}
 	
-	protected boolean extractByteArray() {
+	protected String getExtensionFromFiletype(String format) {
+		switch(format.toLowerCase()) {
+		case "png":
+			return ".png";
+		case "jpeg":
+		default:
+			return ".jpg";
+		}
+	}
+	
+	protected void extractByteArray() throws IOException {
     	try {
 	    	BufferedImage bImage = ImageIO.read(this.image);
 	        ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	        ImageIO.write(bImage, "jpg", bos );
 	        this.imageByteArray = bos.toByteArray();
     	} catch(Exception ex) {
-    		return false;
+    		System.out.println("Could not extract byte[]. " + ex.getMessage());
+    		throw new IOException("Could not extract image.");
     	}
-    	
-    	return true;
+	}
+	
+	protected byte[] extractByteArray(InputStream is) throws IOException {
+		byte[] imgBytes = IOUtils.toByteArray(is);
+		return imgBytes;
 	}
 	
 }
