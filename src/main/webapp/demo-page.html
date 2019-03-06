@@ -53,7 +53,7 @@
                 <i class="bug icon"></i>
                 <!-- MODAL POP: BUG REPORT FORM -->
             </a>
-            <a class="item">
+            <a class="active item">
                 Try it Yourself!
             </a>
             <a class="item">
@@ -109,12 +109,15 @@
         <div class="ui two column very relaxed stackable grid">
             <!--Left-hand Column - User Inputs-->
             <div class="column">
+                <div class="ui image"><img src="/image/drag-drop-ph.png" /></div>
+            </div>
+            <div class="column">
                 <div class="ui form">
                     <div id="drop-area">
                         <form class="my-form">
+                            <!-- UPLOAD IMAGE HERE -->
                             <div class="field">
-                                <p>Upload an image or drag and drop it here</p>
-                                <!-- UPLOAD IMAGE HERE -->
+                                <h3>Upload your Image:</h3>
                                 <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
                                 <h3>Or</h3>
                             </div>
@@ -128,48 +131,49 @@
                                     <input type="text" placeholder="my_image_url.com">
                                 </div>
                             </div>
-                            <div class="ui animated fade button" type="submit">
-                                <div class="visible content">
-                                    <i class="right arrow icon"></i>
+                            </br>
+                            <div class="ui two column very relaxed stackable grid">
+                                <div class="column">
+                                    <div class="field">
+                                        <div class="ui selection dropdown">
+                                            <input type="hidden" name="digit-number">
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text">Number of Digits on Meter:</div>
+                                            <div class="menu">
+                                                <div class="item" data-value="4">4</div>
+                                                <div class="item" data-value="5">5</div>
+                                                <div class="item" data-value="6">6</div>
+                                                <div class="item" data-value="0">I don't know</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="hidden content">
-                                    Submit
+                                <div class="column">
+                                    <div id="submit-image" class="ui animated fade button" type="submit">
+                                        <div class="visible content">
+                                            <i class="right arrow icon"></i>
+                                        </div>
+                                        <div class="hidden content">
+                                            Submit
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+
             </div>
-            <!-- Right-hand Column - Results -->
-            <div class="middle aligned column">
-                <!-- REQUIREMENTS:
-                Photo Thumbnail
-                openMTR Read:
-                MeterType:
-                Total Processing Time:
-                OR
-                Error: Something Went Wrong, Try Again
-                -->
-                <div class="ui four column very relaxed stackable grid">
-                    <div class="doubling four column row">
-                        <div class="column">
-                            <img class="ui small image" src="https://via.placeholder.com/300x300">
-                        </div>
-                        <div class="column">
-                            <h3>openMTR Read:</h3>
-                            <p>Result</p>
-                        </div>
-                        <div class="column">
-                            <h3>Meter Type:</h3>
-                            <p>Result</p>
-                        </div>
-                        <div class="column">
-                            <h3>Total Processing Time:</h3>
-                            <p>Result</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $('#submit-image').click(function () {
+                        $('#results-modal').modal('show');
+                    });
+                });
+            </script>
+
         </div>
     </div>
     <!-- End Demo Form -->
