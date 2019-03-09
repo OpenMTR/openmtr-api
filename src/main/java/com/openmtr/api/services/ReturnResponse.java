@@ -1,6 +1,9 @@
 package com.openmtr.api.services;
 
 
+import java.time.Duration;
+import java.util.Date;
+
 import javax.ws.rs.core.Response;
 
 
@@ -11,6 +14,9 @@ public class ReturnResponse {
     private String error_msg = "";
     private String data = null;
     private int status_code = 400;
+    private Date startProcessing = new Date();
+	private Date stopProcessing;
+    private String totalProcessingTime = "";
 
 
     /**
@@ -36,14 +42,29 @@ public class ReturnResponse {
 
     public Response error() {
     	this.error = true;
+    	this.stopProcessing();
     	return Response
                 .status(this.status_code)
                 .entity("{" +
                         "\"error\" : \"" + this.error + "\", " +
-                        "\"error_msg\" : \"" + this.error_msg + "\" " +
+                        "\"error_msg\" : \"" + this.error_msg + "\", " +
+                        "\"processing_time\" : " + this.totalProcessingTime + " " +
                         "}"
                 )
                 .build();
+    }
+    
+    public Response success() {
+    	this.stopProcessing();
+    	return Response
+    			.status(200)
+    			.entity("{" +
+                "\"error\" : \"" + this.error + "\", " +
+                "\"error_msg\" : \"" + this.error_msg + "\", " +
+                "\"data\" : " + this.data + ", " +
+                "\"processing_time\" : " + this.totalProcessingTime + " " +
+                "}")
+    			.build();
     }
     
     public void setErrorMsg(String message) {
@@ -58,15 +79,20 @@ public class ReturnResponse {
         return this.data;
     }
     
-    public Response success() {
-    	return Response
-    			.status(200)
-    			.entity("{" +
-                "\"error\" : \"" + this.error + "\", " +
-                "\"error_msg\" : \"" + this.error_msg + "\", " +
-                "\"data\" : " + this.data + " " +
-                "}")
-    			.build();
+    
+    public String getStartTime() {
+    	return this.startProcessing.toString();
     }
+    
+    public String getStopTime() {
+    	return this.stopProcessing.toString();
+    }
+    
+	
+	private void stopProcessing() {
+		this.stopProcessing = new Date();
+		Duration totalProcessing = Duration.between(this.startProcessing.toInstant(), this.stopProcessing.toInstant());
+		this.totalProcessingTime = "{\"hours\" : \"" + totalProcessing.toHours() + "\", \"minutes\" : \"" + totalProcessing.toMinutes() + "\", \"seconds\" : \"" + totalProcessing.getSeconds() + "\", \"nanoseconds\" : \"" + totalProcessing.toNanos() + "\"}";
+	}
 
 }
