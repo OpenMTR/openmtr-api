@@ -53,6 +53,10 @@ public class OpenMeterApi {
 		if(imageRequest.validateImageRequest()) {
 			return rr.error(imageRequest.getErrorMsg(), 400);
 		}
+		imageRequest.processImage();
+		if(imageRequest.isError()) {
+			return rr.error(imageRequest.getErrorMsg());
+		}
 		
 		String meterRead = "";
 		OpenMeter om = new OpenMeter();

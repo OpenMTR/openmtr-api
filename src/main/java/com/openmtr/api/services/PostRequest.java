@@ -3,7 +3,6 @@ package com.openmtr.api.services;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -36,8 +35,12 @@ public class PostRequest extends ApiRequest{
 	}
 
 	@FormDataParam("file")
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
+	public void setByteArrayFromInputStream(InputStream inputStream) {
+		try {
+			this.imageByteArray = this.extractByteArray(inputStream);
+		} catch (IOException e) {
+			this.setErrorMsg(e.getMessage());
+		}
 	}
 	
 	public InputStream getInputStream() {
@@ -51,55 +54,29 @@ public class PostRequest extends ApiRequest{
 	@FormDataParam("file")
 	public void setFileDetail(FormDataContentDisposition fileDetail) {
 		this.fileDetail = fileDetail;
-		this.setImageFile(fileDetail.getFileName());
 	}
 	
 	public boolean validateImageRequest() {
+		if(this.isError()) {
+			return this.error;
+		}
 		if(!this.isValidEmail()) {
 			this.setErrorMsg("Email address is invalid");
 		} 
 		else if(!this.isValidDialsOnMeter()) {
 			this.setErrorMsg("Number of dials on meter face is invalid");
 		}
-		else if(!this.validFile()) {
-			this.setErrorMsg("File is empty");
-		}
-		try {
-			this.extractByteArray();
-		} catch (IOException ex) {
-			this.setErrorMsg("Could not extract image");
-		}
 		return this.error;
-	}
-	
-	
-	private boolean validFile() {
-		if(this.fileDetail == null || this.fileDetail.getFileName().length() == 0) {
-			return false;
-		}
-		else if(!this.processImage()) {
-			return false;
-		}
-		return true;
 	}
 	
 	protected boolean processImage() {
 		try {
-			OutputStream out = new FileOutputStream(this.image);
-			int read = 0;
-			
-			byte[] bytes = new byte[1024];
-			
-			while((read = this.inputStream.read(bytes)) != -1) {
-				out.write(bytes, 0, read);
-			}
-			out.flush();
-			out.close();
-			if(!this.image.exists()) {
-				this.setErrorMsg("Could not save Image");
-				return false;
-			}
+			this.setImageFile(this.getExtensionFromFiletype(this.determinFileType(getImageByteArray())));
+			FileOutputStream fos = new FileOutputStream(this.image);
+			fos.write(getImageByteArray());
+			fos.close();
 		} catch (IOException ex) {
+			System.out.println("Could not save file " + ex.getMessage());
 			this.setErrorMsg("Could not save file");
 			return false;
 		}

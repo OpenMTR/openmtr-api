@@ -1,10 +1,14 @@
 package com.openmtr.api.services;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLConnection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -82,8 +86,9 @@ public abstract class ApiRequest {
 		return this.servletContext.getRealPath("/") + "uploadedImages/";
 	}
 	
-	protected void setImageFile(String file_name) {
-		this.image = new File(this.getImageFolderLocation() + file_name);
+	protected void setImageFile(String extension) {
+		Date d = new Date();
+		this.image = new File(this.getImageFolderLocation() + d.getTime() + extension);
 	}
 	
 	protected File getImageFile() {
@@ -128,6 +133,7 @@ public abstract class ApiRequest {
 		}
 	}
 	protected String determineFileType(InputStream inputStream) {
+
 		try {
 			ImageInputStream iis = ImageIO.createImageInputStream(inputStream);
 			Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
@@ -143,6 +149,11 @@ public abstract class ApiRequest {
 		} catch (Exception ex) {
 			return null;
 		}
+	}
+	protected String determinFileType(byte[] byte_array) throws IOException {
+		InputStream is = new BufferedInputStream(new ByteArrayInputStream(byte_array));
+		String mimeType = URLConnection.guessContentTypeFromStream(is);
+		return mimeType;
 	}
 	
 	protected String getExtensionFromFiletype(String format) {
@@ -162,7 +173,6 @@ public abstract class ApiRequest {
 	        ImageIO.write(bImage, "jpg", bos );
 	        this.imageByteArray = bos.toByteArray();
     	} catch(Exception ex) {
-    		System.out.println("Could not extract byte[]. " + ex.getMessage());
     		throw new IOException("Could not extract image.");
     	}
 	}
