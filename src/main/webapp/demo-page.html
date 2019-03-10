@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>openMTR Demo</title>
+    <meta name="viewport" content="width =device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/responsive-navbar.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dimmer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.js"></script>
+    <script src="/js/responsive-navbar.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- Navbar -->
+    <div class="ui inverted vertical nav center aligned segment">
+        <div class="ui container desktop-header-menu">
+            <div class="ui inverted secondary menu">
+                <a class="item">
+                    <div class="ui small image">
+                        <img src="/image/logo-1-text.png">
+                    </div>
+                </a>
+                <a class="active item">
+                    Home
+                </a>
+                <!-- Split to right -->
+                <div class="right menu">
+                    <a class="ui black massive icon button"
+                       data-tooltip="Check out the project on Github"
+                       data-position="bottom right"
+                       data-inverted="">
+                        <i class="github icon"></i>
+                        <!-- LINK TO GITHUB -->
+                    </a>
+                    <a class="ui black massive icon button"
+                       data-tooltip="Submit Bug Report"
+                       data-position="bottom right"
+                       data-inverted="">
+                        <i class="bug icon"></i>
+                        <!-- MODAL POP: BUG REPORT FORM ? -->
+                    </a>
+                    <a class="item">
+                        Try it Yourself!
+                    </a>
+                    <a class="item">
+                        Documentation
+                    </a>
+                    <!-- Dropdown -->
+                    <div class="ui simple dropdown item">
+                        Other
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item">About</div>
+                            <div class="item">Blog</div>
+                            <div class="item">Contact</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu DropDown -->
+        <div class="ui container mobile-header-menu">
+            <div class="ui inverted secondary menu">
+                <a href="/" class="item header">
+                    <div class="logo">
+                        <div class="ui small image">
+                            <img src="/image/logo-1-text.png">
+                        </div>
+                    </div>
+                </a>
+                <div class="right menu">
+                    <a class="item menu-toggle">
+                        Menu
+                        <i class="caret down icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="ui vertical stripe segment mobile-nav-menu">
+        <ul class="nav-list" style="color:white;">
+            <li class="item"><a href="#" class="nav-item">Home</a></li>
+            <li class="item"><a href="#" class="nav-item">Demo openMTR</a></li>
+            <li class="item"><a href="#" class="nav-item">Documentation</a></li>
+            <li class="item"><a href="#" class="nav-item">Project on Github</a></li>
+            <li class="item"><a href="#" class="nav-item">About</a></li>
+        </ul>
+    </div>
+    <!-- End Navbar -->
+    <!-- Hero Image -->
+    <img class="ui fluid image" src="/image/meter-hero.png">
+    <!-- End Hero Image -->
+    <!-- Grid "Feature Boxes" -->
+    <div class="ui basic segment">
+        <div class="ui four column center aligned very relaxed stackable grid">
+            <div class="doubling four column row">
+                <div class="olive column">
+                    <div class="ui small image">
+                        <img src="/image/demo-snap.png">
+                    </div>
+                </div>
+                <div class="purp column">
+                    <div class="ui small image">
+                        <img src="/image/demo-upload.png">
+                    </div>
+                </div>
+                <div class="teal column">
+                    <div class="ui small image">
+                        <img src="/image/demo-submit.png">
+                    </div>
+                </div>
+                <div class="blue column">
+                    <div class="ui small image">
+                        <img src="/image/demo-result.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Feature Boxes -->
+    <!-- Demo Form -->
+    <div class="ui raised segment">
+        <div class="ui two column very relaxed stackable grid">
+            <!--Left-hand Column - User Inputs-->
+            <div class="column">
+                <div class="ui image"><img src="/image/drag-drop-ph.png" /></div>
+            </div>
+            <div class="column">
+                <div class="ui form">
+                    <div id="drop-area">
+                        <form class="my-form">
+                            <!-- UPLOAD IMAGE HERE -->
+                            <div class="field">
+                                <h3>Upload your Image:</h3>
+                                <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                                <h3>Or</h3>
+                            </div>
+                            <div class="field">
+                                <p>Enter an image url: </p>
+                                <!-- ENTER URL HERE -->
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        http://
+                                    </div>
+                                    <input type="text" placeholder="my_image_url.com">
+                                </div>
+                            </div>
+                            </br>
+                            <div class="ui two column very relaxed stackable grid">
+                                <div class="column">
+                                    <div class="field">
+                                        <div class="ui selection dropdown">
+                                            <input type="hidden" name="digit-number">
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text">Number of Digits on Meter:</div>
+                                            <div class="menu">
+                                                <div class="item" data-value="4">4</div>
+                                                <div class="item" data-value="5">5</div>
+                                                <div class="item" data-value="6">6</div>
+                                                <div class="item" data-value="0">I don't know</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div id="submit-image" class="ui animated fade button" type="submit">
+                                        <div class="visible content">
+                                            <i class="right arrow icon"></i>
+                                        </div>
+                                        <div class="hidden content">
+                                            Submit
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $('#submit-image').click(function () {
+                        $('#results-modal').modal('show');
+                    });
+                });
+            </script>
+
+        </div>
+    </div>
+    <!-- End Demo Form -->
+    <!-- Colored Footer -->
+    <div class="ui equal width center aligned padded very relaxed stackable grid">
+        <!-- Boxes -->
+        <div class="row">
+            <div class="blue column">
+                <h3>Column Title</h3>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+            </div>
+            <div class="teal column">
+                <h3>Column Title</h3>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+
+            </div>
+            <div class="green column">
+                <h3>Column Title</h3>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    Inline Text
+                </div>
+
+            </div>
+            <div class="olive column">
+                <div class="ui small image">
+                    <img src="/image/logo-1.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Colored Footer -->
+    <!-- Results Modal -->
+    <div id="results-modal" class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Your Meter Reading
+        </div>
+        <div class="image content">
+            <div class="ui medium image">
+                <img src="/image/water-meter-1.jpg">
+            </div>
+            <div class="description">
+                <div class="ui header">Meter Read:</div>
+                <p>Here is the Meter Read</p>
+                <div class="ui header">Meter Type:</div>
+                <p>Here is the Meter Type</p>
+                <div class="ui header">Processing Time:</div>
+                <p>Here is the Processing Time</p>
+            </div>
+        </div>
+    </div>
+    <!-- End Results Modal -->
+</body>
+</html>
