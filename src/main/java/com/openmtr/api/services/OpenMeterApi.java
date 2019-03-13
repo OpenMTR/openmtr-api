@@ -32,15 +32,18 @@ public class OpenMeterApi {
 		}
 		
 		
-		String meterRead = "";
+	
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(getRequest.getImageByteArray(), getRequest.getDialsOnMeter());
+			rr.setOpenMeterResponse(om.getMeterRead(getRequest.getImageByteArray(), getRequest.getDialsOnMeter()));
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter. ", 400);
 		}
 		
-		rr.setData(meterRead);
+		if(rr.isError()) {
+			return rr.error();
+		}
+		
 		return rr.success();
 
 		
@@ -58,15 +61,17 @@ public class OpenMeterApi {
 			return rr.error(imageRequest.getErrorMsg());
 		}
 		
-		String meterRead = "";
 		OpenMeter om = new OpenMeter();
 		try {
-			meterRead = om.getMeterRead(imageRequest.getImageByteArray(), imageRequest.getDialsOnMeter());
+			rr.setOpenMeterResponse(om.getMeterRead(imageRequest.getImageByteArray(), imageRequest.getDialsOnMeter()));
 		} catch (Exception ex) {
 			return rr.error(ex.getMessage(), 400);
 		}
-
-		rr.setData(meterRead);
+		
+		if(rr.isError()) {
+			return rr.error();
+		}
+		
 		return rr.success();
 	}
 	

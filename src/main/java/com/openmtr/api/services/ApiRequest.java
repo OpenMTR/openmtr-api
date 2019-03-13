@@ -106,7 +106,7 @@ public abstract class ApiRequest {
 	
 	protected boolean validateDigitsOnMeterFace(String numberOfDials) {
 		try {
-		Pattern pat = Pattern.compile("^[9]{3,6}$");
+		Pattern pat = Pattern.compile("^[9]{4,6}$");
 		Matcher m = pat.matcher(numberOfDials);
 		return m.find();
 		} catch (NullPointerException ex) {

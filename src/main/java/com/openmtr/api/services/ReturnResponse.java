@@ -6,17 +6,25 @@ import java.util.Date;
 
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
+
 
 public class ReturnResponse {
 
 
+	private final String version = "1.0.0";
     private boolean error = false;
     private String error_msg = "";
-    private String data = null;
     private int status_code = 400;
+
     private Date startProcessing = new Date();
 	private Date stopProcessing;
     private String totalProcessingTime = "";
+
+    private String meter_read = "";
+    private String open_meter_version = "";
+    private String ai_used = "";
+
 
 
     /**
@@ -46,8 +54,9 @@ public class ReturnResponse {
     	return Response
                 .status(this.status_code)
                 .entity("{" +
-                        "\"error\" : \"" + this.error + "\", " +
+                        "\"error\" : " + this.error + ", " +
                         "\"error_msg\" : \"" + this.error_msg + "\", " +
+                        "\"api_version\" : \"" + this.version + "\", " +
                         "\"processing_time\" : " + this.totalProcessingTime + " " +
                         "}"
                 )
@@ -59,29 +68,57 @@ public class ReturnResponse {
     	return Response
     			.status(200)
     			.entity("{" +
-                "\"error\" : \"" + this.error + "\", " +
-                "\"error_msg\" : \"" + this.error_msg + "\", " +
-                "\"data\" : " + this.data + ", " +
-                "\"processing_time\" : " + this.totalProcessingTime + " " +
+	                "\"error\" : " + this.error + ", " +
+	                "\"error_msg\" : \"" + this.error_msg + "\", " +
+	                "\"api_version\" : \"" + this.version + "\", " +
+	                "\"meter_read\" : {" + 
+	                	"\"read\" : \"" + this.meter_read + "\", " +
+	                	"\"version\" : \"" + this.open_meter_version + "\", " +
+	                	"\"ai_used\" : \"" + this.ai_used + "\"" +
+                	"}, " +
+                	"\"processing_time\" : " + this.totalProcessingTime + " " +
                 "}")
     			.build();
     }
     
+    
     public void setErrorMsg(String message) {
     	this.error_msg = message;
     }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getData() {
-        return this.data;
-    }
-    
     
     public String getStartTime() {
     	return this.startProcessing.toString();
+    }
+    
+    public boolean isError() {
+    	return this.error;
+    }
+    
+    public void setMeterRead(String read) {
+    	this.meter_read = read;
+    }
+    
+    public void setOpenMeterVersion(String version) {
+    	this.open_meter_version = version;
+    }
+    
+    public void setAiUsed(String ai) {
+    	this.ai_used = ai;
+    }
+    
+    public void setOpenMeterResponse(String meterResponse) {
+    	JSONObject jo = new JSONObject(meterResponse);
+    	if(jo.getString("readMethodUsed").trim().equalsIgnoreCase("failed")) {
+			this.setErrorMsg("Could not get a valid meter read. " + jo.getString("meterRead"));
+		}
+		else if(!jo.isNull("error")) {
+			System.out.println("OpenMeter Error: " + jo.getString("error"));
+			this.setErrorMsg("Something happened. Please try again later. ");
+			this.status_code = 500;
+		}
+		this.setMeterRead(jo.getString("meterRead"));
+		this.setAiUsed(jo.getString("readMethodUsed"));
+		this.setOpenMeterVersion(jo.getString("buildVersion"));
     }
     
     public String getStopTime() {
@@ -92,7 +129,7 @@ public class ReturnResponse {
 	private void stopProcessing() {
 		this.stopProcessing = new Date();
 		Duration totalProcessing = Duration.between(this.startProcessing.toInstant(), this.stopProcessing.toInstant());
-		this.totalProcessingTime = "{\"hours\" : \"" + totalProcessing.toHours() + "\", \"minutes\" : \"" + totalProcessing.toMinutes() + "\", \"seconds\" : \"" + totalProcessing.getSeconds() + "\", \"nanoseconds\" : \"" + totalProcessing.toNanos() + "\"}";
+		this.totalProcessingTime = "{\"hours\" : \"" + totalProcessing.toHours() + "\", \"minutes\" : \"" + totalProcessing.toMinutes() + "\", \"seconds\" : \"" + totalProcessing.getSeconds() + "\", \"milliseconds\" : \"" + totalProcessing.toMillis() + "\"}";
 	}
 
 }
