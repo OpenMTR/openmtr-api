@@ -36,10 +36,13 @@ public class PostRequest extends ApiRequest{
 
 	@FormDataParam("file")
 	public void setByteArrayFromInputStream(InputStream inputStream) {
+		
 		try {
 			this.imageByteArray = this.extractByteArray(inputStream);
 		} catch (IOException e) {
 			this.setErrorMsg(e.getMessage());
+		} catch (NullPointerException ex) {
+			this.setErrorMsg("No File was uploaded");
 		}
 	}
 	
@@ -76,8 +79,10 @@ public class PostRequest extends ApiRequest{
 			fos.write(getImageByteArray());
 			fos.close();
 		} catch (IOException ex) {
-			System.out.println("Could not save file " + ex.getMessage());
 			this.setErrorMsg("Could not save file");
+			return false;
+		} catch (NullPointerException ex) {
+			this.setErrorMsg("No file was given");
 			return false;
 		}
 		return true;

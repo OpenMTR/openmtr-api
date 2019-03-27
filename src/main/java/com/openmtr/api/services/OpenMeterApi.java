@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,7 +17,8 @@ public class OpenMeterApi {
 	private ReturnResponse rr = new ReturnResponse();
 
 
-	@GET
+	@Path("/url")
+	@POST
 	@Produces("application/json")
 	public Response downloadFromUrl(@BeanParam GetRequest getRequest) {
 		if(getRequest.validateRequest()) {
@@ -38,6 +38,8 @@ public class OpenMeterApi {
 			rr.setOpenMeterResponse(om.getMeterRead(getRequest.getImageByteArray(), getRequest.getDialsOnMeter()));
 		} catch (IOException ex) {
 			return rr.error("Could not Read Meter. ", 400);
+		} catch (Exception ex) {
+			return rr.error("Could not Read Meter");
 		}
 		
 		if(rr.isError()) {

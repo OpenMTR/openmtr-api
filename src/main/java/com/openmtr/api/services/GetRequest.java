@@ -11,38 +11,39 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.DefaultValue;
+
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 public class GetRequest extends ApiRequest {
-	
-	
+
 	private String url = "";
 
 	@Override
-	@QueryParam("email")
+	@FormDataParam("email")
 	public void setEmailAddress(String email) {
 		this.email = email;
 	}
 
 	@Override
-	@QueryParam("numberOfDials")
-	public void setDialsOnMeter(String dialsOnMeter) {
+	@FormDataParam("numberOfDials")
+	public void setDialsOnMeter(@DefaultValue("9999") String dialsOnMeter) {
 		this.dialsOnMeter = dialsOnMeter;
-		
+
 	}
-	
-	@QueryParam("url")
-	public void setUrl(String url) {
+
+	@FormDataParam("url")
+	public void setUrl(@DefaultValue("") String url) {
 		this.url = url;
 	}
-	
+
 	public String getUrl() {
 		return this.url;
 	}
-	
+
 	@Override
 	protected boolean processImage() {
-		if(this.error) {
+		if (this.error) {
 			return false;
 		}
 		try {
@@ -53,56 +54,55 @@ public class GetRequest extends ApiRequest {
 		} catch (IOException ex) {
 			this.setErrorMsg(ex.getMessage());
 		}
-		
+
 		return false;
 	}
-	
-	
+
 	public boolean validateRequest() {
-		if(!this.isValidEmail()) {
+		if (!this.isValidEmail()) {
 			this.setErrorMsg("Email address is invalid");
-		}
-		else if (!this.isValidDialsOnMeter()) {
+		} else if (!this.isValidDialsOnMeter()) {
 			this.setErrorMsg("The dials on meter is invalid");
-		}
-		else if (!this.isValidUrl()) {
+		} else if (!this.isValidUrl()) {
 			this.setErrorMsg("The URL address is invalid");
 		}
 		return this.isError();
 	}
-	
-	
+
 	protected void createImageFileName(String imageExtension) {
 		Date date = new Date();
 		this.image = new File(this.getImageFolderLocation() + date.getTime() + imageExtension);
 	}
-	
 
-	
 	private void downloadImage(String url) throws FileNotFoundException {
 		try {
 			this.createImageFileName(this.getExtensionFromFiletype(this.determineFileType(new URL(url).openStream())));
-			Files.copy(new URL(url).openStream(), Paths.get(this.getImageFile().getPath()), StandardCopyOption.REPLACE_EXISTING);		
-			if(!this.getImageFile().exists()) {
+			Files.copy(new URL(url).openStream(), Paths.get(this.getImageFile().getPath()),
+					StandardCopyOption.REPLACE_EXISTING);
+			if (!this.getImageFile().exists()) {
 				throw new FileNotFoundException("Could not download image from URL: " + url);
 			}
-			if(this.determineFileType(this.getImageFile().getPath()) == null) {
+			if (this.determineFileType(this.getImageFile().getPath()) == null) {
 				this.getImageFile().delete();
 				throw new IOException("File downloaded was not an image");
 			}
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			throw new FileNotFoundException(ex.getMessage());
 		}
-		
+
 	}
 
 	public boolean isValidUrl() {
-		Pattern reg = Pattern.compile("^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$");
-		Matcher m = reg.matcher(this.url);
-		return m.find();
+		try {
+			Pattern reg = Pattern.compile(
+					"^((http[s]?|ftp):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$");
+			Matcher m = reg.matcher(this.url);
+			return m.find();
+		} catch (NullPointerException ex) {
+			return false;
+		}
+		
+	
 	}
-
-	
-	
 
 }
