@@ -1,82 +1,121 @@
 <!DOCTYPE html>
-<html>
 <!-- 2019 Capstone Project -->
 <!-- Jenny Franklin, James Willhoite, Matthew Thomas -->
 <!-- NOTE: Logo colors:
     open MAIN H:212 S:90 L:50 ; R:13 G:121 B:242
     MTR  MAIN H:233 S:60 L:50 ; R:51 G:69 B:204
     -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title> openMTR Home </title>
+    <title>openMTR Home</title>
+    <meta name="viewport" content="width =device-width, initial-scale=1">
     <link rel="stylesheet"
           type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
-
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/responsive-navbar.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/main.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous">
     </script>
-
-    <script src="semantic/dist/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dimmer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.js"></script>
+    <script src="/js/responsive-navbar.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
+
 
 <body>
     <!-- Navbar -->
-    <!-- NOTE:
-         Semantic doesn't seem to have any built in menu collapse/responsive features.
-         I found a sort of example at https://jsfiddle.net/1712/g6agpoy9/
-         In order for this to be mobile friendly, this is a MUST.
-    -->
-    <div class="ui huge inverted menu">
-        <a class="item">
-            <div class="ui small image">
-                <img src="/image/logo-1-text.png">
-            </div>
-        </a>
-        <a class="active item">
-            Home
-        </a>
-        <!-- Split to right -->
-        <div class="right menu">
-            <a class="ui black massive icon button"
-               data-tooltip="Check out the project on Github"
-               data-position="bottom right"
-               data-inverted="">
-                <i class="github icon"></i>
-                <!-- LINK TO GITHUB -->
-            </a>
-            <a class="ui black massive icon button"
-               data-tooltip="Submit Bug Report"
-               data-position="bottom right"
-               data-inverted="">
-                <i class="bug icon"></i>
-                <!-- MODAL POP: BUG REPORT FORM -->
-            </a>
-            <a class="item">
-                Try it Yourself!
-            </a>
-            <a class="item">
-                Documentation
-            </a>
-            <!-- Dropdown -->
-            <div class="ui simple dropdown item">
-                Other
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <div class="item">About</div>
-                    <div class="item">Blog</div>
-                    <div class="item">Contact</div>
+    <div class="ui inverted vertical nav center aligned segment">
+        <div class="ui container desktop-header-menu">
+            <div class="ui inverted secondary menu">
+                <a class="item">
+                    <div class="ui small image">
+                        <img src="/image/logo-1-text.png">
+                    </div>
+                </a>
+                <a class="active item">
+                    Home
+                </a>
+                <!-- Split to right -->
+                <div class="right menu">
+                    <a class="ui black massive icon button"
+                       data-tooltip="Check out the project on Github"
+                       data-position="bottom right"
+                       data-inverted="">
+                        <i class="github icon"></i>
+                        <!-- LINK TO GITHUB -->
+                    </a>
+                    <a class="ui black massive icon button"
+                       data-tooltip="Submit Bug Report"
+                       data-position="bottom right"
+                       data-inverted="">
+                        <i class="bug icon"></i>
+                        <!-- MODAL POP: BUG REPORT FORM ? -->
+                    </a>
+                    <a class="item">
+                        Try it Yourself!
+                    </a>
+                    <!-- Dropdown -->
+                    <div class="ui simple dropdown item">
+                        Other
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item">About</div>
+                            <div class="item">Blog</div>
+                            <div class="item">Contact</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Mobile Menu DropDown -->
+        <div class="ui container mobile-header-menu">
+            <div class="ui inverted secondary menu">
+                <a href="/" class="item header">
+                    <div class="logo">
+                        <div class="ui small image">
+                            <img src="/image/logo-1-text.png">
+                        </div>
+                    </div>
+                </a>
+                <div class="right menu">
+                    <a class="item menu-toggle">
+                        Menu
+                        <i class="caret down icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="ui vertical stripe segment mobile-nav-menu">
+        <ul class="nav-list" style="color:white;">
+            <li class="item"><a href="#" class="nav-item">Home</a></li>
+            <li class="item"><a href="#" class="nav-item">Demo openMTR</a></li>
+            <li class="item"><a href="#" class="nav-item">Project on Github</a></li>
+            <li class="item"><a href="#" class="nav-item">About</a></li>
+        </ul>
     </div>
     <!-- End Navbar -->
     <!-- Hero Image -->
     <img class="ui fluid image" src="/image/grass-placeholder.png">
     <!-- End Hero Image -->
     <!-- Grid "Feature Boxes" -->
-    <div class="ui equal width center aligned padded grid">
+    <div class="ui equal width center aligned padded grid"
+         style="border-bottom: ridge 7px;
+                border-color:#00b377;">
         <!-- Divider Row
         <div class="row">
             <div class="black column"> </div>
@@ -107,7 +146,8 @@
     </div>
     <!-- End Feature Boxes -->
     <!-- Expanded Features-->
-    <div class="ui piled segments">
+    <div class="ui raised segment"
+         style="margin:0 !important;">
         <div class="ui very padded segment">
             <div class="ui two column very relaxed stackable grid">
                 <div class="middle aligned column">
@@ -119,18 +159,22 @@
                         <br />They're messy, confusing, and impossible to understand.
                     </p>
                     <p style="font-size:x-large; text-align: right;color:#63b4ff">
-                        That's why we've created openMTR. 
+                        That's why we've created openMTR.
                     </p>
                 </div>
                 <div class="middle aligned column">
-                    <img class="ui centered image" src="/image/water-meter-2.jpg">
+                    <img class="ui centered image" 
+                         src="/image/test-meter-2.jpg"
+                         style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
                 </div>
             </div>
         </div>
         <div class="ui very padded segment">
             <div class="ui two column very relaxed stackable grid">
                 <div class="middle aligned column">
-                    <img class="ui centered image" src="https://via.placeholder.com/580x362.jpg">
+                    <img class="ui centered image" 
+                         src="/image/test-meter-8.jpg"
+                         style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
                 </div>
                 <div class="middle aligned column">
                     <h1 style="color:#358ee0;">
@@ -138,7 +182,7 @@
                     </h1>
                     <p style="font-size:x-large">
                         openMTR allows you to quickly take a picture of your meter, upload it,
-                        and instantly recieve the information you're looking for. 
+                        and instantly recieve the information you're looking for.
                         <br />We've used image recogition technology to build a
                         smarter meter-reader just for you.
                     </p>
@@ -149,84 +193,29 @@
             <div class="ui two column very relaxed stackable grid">
                 <div class="middle aligned column">
                     <h1 style="color:#358ee0; text-align: right">
-                       Open Source
+                        Open Source
                     </h1>
                     <p style="font-size:x-large; text-align: right">
-                        It's important to us that technology is available and free to everyone, so 
+                        It's important to us that technology is available and free to everyone, so
                         we've created an open source API that you can incorporate into your project or business.
-                    </p>    
+                    </p>
                     <p style="font-size:x-large; text-align: right">
                         Check out our <a href="#">Documentation Page</a> for more information on integration.
                     </p>
                 </div>
                 <div class="middle aligned column">
-                    <img class="ui centered image" src="https://via.placeholder.com/580x362.jpg">
+                    <img class="ui centered image" 
+                         src="/image/test-meter-6.jpg"
+                         style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Start Footer -->
-    <!--<div class="ui grid container">
-        <div class="ui four column centered divided grid">
-            <div class="row">
-                <div class="right aligned column">
-                    <h3>Column Title</h3>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                </div>
-                <div class="right aligned column">
-                    <h3>Column Title 2</h3>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                </div>
-                <div class="right aligned column">
-                    <h3>Column Title 3</h3>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                    <div class="item">
-                        <i class="right triangle icon"></i>
-                        Inline Text
-                    </div>
-                </div>
-                <div class="right aligned column">
-                    <div class="ui small image">
-                        <img src="/image/logo-1.png">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-    <!--End Footer -->
-
     <!-- Colored Footer -->
-    <div class="ui equal width center aligned padded very relaxed stackable grid">
+    <div class="ui equal width center aligned padded very relaxed stackable grid"
+         style="border-top: ridge 7px;
+                border-color:#00b377;">
         <!-- Boxes -->
         <div class="row">
             <div class="blue column">
