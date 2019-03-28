@@ -97,3 +97,12 @@
 .ui.grid .purp.column {
     background-color: purple !important;
     color: #fff;}
+
+.slick-arrow.slick-prev:before,
+.slick-arrow.slick-next:before {
+    color: #2185d0;
+}
+
+.item .ui.small.image {
+    margin: 0 auto;
+}
