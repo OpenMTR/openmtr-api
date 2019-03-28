@@ -8,18 +8,22 @@
     <link rel="stylesheet"
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet"
           type="text/css"
           href="/css/responsive-navbar.css">
     <link rel="stylesheet"
           type="text/css"
           href="/css/main.css">
+
     <link rel="stylesheet"
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
     <link rel="stylesheet" 
           type="text/css" 
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/demo_page.css" />
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -144,15 +148,37 @@
             </div>
         </div>
     </div>
-
     <!-- End Feature Boxes -->
     <!-- Demo Form -->
     <div class="ui raised segment"
          style="margin:0 !important;">
+        <div class="overlay"></div>
+        <div id="error_msg" class="ui error message">
+            <i class="close icon"></i>
+            <div id="title" class="header">
+                We're sorry we can't apply that discount
+            </div>
+            <p id="message">That offer has expired
+            </p>
+        </div>
         <div class="ui two column very relaxed stackable grid">
             <!--Left-hand Column - User Inputs-->
             <div class="column">
-                <div class="ui image"><img src="/image/drag-drop-ph.png" /></div>
+                <div id="dragNdrop" class="ui form">
+                    <div class="box">
+                        <div class="box__input">
+                            <input class="box__file" type="file" name="files[]" id="file" />
+                            <span id="downloadImage">
+                                <i class="fas fa-download"></i>
+                            </span>
+                            <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
+                        </div>
+                        <div class="box__fileDropped"><img class="ui fluid image" src=""></div>
+                        <div class="box__uploading">Uploading&hellip;</div>
+                        <div class="box__success">Done!</div>
+                        <div class="box__error">Error! Try again.</div>
+                    </div>
+                </div>
             </div>
             <div class="column">
                 <div class="ui form">
@@ -166,17 +192,17 @@
                                     <div class="ui label">
                                         http://
                                     </div>
-                                    <input type="text"
+                                    <input id="url" type="text"
                                            placeholder="my_image_url.com">
                                 </div>
                             </div>
-                            <div class="field">
-                                <label>Or upload your Image:</label>
-                                <input type="file"
-                                       id="fileElem"
-                                       multiple accept="image/*"
-                                       onchange="handleFiles(this.files)">
-                            </div>
+                            <!--<div class="field">-->
+                                <!--<label>Or upload your Image:</label>-->
+                                <!--<input type="file"-->
+                                       <!--id="fileElem"-->
+                                       <!--multiple accept="image/*"-->
+                                       <!--onchange="handleFiles(this.files)">-->
+                            <!--</div>-->
                             <div class="ui divider"></div>
                             <!-- EMAIL -->
                             <div class="field">
@@ -184,7 +210,7 @@
                                 <div class="inline fields">
                                     <div class="eight wide field">
                                         <div class="ui input">
-                                            <input type="text"
+                                            <input id="email" type="text"
                                                    placeholder="john_doe@email.com">
                                         </div>
                                     </div>
@@ -202,10 +228,11 @@
                             <div class="ui two column very relaxed stackable grid">
                                 <div class="column">
                                     <div class="field">
-                                        <div class="ui selection dropdown">
-                                            <input type="hidden" name="digit-number">
+                                        <label>Number of Digits on Meter:</label>
+                                        <div id="digit_dropdown" class="ui selection dropdown">
+                                            <input id="digit-number" type="hidden" name="digit-number">
                                             <i class="dropdown icon"></i>
-                                            <div class="default text">Number of Digits on Meter:</div>
+                                            <div class="default text">Select</div>
                                             <div class="menu">
                                                 <div class="item"
                                                      data-value="4">4</div>
@@ -237,29 +264,6 @@
                 </div>
 
             </div>
-            <!-- Submit Modal JS -->
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#submit-image').click(function () {
-                        $('#results-modal').modal('show');
-                    });
-                });
-            </script>
-            <!-- Email Modal JS -->
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#email-question').click(function () {
-                        $('#email-privacy-modal').modal('show');
-                    });
-                });
-            </script>
-            <!-- Dropdown JS -->
-            <script>
-                $('select.dropdown')
-                    .dropdown()
-                    ;
-            </script>
-
         </div>
 
         <!-- End Demo Form -->
@@ -364,15 +368,15 @@
         </div>
         <div class="image content">
             <div class="ui medium image">
-                <img src="/image/water-meter-1.jpg">
+                <img id="uploadedFile" src="/image/water-meter-1.jpg">
             </div>
             <div class="description">
                 <div class="ui header">Meter Read:</div>
-                <p>Here is the Meter Read</p>
+                <p id="meterRead">Here is the Meter Read</p>
                 <div class="ui header">Meter Type:</div>
-                <p>Here is the Meter Type</p>
+                <p id="meterType">Here is the Meter Type</p>
                 <div class="ui header">Processing Time:</div>
-                <p>Here is the Processing Time</p>
+                <p id="processingTime">Here is the Processing Time</p>
             </div>
         </div>
     </div>
@@ -405,5 +409,12 @@
     <!-- End Email Modal -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/js/carousel.js"></script>
+
+<script src="js/openMtr-demo.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        openMtrDemo.init();
+    });
+</script>
 </body>
 </html>

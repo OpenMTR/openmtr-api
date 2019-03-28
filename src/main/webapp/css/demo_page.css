@@ -1,0 +1,90 @@
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error,
+.box__fileDropped {
+    display: none;
+}
+.box__uploading,
+.box__success,
+.box__error {
+    font-size: 2.5rem;
+}
+/*
+ This will place the file selector off screen.
+ The link in the drag n drop will allow the selection of files
+ */
+.box__file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+label[for="file"] strong {
+    font-size: 1rem;
+    font-weight: 700;
+    color: blue;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.box {
+    font-size: 1.25rem;
+    background-color: #c8dadf;
+    position: relative;
+    padding: 100px 200px;
+    text-align: center;
+}
+
+.box.has-advanced-upload {
+    /*background-color: white;*/
+    outline: 2px dashed black;
+    outline-offset: -10px;
+}
+.box.has-advanced-upload .box__dragndrop {
+    display: inline;
+}
+.box.is-dragover {
+    background-color: grey;
+}
+.box.is-uploading .box__input,
+.box.upload-ready .box__input {
+    visibility: hidden;
+}
+.box.is-uploading .box__uploading,
+.box.is-error .box__error,
+.box.file-dropped .box__fileDropped {
+    display: block;
+}
+.box__input span#downloadImage {
+    font-size: 3rem;
+    display: block;
+}
+.d-block {
+    display: block;
+}
+
+div.overlay {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10001;
+    background: #FFF; /* fallback */
+    background: rgba(255,255,255,0.75);
+    background-image: url('../image/loader3.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 20%;
+    background-size: 25% 50%;
+}
+div#error_msg {
+    display: none;
+}
+
+
+
