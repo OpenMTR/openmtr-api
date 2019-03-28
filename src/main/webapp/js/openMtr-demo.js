@@ -150,7 +150,7 @@ var openMtrDemo = {
             formData.append("url", url.val());
             appendURL = "/url";
         }
-       
+
 
         if(self.validateEmail(email.val())) {
             //ToDo: Add email validation
@@ -220,7 +220,7 @@ var openMtrDemo = {
 
         form.find("div.box__fileDropped img").attr("src", "");
         form.removeClass("upload-ready file-dropped");
-        numberOfDigits.val("";
+        numberOfDigits.val("");
         numberOfDigits.parent().find("div.text").html("Select").addClass("default");
         self.droppedFiles = null;
 
