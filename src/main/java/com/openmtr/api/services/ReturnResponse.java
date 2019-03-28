@@ -24,6 +24,7 @@ public class ReturnResponse {
     private String meter_read = "";
     private String open_meter_version = "";
     private String ai_used = "";
+    private String meter_type = "";
 
 
 
@@ -73,6 +74,7 @@ public class ReturnResponse {
 	                "\"api_version\" : \"" + this.version + "\", " +
 	                "\"meter_read\" : {" + 
 	                	"\"read\" : \"" + this.meter_read + "\", " +
+	                	"\"type\" : \"" + this.meter_type + "\", " +
 	                	"\"version\" : \"" + this.open_meter_version + "\", " +
 	                	"\"ai_used\" : \"" + this.ai_used + "\"" +
                 	"}, " +
@@ -106,6 +108,10 @@ public class ReturnResponse {
     	this.ai_used = ai;
     }
     
+    public void setMeterType(String meter_type) {
+    	this.meter_type = meter_type;
+    }
+    
     public void setOpenMeterResponse(String meterResponse) {
     	JSONObject jo = new JSONObject(meterResponse);
     	if(jo.getString("readMethodUsed").trim().equalsIgnoreCase("failed")) {
@@ -119,6 +125,7 @@ public class ReturnResponse {
 		this.setMeterRead(jo.getString("meterRead"));
 		this.setAiUsed(jo.getString("readMethodUsed"));
 		this.setOpenMeterVersion(jo.getString("buildVersion"));
+		this.setMeterType(jo.getString("meterType"));
     }
     
     public String getStopTime() {

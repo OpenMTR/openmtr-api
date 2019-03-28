@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import com.mattclinard.openmtr.OpenMeter;
+import org.kub.openmtr.OpenMeter;
 
 @Path("/read_meter")
 public class OpenMeterApi {
