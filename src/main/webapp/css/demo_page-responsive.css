@@ -1,0 +1,87 @@
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and ( max-height: 800px ){
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+/* Large desktop */
+@media (min-width: 980px) and (max-width: 1199px) {
+    .box {
+        font-size: 1.25rem;
+        background-color: #c8dadf;
+        position: relative;
+        padding: 150px 100px;
+        text-align: center;
+    }
+
+}
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 761px) and (max-width: 979px) {
+    .box {
+        font-size: 1.25rem;
+        background-color: #c8dadf;
+        position: relative;
+        padding: 100px 100px;
+        text-align: center;
+    }
+
+}
+
+/* iPad in Portrait */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+    .box {
+        font-size: 1.25rem;
+        background-color: #c8dadf;
+        position: relative;
+        padding: 100px 100px;
+        text-align: center;
+    }
+}
+
+/* iPad in Landscape */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+    .box {
+        font-size: 1.25rem;
+        background-color: #c8dadf;
+        position: relative;
+        padding: 50px 100px;
+        text-align: center;
+    }
+}
+
+
+
+
+/* Portrait tablet and down */
+@media (max-width: 760px) {
+    .box {
+        font-size: 1.25rem;
+        background-color: #c8dadf;
+        position: relative;
+        padding: 100px 100px;
+        text-align: center;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .box {
+        font-size: 1.25rem;
+        background-color: #c8dadf;
+        position: relative;
+        padding: 50px 50px;
+        text-align: center;
+    }
+}

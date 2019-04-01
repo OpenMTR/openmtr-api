@@ -24,6 +24,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
 
     <link rel="stylesheet" type="text/css" href="css/demo_page.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo_page-responsive.css" />
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -156,9 +157,9 @@
         <div id="error_msg" class="ui error message">
             <i class="close icon"></i>
             <div id="title" class="header">
-                We're sorry we can't apply that discount
+                Error!
             </div>
-            <p id="message">That offer has expired
+            <p id="message">Something happened... That's all I know.
             </p>
         </div>
         <div class="ui two column very relaxed stackable grid">
@@ -166,18 +167,23 @@
             <div class="column">
                 <div id="dragNdrop" class="ui form">
                     <div class="box">
-                        <div class="box__input">
-                            <input class="box__file" type="file" name="files[]" id="file" />
-                            <span id="downloadImage">
-                                <i class="fas fa-download"></i>
-                            </span>
-                            <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
+                        <div id="form_container">
+                            <div class="box__input">
+                                <input class="box__file" type="file" name="files[]" id="file" />
+                                <span id="downloadImage">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
+                            </div>
+                            <div class="box__uploading">Uploading&hellip;</div>
+                            <div class="box__success">Done! 1 file uploaded.</div>
+                            <div class="box__error">Error! Try again.</div>
                         </div>
-                        <div class="box__fileDropped"><img class="ui fluid image" src=""></div>
-                        <div class="box__uploading">Uploading&hellip;</div>
-                        <div class="box__success">Done!</div>
-                        <div class="box__error">Error! Try again.</div>
                     </div>
+                    <span id="close">
+                        <i class="times circle outline icon"></i>
+                    </span>
+                    <img class="ui fluid image" src="">
                 </div>
             </div>
             <div class="column">
