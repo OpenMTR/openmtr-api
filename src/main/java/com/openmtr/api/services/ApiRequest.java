@@ -30,6 +30,8 @@ public abstract class ApiRequest {
 	protected byte[] imageByteArray;
 
 	protected File image;
+	
+	public boolean doLoop = true;
 
 	protected boolean error = false;
 

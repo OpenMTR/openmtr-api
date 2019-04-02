@@ -27,8 +27,14 @@ public class GetRequest extends ApiRequest {
 
 	@Override
 	@FormDataParam("numberOfDials")
-	public void setDialsOnMeter(@DefaultValue("9999") String dialsOnMeter) {
-		this.dialsOnMeter = dialsOnMeter;
+	public void setDialsOnMeter(String dialsOnMeter) {
+		if(dialsOnMeter == null || dialsOnMeter.length() == 0) {
+			this.dialsOnMeter = "999999";
+		}
+		else {
+			this.dialsOnMeter = dialsOnMeter;	
+			this.doLoop = false;
+		}
 
 	}
 
@@ -61,8 +67,6 @@ public class GetRequest extends ApiRequest {
 	public boolean validateRequest() {
 		if (!this.isValidEmail()) {
 			this.setErrorMsg("Email address is invalid");
-		} else if (!this.isValidDialsOnMeter()) {
-			this.setErrorMsg("The dials on meter is invalid");
 		} else if (!this.isValidUrl()) {
 			this.setErrorMsg("The URL address is invalid");
 		}

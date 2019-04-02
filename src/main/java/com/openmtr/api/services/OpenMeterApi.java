@@ -1,6 +1,8 @@
 package com.openmtr.api.services;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
@@ -9,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
 import org.kub.openmtr.OpenMeter;
 
 @Path("/read_meter")
@@ -20,6 +23,7 @@ public class OpenMeterApi {
 	@Path("/url")
 	@POST
 	@Produces("application/json")
+	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
 	public Response downloadFromUrl(@BeanParam GetRequest getRequest) {
 		if(getRequest.validateRequest()) {
 			return rr.error("Validation Error. " + getRequest.getErrorMsg());
@@ -31,15 +35,11 @@ public class OpenMeterApi {
 			}
 		}
 		
-		
-	
-		OpenMeter om = new OpenMeter();
 		try {
-			rr.setOpenMeterResponse(om.getMeterRead(getRequest.getImageByteArray(), getRequest.getDialsOnMeter()));
-		} catch (IOException ex) {
-			return rr.error("Could not Read Meter. ", 400);
+			String meterResponse = this.readMeter(getRequest.getImageByteArray(), getRequest.getDialsOnMeter(), getRequest.doLoop);			
+			rr.setOpenMeterResponse(meterResponse);
 		} catch (Exception ex) {
-			return rr.error("Could not Read Meter");
+			return rr.error(ex.getMessage(), 400);
 		}
 		
 		if(rr.isError()) {
@@ -63,9 +63,9 @@ public class OpenMeterApi {
 			return rr.error(imageRequest.getErrorMsg());
 		}
 		
-		OpenMeter om = new OpenMeter();
 		try {
-			rr.setOpenMeterResponse(om.getMeterRead(imageRequest.getImageByteArray(), imageRequest.getDialsOnMeter()));
+			String meterResponse = this.readMeter(imageRequest.getImageByteArray(), imageRequest.getDialsOnMeter(), imageRequest.doLoop);			
+			rr.setOpenMeterResponse(meterResponse);
 		} catch (Exception ex) {
 			return rr.error(ex.getMessage(), 400);
 		}
@@ -75,6 +75,37 @@ public class OpenMeterApi {
 		}
 		
 		return rr.success();
+	}
+	
+	private String readMeter(byte[] byteArray, String dialsOnMeter, boolean doLoop) throws IOException {
+		String meterResponse = "";
+		String dials = dialsOnMeter;
+		OpenMeter om = new OpenMeter();
+		Pattern pat = Pattern.compile("^[0-9]{3,}$");
+		int min = 5;
+		if(doLoop) {
+			min = 3;
+		}
+		for(int i = 6; i > min; i--) {
+			meterResponse = om.getMeterRead(byteArray, dials);
+			JSONObject jo = new JSONObject(meterResponse);
+			
+			if(!jo.isNull("error")) {
+				break;
+			}
+	
+			String meterRead = (!jo.isNull("meterRead")) ? jo.getString("meterRead") : "";
+			Matcher m = pat.matcher(meterRead.trim());
+			if(m.matches()) {
+				rr.setDigitsOnMeter(dials);
+				break;
+			}
+			else {
+				dials = dials.substring(0, dials.length() - 1);
+			}
+		}
+		return meterResponse;
+	
 	}
 	
 }

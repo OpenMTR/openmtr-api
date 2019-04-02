@@ -11,8 +11,7 @@ public class PostRequest extends ApiRequest{
 	
 	private InputStream inputStream;
 	
-	private FormDataContentDisposition fileDetail;
-	
+	private FormDataContentDisposition fileDetail;	
 
 	@FormDataParam("email")
 	public void setEmailAddress(String email) {
@@ -27,10 +26,11 @@ public class PostRequest extends ApiRequest{
 	@FormDataParam("numberOfDials")
 	public void setDialsOnMeter(String numberOfDials) {
 		if(numberOfDials == null || numberOfDials.length() == 0) {
-			this.dialsOnMeter = "99999";
+			this.dialsOnMeter = "999999";
 		}
 		else {
 			this.dialsOnMeter = numberOfDials;	
+			this.doLoop = false;
 		}
 	}
 
@@ -66,9 +66,6 @@ public class PostRequest extends ApiRequest{
 		if(!this.isValidEmail()) {
 			this.setErrorMsg("Email address is invalid");
 		} 
-		else if(!this.isValidDialsOnMeter()) {
-			this.setErrorMsg("Number of dials on meter face is invalid");
-		}
 		return this.error;
 	}
 	
