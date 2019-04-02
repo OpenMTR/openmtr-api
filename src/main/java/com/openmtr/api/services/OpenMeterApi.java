@@ -53,7 +53,7 @@ public class OpenMeterApi {
 	
 	@POST
 	@Produces("application/json")
-	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
+	@Consumes("multipart/form-data")
 	public Response uploadImage(@BeanParam PostRequest imageRequest) {
 		if(imageRequest.validateImageRequest()) {
 			return rr.error(imageRequest.getErrorMsg(), 400);
