@@ -96,7 +96,7 @@ var openMtrDemo = {
         jQuery("div#dragNdrop span#close i").on("click", function() {
             self.droppedFiles = null;
             jQuery("div#dragNdrop span#close").fadeOut("fast");
-            jQuery("div#dragNdrop img").attr("src", "");
+            jQuery("div#dragNdrop img").attr("src", "").css("max-height", "0px");
             form.removeClass("upload-ready file-dropped");
             jQuery("div#dragNdrop .box").fadeIn("fast");
         });
@@ -262,8 +262,10 @@ var openMtrDemo = {
         var email = jQuery("form.my-form input#email");
         var numberOfDigits = jQuery("form.my-form input#digit-number");
 
-        form.find("div.box__fileDropped img").attr("src", "");
+        jQuery("div#dragNdrop img").attr("src", "").css("max-height", "0px");
+        jQuery("div#dragNdrop span#close").fadeOut("fast");
         form.removeClass("upload-ready has-success is-error");
+        form.fadeIn("fast");
         numberOfDigits.val("");
         numberOfDigits.parent().find("div.text").html("Select").addClass("default");
         self.droppedFiles = null;
@@ -271,6 +273,22 @@ var openMtrDemo = {
         url.val("");
 
 
+    },
+
+    advancedShown: 0,
+
+    toggleAdvanced() {
+        var self = this;
+        var advanced = jQuery("div#advancedTab");
+
+        if(self.advancedShown === 0) {
+            advanced.slideDown(500);
+            self.advancedShown = 1;
+        }
+        else {
+            advanced.slideUp(500);
+            self.advancedShown = 0;
+        }
     },
 
     displayErrorMsg(title, text, level) {
