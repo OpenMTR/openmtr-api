@@ -262,8 +262,10 @@ var openMtrDemo = {
         var email = jQuery("form.my-form input#email");
         var numberOfDigits = jQuery("form.my-form input#digit-number");
 
+
         jQuery("div#dragNdrop img").attr("src", "").css("max-height", "0px");
         jQuery("div#dragNdrop span#close").fadeOut("fast");
+
         form.removeClass("upload-ready has-success is-error");
         form.fadeIn("fast");
         numberOfDigits.val("");
