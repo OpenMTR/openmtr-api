@@ -84,4 +84,7 @@ and (orientation : landscape) {
         padding: 50px 50px;
         text-align: center;
     }
+    .overlay {
+        background-size: 25% 25% !important;
+    }
 }
