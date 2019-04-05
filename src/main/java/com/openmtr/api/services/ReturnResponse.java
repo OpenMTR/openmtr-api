@@ -10,6 +10,9 @@ import org.json.JSONObject;
 public class ReturnResponse {
 
 	private final String version = "1.0.0";
+	
+	private Database db = new Database();
+	
 	private boolean error = false;
 	private String error_msg = "";
 	private int status_code = 400;
@@ -49,6 +52,13 @@ public class ReturnResponse {
 	public Response error() {
 		this.error = true;
 		this.stopProcessing();
+		
+		db.setSuccess(false);
+		db.setErrorCode(this.status_code);
+		db.setErrorMessage(this.error_msg);
+		db.setBuildVersion(this.open_meter_version);
+		db.execute();
+		
 		return Response.status(this.status_code)
 				.entity("{" + "\"error\" : " + this.error + ", " + "\"error_msg\" : \"" + this.error_msg + "\", "
 						+ "\"api_version\" : \"" + this.version + "\", " + "\"processing_time\" : "
@@ -58,6 +68,15 @@ public class ReturnResponse {
 
 	public Response success() {
 		this.stopProcessing();
+		
+		db.setSuccess(true);
+		db.setBuildVersion(this.open_meter_version);
+		db.setMeterRead(this.meter_read);
+		db.setMeterType(this.meter_type);
+		db.setReadMethod(this.ai_used);
+		db.setDialsOnMeter(this.digitsOnMeter);
+		db.execute();
+		
 		return Response.status(200)
 				.entity("{" + "\"error\" : " + this.error + ", " + "\"error_msg\" : \"" + this.error_msg + "\", "
 						+ "\"api_version\" : \"" + this.version + "\", " + "\"meter_read\" : {" + "\"read\" : \""
@@ -66,6 +85,10 @@ public class ReturnResponse {
 						+ this.digitsOnMeter + "\"" + "}, "
 						+ "\"processing_time\" : " + this.totalProcessingTime + " " + "}")
 				.build();
+	}
+	
+	public Database getDatabase() {
+		return this.db;
 	}
 
 	public void setErrorMsg(String message) {
@@ -127,6 +150,7 @@ public class ReturnResponse {
 	private void stopProcessing() {
 		this.stopProcessing = new Date();
 		Duration totalProcessing = Duration.between(this.startProcessing.toInstant(), this.stopProcessing.toInstant());
+		db.setProcessingTime(totalProcessing.toMillis() + "");
 		this.totalProcessingTime = "{\"hours\" : \"" + totalProcessing.toHours() + "\", \"minutes\" : \""
 				+ totalProcessing.toMinutes() + "\", \"seconds\" : \"" + totalProcessing.getSeconds()
 				+ "\", \"milliseconds\" : \"" + totalProcessing.toMillis() + "\"}";

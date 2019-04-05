@@ -25,15 +25,21 @@ public class OpenMeterApi {
 	@Produces("application/json")
 	@Consumes("multipart/form-data")
 	public Response downloadFromUrl(@BeanParam GetRequest getRequest) {
+		Database db = rr.getDatabase();
+		db.setEmailAddress(getRequest.getEmailAddress());
+		
 		if(getRequest.validateRequest()) {
 			return rr.error("Validation Error. " + getRequest.getErrorMsg());
 		}
-		else {
-			getRequest.processImage();
-			if(getRequest.isError()) {
-				return rr.error("Error: " + getRequest.getErrorMsg());
-			}
+
+		getRequest.processImage();
+		if(getRequest.isError()) {
+			return rr.error("Error: " + getRequest.getErrorMsg());
 		}
+		db.setImgUrl(getRequest.getUrl());
+		db.setFileName(getRequest.getImageFile().getName());
+		db.setLooped(getRequest.doLoop);
+		
 		
 		try {
 			String meterResponse = this.readMeter(getRequest.getImageByteArray(), getRequest.getDialsOnMeter(), getRequest.doLoop);			
@@ -55,6 +61,9 @@ public class OpenMeterApi {
 	@Produces("application/json")
 	@Consumes("multipart/form-data")
 	public Response uploadImage(@BeanParam PostRequest imageRequest) {
+		Database db = rr.getDatabase();
+		db.setEmailAddress(imageRequest.getEmailAddress());
+		
 		if(imageRequest.validateImageRequest()) {
 			return rr.error(imageRequest.getErrorMsg(), 400);
 		}
@@ -62,6 +71,8 @@ public class OpenMeterApi {
 		if(imageRequest.isError()) {
 			return rr.error(imageRequest.getErrorMsg());
 		}
+		db.setFileName(imageRequest.getImageFile().getName());
+		db.setLooped(imageRequest.doLoop);
 		
 		try {
 			String meterResponse = this.readMeter(imageRequest.getImageByteArray(), imageRequest.getDialsOnMeter(), imageRequest.doLoop);			
