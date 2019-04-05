@@ -23,7 +23,7 @@ public class OpenMeterApi {
 	@Path("/url")
 	@POST
 	@Produces("application/json")
-	@Consumes({"multipart/form-data", "application/x-www-form-urlencoded"})
+	@Consumes("multipart/form-data")
 	public Response downloadFromUrl(@BeanParam GetRequest getRequest) {
 		if(getRequest.validateRequest()) {
 			return rr.error("Validation Error. " + getRequest.getErrorMsg());
