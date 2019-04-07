@@ -1,0 +1,681 @@
+﻿<!DOCTYPE html>
+<!-- 2019 Capstone Project -->
+<!-- Documentation Page -->
+<!-- Jenny Franklin, James Willhoite, Matthew Thomas -->
+<!-- NOTE: Logo colors:
+    open MAIN H:212 S:90 L:50 ; R:13 G:121 B:242
+    MTR  MAIN H:233 S:60 L:50 ; R:51 G:69 B:204
+    -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>openMTR Documentation</title>
+    <meta name="viewport" content="width =device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/responsive-navbar.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dimmer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/modal.js"></script>
+    <script src="https://semantic-ui.com/javascript/library/highlight.min.js"></script>
+    <script src="/js/responsive-navbar.js"></script>
+
+</head>
+
+<body>
+    <!-- Script to make code snippets highlight correctly -->
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <!-- Navbar -->
+    <div class="ui inverted vertical nav center aligned segment">
+        <div class="ui container desktop-header-menu">
+            <div class="ui inverted secondary menu">
+                <a class="item">
+                    <div class="ui small image">
+                        <img src="/image/logo-1-text.png">
+                    </div>
+                </a>
+                <a class="item"
+                   href="https://openmtr.azurewebsites.net">
+                    Home
+                </a>
+                <!-- Split to right -->
+                <div class="right menu">
+                    <a href="https://github.com/OpenMTR/openmtr-api"
+                       class="ui black massive icon button"
+                       data-tooltip="Check out the project on Github"
+                       data-position="bottom right"
+                       data-inverted="">
+                        <i class="github icon"></i>
+                        <!-- LINK TO GITHUB -->
+                    </a>
+                    <a href="https://github.com/OpenMTR/openmtr-api/issues"
+                       class="ui black massive icon button"
+                       data-tooltip="Submit Bug Report"
+                       data-position="bottom right"
+                       data-inverted="">
+                        <i class="bug icon"></i>
+                    </a>
+                    <a class="active item"
+                       href="https://openmtr.azurewebsites.net/documentation">
+                        Documentation
+                    </a>
+                    <a href="https://openmtr.azurewebsites.net/demo-page"
+                       class="item">
+                        Try it Yourself!
+                    </a>
+                    <!-- Dropdown -->
+                    <div class="ui simple dropdown item">
+                        Other
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item">About</div>
+                            <div class="item">Blog</div>
+                            <div class="item">Contact</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu DropDown -->
+        <div class="ui container mobile-header-menu">
+            <div class="ui inverted secondary menu">
+                <a href="/" class="item header">
+                    <div class="logo">
+                        <div class="ui small image">
+                            <img src="/image/logo-1-text.png">
+                        </div>
+                    </div>
+                </a>
+                <div class="right menu">
+                    <a class="item menu-toggle">
+                        Menu
+                        <i class="caret down icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="ui vertical stripe segment mobile-nav-menu">
+        <ul class="nav-list" style="color:white;">
+            <li class="item">
+                <a href="https://openmtr.azurewebsites.net"
+                   class="nav-item">Home</a>
+            </li>
+            <li class="item">
+                <a href="https://openmtr.azurewebsites.net/demo-page"
+                   class="nav-item">Try it!</a>
+            </li>
+            <li class="item">
+                <a href="https://github.com/OpenMTR/openmtr-api"
+                   class="nav-item">openMTR Github</a>
+            </li>
+            <li class="item">
+                <a href="#" class="nav-item">About</a>
+            </li>
+        </ul>
+    </div>
+    <!-- End Navbar -->
+    <!-- Decorative Div for some color -->
+    <div class="ui equal width center aligned padded grid"
+         style="border-bottom: ridge 7px;
+                border-color:#00b377;">
+        <div class="very relaxed stackable row">
+            <div class="olive column">
+
+            </div>
+            <div class="green column">
+
+            </div>
+            <div class="teal column">
+
+            </div>
+            <div class="blue column">
+
+            </div>
+        </div>
+    </div>
+    <!-- End Decor Div -->
+    <!-- Main Content -->
+    <div class="ui raised segment"
+         style="margin:0 !important;">
+        <div class="ui raised segment">
+            <!-- Doc Header -->
+            <h1 class="ui huge header">
+                <i class="sitemap icon"></i>
+                <div class="content"
+                     style="color:#358ee0;">
+                    openMTR Documentation
+                    <div class="sub header">To contribute, please visit our Github</div>
+                </div>
+            </h1>
+            <!-- Main Menu -->
+            <div class="ui pointing menu">
+                <a class="item active"
+                   id="startPointer">
+                    Getting Started
+                </a>
+                <a class="item"
+                   id="integrationPointer">
+                    Integration
+                </a>
+                <a class="item"
+                   id="workbookPointer">
+                    Project Workbook
+                </a>
+                <a class="disabled item"
+                   id="versionPointer">
+                    Version Notes
+                </a>
+                <div class="right menu">
+                    <!-- Right Menu Placeholder -->
+                </div>
+            </div>
+            <!-- "Getting Started" Content-->
+            <div class="ui segment"
+                 id="startContent">
+                <h1>
+                    Getting Started
+                </h1>
+                <h3 style="color:#358ee0;">
+                    Welcome to openMTR!
+                </h3>
+                <p>
+                    To get started, all you need is a camera and an internet connection! Simply take a photo of your meter face, and we'll take care of the rest.
+                </p>
+            </div>
+            <!-- "Integration" Content-->
+            <div class="ui segment"
+                 id="integrationContent">
+                <h1 class="ui huge header">
+                    <div class="content">
+                        Integration
+                        <div class="sub header">
+                            Want to use openMTR in your projects?
+                            Here are examples and code snippets.
+                        </div>
+                    </div>
+                </h1>
+                <!-- Languages Menu -->
+                <div class="ui inverted pointing menu">
+                    <a class="olive item active"
+                       id="AjaxPointer">
+                        Ajax
+                    </a>
+                    <a class="green item "
+                       id="BashPointer">
+                        Bash
+                    </a>
+                    <a class="teal item"
+                       id="JavaPointer">
+                        Java
+                    </a>
+                    <a class=" blue item"
+                       id="dotNetPointer">
+                        .NET
+                    </a>
+                    <a class="olive item"
+                       id="PHPPointer">
+                        PHP
+                    </a>
+                    <a class="green item"
+                       id="PythonPointer">
+                        Python
+                    </a>
+                </div>
+                <!-- Code Snippets -->
+                <div class="ui segments">
+                    <!-- Ajax Code Snippet -->
+                    <div class="ui olive segment"
+                         id="ajaxSegment">
+                        <div class="ui divided grid">
+                            <div class="row">
+                                <div class="two wide column">
+                                    <h3>Ajax</h3>
+                                </div>
+                                <div class="fourteen wide column">
+                                    <pre>
+                                    <code class="javascript">
+var formData = new FormData();
+formData.append("file", file);
+formData.append("email", email);
+formData.append("numberOfDials", dials);
+
+jQuery.ajax({
+    type: "POST",
+    url: "http://openmtr.azurewebsites.net/api/read_meter",
+    data: formData,
+    processData: false,
+    contentType: false,
+    dataType: "json",
+    cache: false,
+    success: function(data) {
+		/* On success do something here */
+    },
+    error: function(a,b,c) {
+        var data = a.responseJSON;
+        if(a.status === 400 && data.error) {
+            /* Display Error Message Here */
+        }
+    }
+});
+                </code>
+            </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bash Code Snippet -->
+                    <div class="ui green segment"
+                         id="bashSegment">
+                        <div class="ui divided grid">
+                            <div class="row">
+                                <div class="two wide column">
+                                    <h3>Bash</h3>
+                                </div>
+                                <div class="fourteen wide column">
+                                    <pre>
+                                    <code class="bash">
+#!/bin/bash
+# Please visit our GitHub page for more info. 
+# https://github.com/OpenMTR/openmtr-api
+
+CURL=`which curl`
+CURL_PARM="${CURL} "
+SERVER="http://openmtr.azurewebsites.net/api/read_meter"
+
+
+if [[ $# -eq 0 ]]; then
+  echo ""
+  echo "OpenMtr-API Usage"
+  echo "$(basename $0) -f <file> -u <url> -e <email> -d <dials on meter face>"
+  echo "***Please only use either the -f flag or the -u flag, not both***"
+  echo "-f The file to upload (/path/to/image.jpg)"
+  echo "-u The url to a given image"
+  echo "-e You E-mail address"
+  echo "-d The number of dials on a meter face expressed as 999999."
+  echo "    Please use \"9's\" to express the dials. Ex: 4 dials on face express as 9999"
+  echo ""
+  exit 1
+fi
+
+while getopts f:e:d:u: option
+do
+case "${option}"
+in
+f) FILE=${OPTARG};;
+e) EMAIL=${OPTARG};;
+d) DIALS=${OPTARG};;
+u) URL=${OPTARG};;
+esac
+done
+
+if [[ -z "$FILE" && -z "$URL" ]]; then
+  echo "No File or URL given"
+  exit 1
+fi
+if [[ -n "$FILE" && -n "$URL" ]]; then
+  echo "Please only specifiy either a file OR a URL. Not Both."
+  exit 1
+fi
+if [[ -n "$FILE" && -z "$URL" ]]; then
+  if [[ ! -f "$FILE" ]]; then
+    echo "The specified file doesn't exist."
+    exit 1
+  fi
+  CURL_PARM+=" -F file=@\"${FILE}\""
+fi
+if [[ -n "$URL" && -z "$FILE" ]]; then
+  SERVER+="/url"
+  CURL_PARM+=" -F url=\"${URL}\""
+fi
+
+
+if [ -z "$EMAIL" ]; then
+  echo "Email address is required"
+  exit 1
+else
+  CURL_PARM+=" -F email=\"${EMAIL}\""
+fi
+
+if [[ -n "$DIALS" ]]; then
+  CURL_PARM+=" -F numberOfDials=\"${DIALS}\""
+fi
+
+CURL_PARM+=" ${SERVER}";
+
+echo "Reading Meter. Please be patient. This may take a bit ....."
+echo ""
+
+eval ${CURL_PARM}
+
+echo ""
+
+exit 0
+
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Java Code Snippet -->
+                    <div class="ui teal segment"
+                         id="javaSegment">
+                        <div class="ui divided grid">
+                            <div class="row">
+                                <div class="two wide column">
+                                    <h3>Java</h3>
+                                </div>
+                                <div class="fourteen wide column">
+                                    <pre>
+                                    <code class="java">
+Placeholder Code
+
+# test
+echo 'hello there'
+                                            </code>
+                                            </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Python Code Snippet -->
+                    <div class="ui green segment"
+                         id="pythonSegment">
+                        <div class="ui divided grid">
+                            <div class="row">
+                                <div class="two wide column">
+                                    <h3>Python</h3>
+                                    <!-- Field "email" and "file", optional "numberOfDials"
+                                    response json string
+                                    -->
+                                </div>
+                                <div class="fourteen wide column">
+                                    <pre>
+                                    <code class="python">
+Placeholder Code
+
+# test
+echo 'hello there'
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .NET Code Snippet -->
+                    <div class="ui blue segment"
+                         id="dotNetSegment">
+                        <div class="ui divided grid">
+                            <div class="row">
+                                <div class="two wide column">
+                                    <h3>.NET</h3>
+                                    <!-- Field "email" and "file", optional "numberOfDials"
+                                    response json string
+                                    -->
+                                </div>
+                                <div class="fourteen wide column">
+                                    <pre>
+                                    <code class="dotNet">
+Placeholder Code
+
+# test
+echo 'hello there'
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PHP Code Snippet -->
+                    <div class="ui olive segment"
+                         id="PHPSegment">
+                        <div class="ui divided grid">
+                            <div class="row">
+                                <div class="two wide column">
+                                    <h3>PHP</h3>
+                                    <!-- Field "email" and "file", optional "numberOfDials"
+                                    response json string
+                                    -->
+                                </div>
+                                <div class="fourteen wide column">
+                                    <pre>
+                                    <code class="PHP">
+Placeholder Code
+
+# test
+echo 'hello there'
+                                    </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- "Project Workbook" Content -->
+            <div class="ui segment"
+                 id="workbookContent">
+                <h1>
+                    Project Workbook
+                </h1>
+                <!-- Workbook Menu -->
+                <div class="ui pointing menu">
+                    <a class="olive item active"
+                       id="overviewPointer">
+                        Overview
+                    </a>
+                    <a class="green item "
+                       id="requirementsPointer">
+                        Requirements
+                    </a>
+                    <a class="teal item"
+                       id="designPointer">
+                        Project Design
+                    </a>
+                    <a class=" blue item"
+                       id="pipelinePointer">
+                        Pipeline
+                    </a>
+                    <a class="olive item"
+                       id="implementationPointer">
+                        Implementation
+                    </a>
+                    <a class="green item"
+                       id="finalPointer">
+                        Wrap-up
+                    </a>
+                </div>
+                <div class="ui divided grid">
+                    <!-- Project Overview -->
+                    <div class="row"
+                         id="overviewRow">
+                        <div class="two wide column">
+                            <i class="huge clipboard outline icon"></i>
+                        </div>
+                        <div class="ten wide column">
+                            <h1>Project Overview</h1>
+                            <p>
+                                This website was built as a Capstone project by a team of students from
+                                <a href="http://www.pstcc.edu">Pellissippi State Community College</a> for the
+                                <a href="https://www.kub.org">Knoxville Utilities Board</a> during Spring Semester 2019.
+                                This project was a continuation of the previous Capstone project from Spring of 2018.
+                            </p>
+                            <p>
+                                The previous Capstone team began the build for an API that uses image recognition AI to read
+                                images of utility meters. Here is their Github and Documentation. They modeled the API
+                                off the License Plate reconigtion technology used by <a href="https://www.openalpr.com">openALPR</a>.
+                                KUB is currently continuing the development of the openMTR API.
+                            </p>
+                        </div>
+                        <div class="four wide column">
+                            <div class="ui medium image">
+                                <img src="/image/capstone18-dials.png">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Requirements -->
+                    <div class="row"
+                         id="requirementsRow">
+                        <div class="two wide column">
+                            <i class="huge tasks icon"></i>
+                        </div>
+                        <div class="ten wide column">
+                            <h1>Requirements</h1>
+                        </div>
+                        <div class="three wide column">
+                            <img>
+                        </div>
+                    </div>
+                    <!-- Project Design & Process -->
+                    <div class="row"
+                         id="designRow">
+                        <div class="two wide column">
+                            <i class="huge pencil alternate icon"></i>
+                        </div>
+                        <div class="fourteen wide column">
+
+                            <h1>Design & Process</h1>
+                            <p>
+                                Design Docs:
+                            </p>
+                            <ul class="ui list">
+                                <li>Network Diagram</li>
+                                <ul>
+                                    <li>A Network Diagram is a visual representation of a project's schedule.</li>
+                                    <li>It represents a project's critical path as well as the scope for the project.</li>
+                                </ul>
+                                <li>Top-level visual</li>
+                                <li>Use Case -> DFD mid level</li>
+                                <li>DB Design</li>
+                                <li>Tech Stack</li>
+                                <li>Proj Schedule Plan</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Workflow and Pipeline Set-up -->
+                    <div class="row"
+                         id="pipelineRow">
+                        <div class="two wide column">
+                            <i class="huge cogs icon"></i>
+                        </div>
+                        <div class="ten wide column">
+
+                            <h1>Workflow & the Pipeline</h1>
+                        </div>
+                        <div class="three wide column">
+                            <img>
+                        </div>
+                    </div>
+                    <!-- Implementation Process -->
+                    <div class="row"
+                         id="implementationRow">
+                        <div class="two wide column">
+                            <i class="huge terminal icon"></i>
+                        </div>
+                        <div class="ten wide column">
+                            <h1>Implementation</h1>
+                            <p>
+                                Work stage
+                                Who worked on what
+                                Screenshots/blurbs of stuff
+                                Jenny - Thumbnail Images of Sketches; Semantic;
+                                James - screenshot of working on calls; overview of tasks
+                                Matt - simple Azure Pipeline breakdown; DB stuff
+                                Git Commits Log Image
+                                Hours Logged Chart
+                                Blog snippet and Link
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Wrap-up -->
+                    <div class="row"
+                         id="finalRow">
+                    <div class="two wide column">
+                        <i class="huge trophy icon"></i>
+                    </div>
+                    <div class="ten wide column">
+                        <h1>Project Wrap-up & Presentation</h1>
+                        <p>
+                            Wrapup
+                            Requirements vs Final Product Visual
+                            Favorite Things we learned
+                            Overcoming challenges
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- "Version Notes" Content -->
+            <div class="ui segment"
+                 id="versionContent">
+                <h1>What's New in Version #.##</h1>
+                <p>placeholder for Version Updates</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Colored Footer -->
+    <div class="ui equal width center aligned padded very relaxed stackable grid"
+         style="border-top: ridge 7px;
+                border-color:#00b377;">
+        <!-- Boxes -->
+        <div class="row">
+            <div class="blue column">
+                <h3>openMTR</h3>
+                <div class="item"
+                     href="https://openmtr.azurewebsites.net">
+                    <i class="right triangle icon"></i>
+                    Home
+                </div>
+                <div class="item"
+                     href="https://openmtr.azurewebsites.net/demo-page.html">
+                    <i class="right triangle icon"></i>
+                    Demo
+                </div>
+            </div>
+            <div class="teal column">
+                <h3>About Us</h3>
+                <div class="item"
+                     href="https://kub.org">
+                    <i class="right triangle icon"></i>
+                    KUB
+                </div>
+                <div class="item"
+                     href="http://pstcc.edu">
+                    <i class="right triangle icon"></i>
+                    PSTCC
+                </div>
+                <div class="item">
+                    <i class="right triangle icon"></i>
+                    The Team
+                </div>
+
+            </div>
+            <div class="green column">
+            </div>
+            <div class="olive column">
+                <div class="ui small image">
+                    <img src="/image/logo-1.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Colored Footer -->
+</body>
+</html>
