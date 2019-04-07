@@ -250,6 +250,11 @@ var openMtrDemo = {
                 var data = a.responseJSON;
                 if(a.status === 400 && data.error) {
                     self.displayErrorMsg("Error!", data.error_msg);
+                    return false;
+                }
+                if(a.status === 500) {
+                    self.displayErrorMsg("System Error.", "I'm sorry. I can't process your request at this time. Please try again later.");
+                    return false;
                 }
             }
         });

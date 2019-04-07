@@ -134,6 +134,7 @@ public class ReturnResponse {
 			this.setErrorMsg("Could not get a valid meter read. " + meterRead);
 		} else if (!jo.isNull("error")) {
 			this.setErrorMsg("Something happened. Please try again later. ");
+			this.error_msg+= " Error from OpenMeter. " + jo.getString("error");
 			this.status_code = 500;
 		} else {
 			this.setMeterRead(meterRead);
