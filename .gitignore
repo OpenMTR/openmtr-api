@@ -39,6 +39,9 @@ local.properties
 .loadpath
 .recommenders
 
+#JetBrains
+.idea/*
+
 # External tool builders
 .externalToolBuilders/
 
