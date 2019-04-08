@@ -73,7 +73,7 @@
                        href="https://openmtr.azurewebsites.net/documentation">
                         Documentation
                     </a>
-                    <a href="https://openmtr.azurewebsites.net/demo-page"
+                    <a href="https://openmtr.azurewebsites.net/demo-page.html"
                        class="item">
                         Try it Yourself!
                     </a>
@@ -117,7 +117,7 @@
                    class="nav-item">Home</a>
             </li>
             <li class="item">
-                <a href="https://openmtr.azurewebsites.net/demo-page"
+                <a href="https://openmtr.azurewebsites.net/demo-page.html"
                    class="nav-item">Try it!</a>
             </li>
             <li class="item">
@@ -188,68 +188,139 @@
             <!-- "Getting Started" Content-->
             <div class="ui segment"
                  id="startContent">
-                <h1>
-                    Getting Started
-                </h1>
-                <h3 style="color:#358ee0;">
-                    Welcome to openMTR!
-                </h3>
-                <p>
-                    To get started, all you need is a camera and an internet connection! Simply take a photo of your meter face, and we'll take care of the rest.
-                </p>
-            </div>
-            <!-- "Integration" Content-->
-            <div class="ui segment"
-                 id="integrationContent">
-                <h1 class="ui huge header">
-                    <div class="content">
-                        Integration
-                        <div class="sub header">
-                            Want to use openMTR in your projects?
-                            Here are examples and code snippets.
+                <div class="ui very relaxed stackable grid">
+                    <div class="row">
+                        <div class="ui column">
+                            <h1 class="ui huge header">
+                                <i class="olive centered massive compass outline icon"></i>
+                                <div class="content">
+                                    Getting Started
+                                    <div class="sub header">Welcome to openMTR</div>
+                                </div>
+                            </h1>
                         </div>
                     </div>
-                </h1>
-                <!-- Languages Menu -->
-                <div class="ui inverted pointing menu">
-                    <a class="olive item active"
-                       id="AjaxPointer">
-                        Ajax
-                    </a>
-                    <a class="green item "
-                       id="BashPointer">
-                        Bash
-                    </a>
-                    <a class="teal item"
-                       id="JavaPointer">
-                        Java
-                    </a>
-                    <a class=" blue item"
-                       id="dotNetPointer">
-                        .NET
-                    </a>
-                    <a class="olive item"
-                       id="PHPPointer">
-                        PHP
-                    </a>
-                    <a class="green item"
-                       id="PythonPointer">
-                        Python
-                    </a>
+                    <div class="ui very relaxed stackable grid">
+                        <div class="row">
+                            <div class="ui one wide column">
+                                <!-- empty for formatting -->
+                            </div>
+                            <div class="ui ten wide column">
+                                <p>
+                                    To get started, all you need is a camera and an internet connection!
+                                </p>
+                                <ol>
+                                    <li>Take a photo of your meter face</li>
+                                    <li>Go to our <a href="https://openmtr.azurewebsites.net/demo-page.html"> Demo Page</a></li>
+                                    <li>Upload a .jpg through:</li>
+                                    <ul>
+                                        <li>Using our demo's drag and drop feature</li>
+                                        <li>Browsing for the file on your computer</li>
+                                        <li>Entering the image url under the "Advanced" tab</li>
+                                    </ul>
+                                    <li>Enter your email</li>
+                                    <li>Click Submit!</li>
+                                </ol>
+                                <h3>
+                                    Advanced Options
+                                </h3>
+                                <p>
+                                    As mentioned earlier, there is an "Advanced" Option on the Demo page.
+                                    If you know the number of digits on your meter, you can enter them here
+                                    using a dropdown. We can still read the meter without this information,
+                                    but if you do know, it saves a bit of time.
+                                </p>
+                            </div>
+                            <div class="ui four wide column">
+                                <img class="ui medium centered image"
+                                     src="/image/test-meter-8.jpg"
+                                     style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui one wide column">
+                                <!-- empty for formatting -->
+                            </div>
+                            <div class="ui ten wide column">
+                                <h3 class="ui header">
+                                    <i class="camera icon"></i>
+                                    <div class="content">
+                                        Picture Best Practices
+                                    </div>
+                                </h3>
+                                <p>
+                                    To get the best possible photo, try to follow these steps:
+                                </p>
+                                <ol>
+                                    <li>Try to center the meter face in your photo</li>
+                                    <li>Avoid taking the photo at an angle: face the camera parallel to the meter. 
+                                    Straight on will get the best results.</li>
+                                    <li>Avoid using flash</li>
+                                    <li>If possible, remove any dirt or residue on meter face</li>
+                                </ol>
+                                <p>
+                                    We have some more example photos on our 
+                                    <a href="https://openmtr.azurewebsites.net/demo-page.html">Demo Page</a>, 
+                                    so check those out if you need a visual.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Code Snippets -->
-                <div class="ui segments">
-                    <!-- Ajax Code Snippet -->
-                    <div class="ui olive segment"
-                         id="ajaxSegment">
-                        <div class="ui divided grid">
-                            <div class="row">
-                                <div class="two wide column">
-                                    <h3>Ajax</h3>
-                                </div>
-                                <div class="fourteen wide column">
-                                    <pre>
-                                    <code class="javascript">
+            </div>
+        </div>
+        <!-- "Integration" Content-->
+        <div class="ui segment"
+             id="integrationContent">
+            <h1 class="ui huge header">
+                <div class="content">
+                    Integration
+                    <div class="sub header">
+                        Want to use openMTR in your projects?
+                        Here are examples and code snippets.
+                    </div>
+                </div>
+            </h1>
+            <!-- Languages Menu -->
+            <div class="ui inverted pointing menu">
+                <a class="olive item active"
+                   id="AjaxPointer">
+                    Ajax
+                </a>
+                <a class="green item "
+                   id="BashPointer">
+                    Bash
+                </a>
+                <a class="teal item"
+                   id="JavaPointer">
+                    Java
+                </a>
+                <a class=" blue item"
+                   id="dotNetPointer">
+                    .NET
+                </a>
+                <a class="olive item"
+                   id="PHPPointer">
+                    PHP
+                </a>
+                <a class="green item"
+                   id="PythonPointer">
+                    Python
+                </a>
+            </div>
+            <!-- Code Snippets -->
+            <div class="ui segments">
+                <!-- Ajax Code Snippet -->
+                <div class="ui olive segment"
+                     id="ajaxSegment">
+                    <div class="ui divided grid">
+                        <div class="row">
+                            <div class="two wide column">
+                                <h3>Ajax</h3>
+                            </div>
+                            <div class="fourteen wide column">
+                                <pre>
+                                <code class="javascript">
 var formData = new FormData();
 formData.append("file", file);
 formData.append("email", email);
@@ -275,21 +346,21 @@ jQuery.ajax({
 });
                 </code>
             </pre>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Bash Code Snippet -->
-                    <div class="ui green segment"
-                         id="bashSegment">
-                        <div class="ui divided grid">
-                            <div class="row">
-                                <div class="two wide column">
-                                    <h3>Bash</h3>
-                                </div>
-                                <div class="fourteen wide column">
-                                    <pre>
-                                    <code class="bash">
+                </div>
+                <!-- Bash Code Snippet -->
+                <div class="ui green segment"
+                     id="bashSegment">
+                    <div class="ui divided grid">
+                        <div class="row">
+                            <div class="two wide column">
+                                <h3>Bash</h3>
+                            </div>
+                            <div class="fourteen wide column">
+                                <pre>
+                                <code class="bash">
 #!/bin/bash
 # Please visit our GitHub page for more info. 
 # https://github.com/OpenMTR/openmtr-api
@@ -369,243 +440,243 @@ exit 0
 
                                     </code>
                                     </pre>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Java Code Snippet -->
-                    <div class="ui teal segment"
-                         id="javaSegment">
-                        <div class="ui divided grid">
-                            <div class="row">
-                                <div class="two wide column">
-                                    <h3>Java</h3>
-                                </div>
-                                <div class="fourteen wide column">
-                                    <pre>
-                                    <code class="java">
+                </div>
+                <!-- Java Code Snippet -->
+                <div class="ui teal segment"
+                     id="javaSegment">
+                    <div class="ui divided grid">
+                        <div class="row">
+                            <div class="two wide column">
+                                <h3>Java</h3>
+                            </div>
+                            <div class="fourteen wide column">
+                                <pre>
+                                <code class="java">
 Placeholder Code
 
 # test
 echo 'hello there'
                                             </code>
                                             </pre>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Python Code Snippet -->
-                    <div class="ui green segment"
-                         id="pythonSegment">
-                        <div class="ui divided grid">
-                            <div class="row">
-                                <div class="two wide column">
-                                    <h3>Python</h3>
-                                    <!-- Field "email" and "file", optional "numberOfDials"
-                                    response json string
-                                    -->
-                                </div>
-                                <div class="fourteen wide column">
-                                    <pre>
-                                    <code class="python">
+                </div>
+                <!-- Python Code Snippet -->
+                <div class="ui green segment"
+                     id="pythonSegment">
+                    <div class="ui divided grid">
+                        <div class="row">
+                            <div class="two wide column">
+                                <h3>Python</h3>
+                                <!-- Field "email" and "file", optional "numberOfDials"
+                                response json string
+                                -->
+                            </div>
+                            <div class="fourteen wide column">
+                                <pre>
+                                <code class="python">
 Placeholder Code
 
 # test
 echo 'hello there'
                                     </code>
                                     </pre>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- .NET Code Snippet -->
-                    <div class="ui blue segment"
-                         id="dotNetSegment">
-                        <div class="ui divided grid">
-                            <div class="row">
-                                <div class="two wide column">
-                                    <h3>.NET</h3>
-                                    <!-- Field "email" and "file", optional "numberOfDials"
-                                    response json string
-                                    -->
-                                </div>
-                                <div class="fourteen wide column">
-                                    <pre>
-                                    <code class="dotNet">
+                </div>
+                <!-- .NET Code Snippet -->
+                <div class="ui blue segment"
+                     id="dotNetSegment">
+                    <div class="ui divided grid">
+                        <div class="row">
+                            <div class="two wide column">
+                                <h3>.NET</h3>
+                                <!-- Field "email" and "file", optional "numberOfDials"
+                                response json string
+                                -->
+                            </div>
+                            <div class="fourteen wide column">
+                                <pre>
+                                <code class="dotNet">
 Placeholder Code
 
 # test
 echo 'hello there'
                                     </code>
                                     </pre>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- PHP Code Snippet -->
-                    <div class="ui olive segment"
-                         id="PHPSegment">
-                        <div class="ui divided grid">
-                            <div class="row">
-                                <div class="two wide column">
-                                    <h3>PHP</h3>
-                                    <!-- Field "email" and "file", optional "numberOfDials"
-                                    response json string
-                                    -->
-                                </div>
-                                <div class="fourteen wide column">
-                                    <pre>
-                                    <code class="PHP">
+                </div>
+                <!-- PHP Code Snippet -->
+                <div class="ui olive segment"
+                     id="PHPSegment">
+                    <div class="ui divided grid">
+                        <div class="row">
+                            <div class="two wide column">
+                                <h3>PHP</h3>
+                                <!-- Field "email" and "file", optional "numberOfDials"
+                                response json string
+                                -->
+                            </div>
+                            <div class="fourteen wide column">
+                                <pre>
+                                <code class="PHP">
 Placeholder Code
 
 # test
 echo 'hello there'
                                     </code>
                                     </pre>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- "Project Workbook" Content -->
-            <div class="ui segment"
-                 id="workbookContent">
-                <h1>
-                    Project Workbook
-                </h1>
-                <!-- Workbook Menu -->
-                <div class="ui pointing menu">
-                    <a class="olive item active"
-                       id="overviewPointer">
-                        Overview
-                    </a>
-                    <a class="green item "
-                       id="requirementsPointer">
-                        Requirements
-                    </a>
-                    <a class="teal item"
-                       id="designPointer">
-                        Project Design
-                    </a>
-                    <a class=" blue item"
-                       id="pipelinePointer">
-                        Pipeline
-                    </a>
-                    <a class="olive item"
-                       id="implementationPointer">
-                        Implementation
-                    </a>
-                    <a class="green item"
-                       id="finalPointer">
-                        Wrap-up
-                    </a>
+        </div>
+        <!-- "Project Workbook" Content -->
+        <div class="ui segment"
+             id="workbookContent">
+            <h1>
+                Project Workbook
+            </h1>
+            <!-- Workbook Menu -->
+            <div class="ui pointing menu">
+                <a class="olive item active"
+                   id="overviewPointer">
+                    Overview
+                </a>
+                <a class="green item "
+                   id="requirementsPointer">
+                    Requirements
+                </a>
+                <a class="teal item"
+                   id="designPointer">
+                    Project Design
+                </a>
+                <a class=" blue item"
+                   id="pipelinePointer">
+                    Pipeline
+                </a>
+                <a class="olive item"
+                   id="implementationPointer">
+                    Implementation
+                </a>
+                <a class="green item"
+                   id="finalPointer">
+                    Wrap-up
+                </a>
+            </div>
+            <div class="ui divided grid">
+                <!-- Project Overview -->
+                <div class="row"
+                     id="overviewRow">
+                    <div class="two wide column">
+                        <i class="huge clipboard outline icon"></i>
+                    </div>
+                    <div class="ten wide column">
+                        <h1>Project Overview</h1>
+                        <p>
+                            This website was built as a Capstone project by a team of students from
+                            <a href="http://www.pstcc.edu">Pellissippi State Community College</a> for the
+                            <a href="https://www.kub.org">Knoxville Utilities Board</a> during Spring Semester 2019.
+                            This project was a continuation of the previous Capstone project from Spring of 2018.
+                        </p>
+                        <p>
+                            The previous Capstone team began the build for an API that uses image recognition AI to read
+                            images of utility meters. Here is their Github and Documentation. They modeled the API
+                            off the License Plate reconigtion technology used by <a href="https://www.openalpr.com">openALPR</a>.
+                            KUB is currently continuing the development of the openMTR API.
+                        </p>
+                    </div>
+                    <div class="four wide column">
+                        <div class="ui medium image">
+                            <img src="/image/capstone18-dials.png">
+                        </div>
+                    </div>
                 </div>
-                <div class="ui divided grid">
-                    <!-- Project Overview -->
-                    <div class="row"
-                         id="overviewRow">
-                        <div class="two wide column">
-                            <i class="huge clipboard outline icon"></i>
-                        </div>
-                        <div class="ten wide column">
-                            <h1>Project Overview</h1>
-                            <p>
-                                This website was built as a Capstone project by a team of students from
-                                <a href="http://www.pstcc.edu">Pellissippi State Community College</a> for the
-                                <a href="https://www.kub.org">Knoxville Utilities Board</a> during Spring Semester 2019.
-                                This project was a continuation of the previous Capstone project from Spring of 2018.
-                            </p>
-                            <p>
-                                The previous Capstone team began the build for an API that uses image recognition AI to read
-                                images of utility meters. Here is their Github and Documentation. They modeled the API
-                                off the License Plate reconigtion technology used by <a href="https://www.openalpr.com">openALPR</a>.
-                                KUB is currently continuing the development of the openMTR API.
-                            </p>
-                        </div>
-                        <div class="four wide column">
-                            <div class="ui medium image">
-                                <img src="/image/capstone18-dials.png">
-                            </div>
-                        </div>
+                <!-- Requirements -->
+                <div class="row"
+                     id="requirementsRow">
+                    <div class="two wide column">
+                        <i class="huge tasks icon"></i>
                     </div>
-                    <!-- Requirements -->
-                    <div class="row"
-                         id="requirementsRow">
-                        <div class="two wide column">
-                            <i class="huge tasks icon"></i>
-                        </div>
-                        <div class="ten wide column">
-                            <h1>Requirements</h1>
-                        </div>
-                        <div class="three wide column">
-                            <img>
-                        </div>
+                    <div class="ten wide column">
+                        <h1>Requirements</h1>
                     </div>
-                    <!-- Project Design & Process -->
-                    <div class="row"
-                         id="designRow">
-                        <div class="two wide column">
-                            <i class="huge pencil alternate icon"></i>
-                        </div>
-                        <div class="fourteen wide column">
+                    <div class="three wide column">
+                        <img>
+                    </div>
+                </div>
+                <!-- Project Design & Process -->
+                <div class="row"
+                     id="designRow">
+                    <div class="two wide column">
+                        <i class="huge pencil alternate icon"></i>
+                    </div>
+                    <div class="fourteen wide column">
 
-                            <h1>Design & Process</h1>
-                            <p>
-                                Design Docs:
-                            </p>
-                            <ul class="ui list">
-                                <li>Network Diagram</li>
-                                <ul>
-                                    <li>A Network Diagram is a visual representation of a project's schedule.</li>
-                                    <li>It represents a project's critical path as well as the scope for the project.</li>
-                                </ul>
-                                <li>Top-level visual</li>
-                                <li>Use Case -> DFD mid level</li>
-                                <li>DB Design</li>
-                                <li>Tech Stack</li>
-                                <li>Proj Schedule Plan</li>
+                        <h1>Design & Process</h1>
+                        <p>
+                            Design Docs:
+                        </p>
+                        <ul class="ui list">
+                            <li>Network Diagram</li>
+                            <ul>
+                                <li>A Network Diagram is a visual representation of a project's schedule.</li>
+                                <li>It represents a project's critical path as well as the scope for the project.</li>
                             </ul>
-                        </div>
+                            <li>Top-level visual</li>
+                            <li>Use Case -> DFD mid level</li>
+                            <li>DB Design</li>
+                            <li>Tech Stack</li>
+                            <li>Proj Schedule Plan</li>
+                        </ul>
                     </div>
-                    <!-- Workflow and Pipeline Set-up -->
-                    <div class="row"
-                         id="pipelineRow">
-                        <div class="two wide column">
-                            <i class="huge cogs icon"></i>
-                        </div>
-                        <div class="ten wide column">
+                </div>
+                <!-- Workflow and Pipeline Set-up -->
+                <div class="row"
+                     id="pipelineRow">
+                    <div class="two wide column">
+                        <i class="huge cogs icon"></i>
+                    </div>
+                    <div class="ten wide column">
 
-                            <h1>Workflow & the Pipeline</h1>
-                        </div>
-                        <div class="three wide column">
-                            <img>
-                        </div>
+                        <h1>Workflow & the Pipeline</h1>
                     </div>
-                    <!-- Implementation Process -->
-                    <div class="row"
-                         id="implementationRow">
-                        <div class="two wide column">
-                            <i class="huge terminal icon"></i>
-                        </div>
-                        <div class="ten wide column">
-                            <h1>Implementation</h1>
-                            <p>
-                                Work stage
-                                Who worked on what
-                                Screenshots/blurbs of stuff
-                                Jenny - Thumbnail Images of Sketches; Semantic;
-                                James - screenshot of working on calls; overview of tasks
-                                Matt - simple Azure Pipeline breakdown; DB stuff
-                                Git Commits Log Image
-                                Hours Logged Chart
-                                Blog snippet and Link
-                            </p>
-                        </div>
+                    <div class="three wide column">
+                        <img>
                     </div>
-                    <!-- Wrap-up -->
-                    <div class="row"
-                         id="finalRow">
+                </div>
+                <!-- Implementation Process -->
+                <div class="row"
+                     id="implementationRow">
+                    <div class="two wide column">
+                        <i class="huge terminal icon"></i>
+                    </div>
+                    <div class="ten wide column">
+                        <h1>Implementation</h1>
+                        <p>
+                            Work stage
+                            Who worked on what
+                            Screenshots/blurbs of stuff
+                            Jenny - Thumbnail Images of Sketches; Semantic;
+                            James - screenshot of working on calls; overview of tasks
+                            Matt - simple Azure Pipeline breakdown; DB stuff
+                            Git Commits Log Image
+                            Hours Logged Chart
+                            Blog snippet and Link
+                        </p>
+                    </div>
+                </div>
+                <!-- Wrap-up -->
+                <div class="row"
+                     id="finalRow">
                     <div class="two wide column">
                         <i class="huge trophy icon"></i>
                     </div>
@@ -621,13 +692,13 @@ echo 'hello there'
                 </div>
             </div>
         </div>
-            <!-- "Version Notes" Content -->
-            <div class="ui segment"
-                 id="versionContent">
-                <h1>What's New in Version #.##</h1>
-                <p>placeholder for Version Updates</p>
-            </div>
+        <!-- "Version Notes" Content -->
+        <div class="ui segment"
+             id="versionContent">
+            <h1>What's New in Version #.##</h1>
+            <p>placeholder for Version Updates</p>
         </div>
+    </div>
     </div>
 
     <!-- Colored Footer -->
