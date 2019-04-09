@@ -374,19 +374,20 @@
     SERVER="http://openmtr.azurewebsites.net/api/read_meter"
 
 
-    if [[ $# -eq 0 ]]; then
-      echo ""
-      echo "OpenMtr-API Usage"
-      echo "$(basename $0) -f &lt;file&gt; -u &lt;url&gt; -e &lt;email&gt; -d &lt;dials on meter face&gt;"
-      echo "***Please only use either the -f flag or the -u flag, not both***"
-      echo "-f The file to upload (/path/to/image.jpg)"
-      echo "-u The url to a given image"
-      echo "-e You E-mail address"
-      echo "-d The number of dials on a meter face expressed as 999999."
-      echo "    Please use \"9's\" to express the dials. Ex: 4 dials on face express as 9999"
-      echo ""
-      exit 1
-    fi
+
+if [[ $# -eq 0 ]]; then
+  echo ""
+  echo "OpenMtr-API Usage"
+  echo "$(basename $0) -f <file> -u <url> -e <email> -d <dials on meter face>"
+  echo "***Please only use either the -f flag or the -u flag, not both***"
+  echo "-f The file to upload (/path/to/image.jpg)."
+  echo "-u The url to a given image."
+  echo "-e Your E-mail address."
+  echo "-d The number of dials on a meter face expressed as 999999."
+  echo "    Please use \"9's\" to express the dials. Ex: 4 dials on face expressed as 9999"
+  echo ""
+  exit 1
+fi
 
     while getopts f:e:d:u: option
     do
@@ -399,25 +400,25 @@
     esac
     done
 
-    if [[ -z "$FILE" && -z "$URL" ]]; then
-      echo "No File or URL given"
-      exit 1
-    fi
-    if [[ -n "$FILE" && -n "$URL" ]]; then
-      echo "Please only specifiy either a file OR a URL. Not Both."
-      exit 1
-    fi
-    if [[ -n "$FILE" && -z "$URL" ]]; then
-      if [[ ! -f "$FILE" ]]; then
-        echo "The specified file doesn't exist."
-        exit 1
-      fi
-      CURL_PARM+=" -F file=@\"${FILE}\""
-    fi
-    if [[ -n "$URL" && -z "$FILE" ]]; then
-      SERVER+="/url"
-      CURL_PARM+=" -F url=\"${URL}\""
-    fi
+if [[ -z "$FILE" && -z "$URL" ]]; then
+  echo "No File or URL given"
+  exit 1
+fi
+if [[ -n "$FILE" && -n "$URL" ]]; then
+  echo "Please only specify either a file OR a URL. Not Both."
+  exit 1
+fi
+if [[ -n "$FILE" && -z "$URL" ]]; then
+  if [[ ! -f "$FILE" ]]; then
+    echo "The specified file doesn't exist."
+    exit 1
+  fi
+  CURL_PARM+=" -F file=@\"${FILE}\""
+fi
+if [[ -n "$URL" && -z "$FILE" ]]; then
+  SERVER+="/url"
+  CURL_PARM+=" -F url=\"${URL}\""
+fi
 
 
     if [ -z "$EMAIL" ]; then
