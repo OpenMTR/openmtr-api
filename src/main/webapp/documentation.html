@@ -500,10 +500,60 @@ fi
                                     <div class="fourteen wide column">
                                         <pre>
                                         <code class="dotNet">
-    Placeholder Code
+using System.Threading.Tasks;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
-    # test
-    echo 'hello there'
+namespace ConsoleApplicationTest
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            Task<HttpResponseMessage> recognizeTask = Task.Run(() => UploadFileAsync("http://openmtr.azurewebsites.net/api/read_meter", "C:\\Users\\user\\Path\\To\\image.jpg"));
+            recognizeTask.Wait();
+            string task_result = recognizeTask.Result.ToString();
+            // use response          
+           
+        }
+
+        public static async Task<HttpResponseMessage> UploadFileAsync(string url,string path)
+        {
+            using (var client = new HttpClient())
+            {
+                // construct multipart/form-data request
+                var multiForm = new MultipartFormDataContent();
+
+                StringContent email = new StringContent("example@email.com", System.Text.Encoding.UTF8);
+                email.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+
+                StringContent numberOfDials = new StringContent("9999", System.Text.Encoding.UTF8);
+                numberOfDials.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+
+                // add API method parameters
+                multiForm.Add(email, "email");
+                multiForm.Add(numberOfDials, "numberOfDials");
+              
+                // add file and directly upload it
+                FileStream fs = File.OpenRead(path);
+                multiForm.Add(new StreamContent(fs), "file", Path.GetFileName(path));
+
+                // send request to API 
+                HttpResponseMessage response = await client.PostAsync(url, multiForm);
+
+               string responseBody = await response.Content.ReadAsStringAsync();
+               string displayResult = response + "\n\n" + responseBody;
+               System.Console.WriteLine(displayResult);
+               return response;
+            }
+        }
+
+    }
+}
                                         </code>
                                         </pre>
                                     </div>
