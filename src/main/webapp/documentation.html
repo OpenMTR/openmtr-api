@@ -625,10 +625,10 @@ exit();
                                         <div class="ui divider"></div>
                                         <h3>Background</h3>
                                         <p>
-                                            The previous Capstone (2018) team began the build for an API that uses image recognition AI to read
+                                            The previous Capstone (2018) team began the build for an Library that uses image recognition AI to read
                                             images of utility meters.
                                             <b>
-                                                In short, it is an API that takes an input in .jpg form, attempts to read it,
+                                                In short, it is a library that takes an input in .jpg form, attempts to read it,
                                                 and returns either an error or a results read in the form of a .json string.
                                             </b>
                                             Here is their <a href="#">Github</a>.
@@ -643,8 +643,8 @@ exit();
                                         <div class="ui divider"></div>
                                         <h3>Our Part</h3>
                                         <p>
-                                            Following the creation and continued development of the openMTR API, KUB tasked
-                                            us with sharing it with you. We were to build a site that exposed the application,
+                                            Following the creation and continued development of the openMTR Library, KUB tasked
+                                            us with sharing it with you. We were to build a site and API that exposed the library,
                                             as well as deploy the site live through Azure. The KUB team hadn't worked previously
                                             with any cloud services, and wanted to use our project as a tool to help them explore
                                             the options there. We would learn together.
@@ -750,39 +750,64 @@ exit();
                                         <h3>
                                             Mission: Expose openMTR as a functioning application to the world
                                         </h3>
-                                        <div class="ui secondary raised segment">
+                                        <!-- Deliverables Colored Segment -->
+                                        <!-- Look at dot color for ul bits -->
+                                        <div class="ui raised segment"
+                                             style="background-color:#e6fff7;">
                                             <h3>Deliverables:</h3>
                                             <ol>
                                                 <li><b>Build a site to demo the meter reader</b></li>
-                                                <ul>
+                                                <ul style="margin:5px 0px;">
                                                     <li>Home Page: Introduce and "Sell" the Application</li>
                                                     <li>Demo Page: Get .jpg file from user > send to API > display the response (read or error)</li>
                                                     <li>Documentation Page: Provide directions for use as well as code snippets for developers </li>
                                                 </ul>
-                                                <li><b>Write an API that connected the user to the openMTR API</b></li>
-                                                <ul>
-                                                    <li></li>
-                                                    <li></li>
-                                                    <li></li>
-                                                    <li></li>
+                                                <li><b>Write an API that connects the user to the openMTR Library</b></li>
+                                                <ul style="margin:5px 0px;">
+                                                    <li>API must:</li>
+                                                    <ul>
+                                                        <li>Download image from user</li>
+                                                        <li>Validate image format</li>
+                                                        <li>Send image to openMTR Library</li>
+                                                        <li>Record and write to the Database the following: </li>
+                                                        <ul>
+                                                            <li>Library Response & Run Details</li>
+                                                            <li>User Data</li>
+                                                            <li>For more details, see the Project Design tab above</li>
+                                                        </ul>
+                                                        <li>Return the pertinent data (Meter Read) to the user</li>
+                                                    </ul>
+                                                </ul>
+                                                <li><b> Create web app service through Microsoft Azure</b></li>
+                                                <ul style="margin:5px 0px;">
+                                                    <li style="margin-top:5px;">Create basic webapp using free tier</li>
+                                                    <li>Host SQL Server Database</li>
+                                                    <li>Store images uploaded through the API on "WebApp" Server </li>
                                                 </ul>
                                                 <li><b>Document the performance and all use of the meter reader in a Database</b></li>
-                                                <ul>
-                                                    <li>Design and Create a Database to hold information on the application's usage and development progress</li>
+                                                <ul style="margin:5px 0px;">
+                                                    <li>Design and Create an SQL Server Database on Azure that holds:</li>
                                                     <ul>
-                                                        <li>More information about the DB under the "Project Design" tab above</li>
+                                                        <li>Information on the application's usage</li>
+                                                        <ul>
+                                                            <li>Meter Read</li>
+                                                            <li>Meter Type</li>
+                                                            <li>Usage Metadata</li>
+                                                        </ul>
+                                                        <li>Any gathered user information</li>
+                                                        <li><i>More information about the DB under the "Project Design" tab above</i></li>
                                                     </ul>
                                                     <li>Create a Class to write to the database when the application is used</li>
                                                 </ul>
-                                                <li><b>Create a pipeline that used continuous integration to deploy through Azure Devops</b></li>
-                                                <ul>
-                                                    <li></li>
-                                                    <li></li>
-                                                    <li></li>
-                                                    <li></li>
+                                                <li><b>Create a pipeline that uses continuous integration to deploy through Azure Devops</b></li>
+                                                <ul style="margin:5px 0px;">
+                                                    <li>Connect pipeline to Github</li>
+                                                    <li>Trigger build via webhooks whenever master branch is updated</li>
+                                                    <li>Tests for successful build</li>
+                                                    <li>Release successful build to the Azure App Service</li>
                                                 </ul>
                                                 <li><b>Present the user with thorough documentation for their own integration needs</b></li>
-                                                <ul>
+                                                <ul style="margin:5px 0px;">
                                                     <li>Explain how to use the application to end-users</li>
                                                     <li>Provide code samples for integration for developers</li>
                                                     <ul>
@@ -794,39 +819,39 @@ exit();
                                                 </ul>
                                             </ol>
                                         </div>
-                                            This seemed straightforward enough, but let's break it down a little more.
-                                            <!--<div class="ui list">
-             <div class="item">
-                 <div class="header">1. Site Build</div>
-                 A lovely city
-             </div>
-             <div class="item">
-                 <div class="header">2. API</div>
-                 Also quite a lovely city
-             </div>
-             <div class="item">
-                 <div class="header">3. Database</div>
-                 Sometimes can be a lovely city
-             </div>
-             <div class="item">
-                 <div class="header">4. Pipeline</div>
-                 What a lovely city
-             </div>
-             <div class="item">
-                 <div class="header">5. Documentation</div>
-                 What a lovely city
-             </div>
-         </div>-->
-                                            <h3>
-                                                Stretch Goals
-                                            </h3>
-                                        </div>
-                                        <div class="four wide column">
-                                            <div class="ui medium image">
-                                                <img src="/image/logo-1.png">
-                                            </div>
+                                        This seemed straightforward enough, but let's break it down a little more.
+                                        <!--<div class="ui list">
+            <div class="item">
+                <div class="header">1. Site Build</div>
+                A lovely city
+            </div>
+            <div class="item">
+                <div class="header">2. API</div>
+                Also quite a lovely city
+            </div>
+            <div class="item">
+                <div class="header">3. Database</div>
+                Sometimes can be a lovely city
+            </div>
+            <div class="item">
+                <div class="header">4. Pipeline</div>
+                What a lovely city
+            </div>
+            <div class="item">
+                <div class="header">5. Documentation</div>
+                What a lovely city
+            </div>
+        </div>-->
+                                        <h3>
+                                            Stretch Goals
+                                        </h3>
+                                    </div>
+                                    <div class="four wide column">
+                                        <div class="ui medium image">
+                                            <img src="/image/logo-1.png">
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Project Design & Process -->
