@@ -517,27 +517,48 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- PHP Code Snippet -->
-                        <div class="ui olive segment"
-                             id="PHPSegment">
-                            <div class="ui divided grid">
-                                <div class="row">
-                                    <div class="two wide column">
-                                        <h3>PHP</h3>
-                                        <!-- Field "email" and "file", optional "numberOfDials"
-                                        response json string
-                                        -->
-                                    </div>
-                                    <div class="fourteen wide column">
-                                        <pre>
-                                        <code class="PHP">
-    Placeholder Code
+                    </div>
+                    <!-- PHP Code Snippet -->
+                    <div class="ui olive segment"
+                         id="PHPSegment">
+                        <div class="ui divided grid">
+                            <div class="row">
+                                <div class="two wide column">
+                                    <h3>PHP</h3>
+                                    <!-- Field "email" and "file", optional "numberOfDials"
+                                    response json string
+                                    -->
+                                </div>
+                                <div class="fourteen wide column">
+                                    <pre>
+                                    <code class="PHP">
+$url = "http://openmtr.azurewebsites.net/api/read_meter"; //Append /url to give a URL for the image
+$imageToUpload = "/path/to/image.jpg";
 
-    # test
-    echo 'hello there'
-                                        </code>
-                                        </pre>
-                                    </div>
+if(!file_exists($imageToUpload)) {
+    echo "The image doesn't exist";
+    exit();
+}
+$fields = array(
+    "file" => new CURLFile($imageToUpload),
+    "url" => "http://some_url.com", //If URL then Omit file
+    "email" => "someone@domain.com",
+    "numberOfDials" => "999999" //Optional
+);
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$jsonString = curl_exec($ch);
+$result = json_decode($jsonString);
+curl_close($ch);
+/*
+ * Do something with the results here
+ */
+exit();
+                                    </code>
+                                    </pre>
                                 </div>
                             </div>
                         </div>
