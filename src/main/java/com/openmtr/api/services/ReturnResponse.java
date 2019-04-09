@@ -153,7 +153,7 @@ public class ReturnResponse {
 		Duration totalProcessing = Duration.between(this.startProcessing.toInstant(), this.stopProcessing.toInstant());
 		db.setProcessingTime(totalProcessing.toMillis() + "");
 		this.totalProcessingTime = "{\"hours\" : \"" + totalProcessing.toHours() + "\", \"minutes\" : \""
-				+ totalProcessing.toMinutes() + "\", \"seconds\" : \"" + totalProcessing.getSeconds()
+				+ totalProcessing.toMinutes()%60 + "\", \"seconds\" : \"" + totalProcessing.getSeconds()%60
 				+ "\", \"milliseconds\" : \"" + totalProcessing.toMillis() + "\"}";
 	}
 

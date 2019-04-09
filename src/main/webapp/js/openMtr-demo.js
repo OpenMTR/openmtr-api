@@ -239,7 +239,13 @@ var openMtrDemo = {
                 var modal = jQuery("div#results-modal");
                 modal.find("p#meterRead").html(data.meter_read.read);
                 modal.find("p#meterType").html(data.meter_read.type);
-                modal.find("p#processingTime").html(data.processing_time.seconds + " seconds");
+                var time = "";
+                if (parseInt(data.processing_time.minutes) > 0) {
+                    time += (parseInt(data.processing_time.minutes) === 1)
+                        ? data.processing_time.minutes + " minute "
+                        : data.processing_time.minutes + " minutes ";
+                }
+                modal.find("p#processingTime").html(time + data.processing_time.seconds + " seconds");
 
                 jQuery("#results-modal").modal("show");
                 self.resetForm();
