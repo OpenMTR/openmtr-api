@@ -493,9 +493,6 @@ fi
                                 <div class="row">
                                     <div class="two wide column">
                                         <h3>.NET</h3>
-                                        <!-- Field "email" and "file", optional "numberOfDials"
-                                        response json string
-                                        -->
                                     </div>
                                     <div class="fourteen wide column">
                                         <pre>
@@ -643,17 +640,19 @@ exit();
                     <div id="projectWorkbookContent" class="tab-content">
                         <!-- Project Overview -->
                         <div id="overviewRow" class="active">
-                            <div class="ui divided grid">
+                            <div class="ui divided relaxed stackable grid">
                                 <div class="row">
+                                    <!-- First Column (2 wide) -->
                                     <div class="two wide column">
                                         <i class="huge clipboard outline icon"></i>
                                     </div>
+                                    <!-- Second Column (10 wide) -->
                                     <div class="ui ten wide column">
                                         <div class="ui tertiary inverted olive segment">
                                             <div class="ui stackable aligned grid">
                                                 <div class="middle aligned row">
                                                     <div class="column">
-                                                        <h1 class="ui huge header">                                                         
+                                                        <h1 class="ui huge header">
                                                             <div class="content">
                                                                 Capstone 2019
                                                                 <div class="sub header">Welcome to openMTR</div>
@@ -678,12 +677,12 @@ exit();
                                             The previous Capstone (2018) team began the build for an Library that uses image recognition AI to read
                                             images of utility meters.
                                             <b>
-                                                In short, it is a library that takes an input in .jpg form, attempts to read it,
+                                                In short, they created a library that takes an input in .jpg form, attempts to read it,
                                                 and returns either an error or a results read in the form of a .json string.
                                             </b>
                                             Here is their <a href="#">Github</a>.
                                             They were inspired by <a href="https://www.openalpr.com">openALPR</a>'s API,
-                                            which used in License Plate reconigtion technology.
+                                            which uses License Plate recognition technology.
                                         </p>
                                         <p>
                                             KUB is currently continuing the development of the openMTR API.
@@ -698,7 +697,7 @@ exit();
                                             as well as deploy the site live through Azure. The KUB team hadn't worked previously
                                             with any cloud services, and wanted to use our project as a tool to help them explore
                                             the options there. We would learn together.
-                                        </p>                                        
+                                        </p>
                                         <p>
                                             To see more specific requirements, check out the <b>Requirements</b> tab above.
                                         </p>
@@ -706,7 +705,7 @@ exit();
                                         <div class="ui header">
                                             <i class="users icon"></i>
                                             <div class="content">Meet the Team</div>
-                                        </div> 
+                                        </div>
                                         <div class="ui three column grid">
                                             <div class="column">
                                                 <div class="ui fluid card">
@@ -758,17 +757,18 @@ exit();
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Third Colum (4 wide) -->
                                     <div class="four wide column">
-                                        <div class="ui medium image">
-                                            <img src="/image/capstone18-dials.png">
-                                        </div>
+                                            <img class="ui medium centered image"
+                                                 src="/image/capstone18-dials.png">                                    
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Requirements -->
                         <div id="requirementsRow">
-                            <div class="ui divided grid">
+                            <div class="ui divided relaxed stackable grid">
+                                <!-- Row 1 -->
                                 <div class="row">
                                     <!-- First Column (2 wide) -->
                                     <div class="two wide column">
@@ -869,36 +869,74 @@ exit();
                                                 </ul>
                                             </ol>
                                         </div>
-                                        This seemed straightforward enough, but let's break it down a little more.
-                                        <!--<div class="ui list">
-            <div class="item">
-                <div class="header">1. Site Build</div>
-                A lovely city
-            </div>
-            <div class="item">
-                <div class="header">2. API</div>
-                Also quite a lovely city
-            </div>
-            <div class="item">
-                <div class="header">3. Database</div>
-                Sometimes can be a lovely city
-            </div>
-            <div class="item">
-                <div class="header">4. Pipeline</div>
-                What a lovely city
-            </div>
-            <div class="item">
-                <div class="header">5. Documentation</div>
-                What a lovely city
-            </div>
-        </div>-->
-                                        <h3>
-                                            Stretch Goals
-                                        </h3>
+                                       
                                     </div>
+                                    <!-- Third Column (4 wide) -->
                                     <div class="four wide column">
-                                        <div class="ui medium image">
-                                            <img src="/image/logo-1.png">
+                                        <img class="ui medium centered image"
+                                             src="/image/logo-1.png">
+                                    </div>
+                                </div>
+                                <!-- Row 2 -->
+                                <div class="row">
+                                    <!-- First Column (2 wide) -->
+                                    <div class="two wide column">
+                                        <!-- Intentionally Empty -->
+                                    </div>
+                                    <!-- Second Column (10 wide) -->
+                                    <div class="ten wide column">
+                                        <!-- Techonologies Colored Segment -->
+                                        <div class="ui raised segment"
+                                             style="background-color:#e6fff7;">
+                                            <h3>Technologies & Method Requirements:</h3>
+                                            <ol>
+                                                <li><b>Front End</b></li>
+                                                <ul style="margin:5px 0px;">
+                                                    <li>Use Semantic UI development framework</li>
+                                                    <li>Get inspiration from openALPR's site design</li>
+                                                    <li><i>Stretch Goals:</i></li>
+                                                    <ul>
+                                                        <li>Use <a href="https://emberjs.com/">Ember.js</a> front-end framework</li>
+                                                        <li></li>
+                                                    </ul>
+                                                </ul>
+                                                <li><b>Back End</b></li>
+                                                <ul style="margin:5px 0px;">
+                                                    <li>Use <a href="https://github.com/jax-rs">Jax-RS</a> (Java™ API for RESTful Web Services) for API build</li>
+                                                    <li>Connect API to Azure Using <a href="https://openliberty.io/">openLiberty</a></li>
+                                                    <li>Use <a href="https://github.com/">Github</a> for Source Control and Integration</li>
+                                                    <li>Code Review:</li>
+                                                    <ul>
+                                                        <li>Integrate a Automated Code Analysis Tool into Github</li>
+                                                        <li>Use Azure Dev Pipeline for Static Code Analysis</li>
+                                                        <li>Two approvals required to merge on Git - all team members must review</li>
+                                                    </ul>
+                                                    <li><i>Stretch Goals:</i></li>
+                                                    <ul>
+                                                        <li>Document the API using <a href="">Swagger</a></li>
+                                                    </ul>
+                                                </ul>
+                                                <li><b>Workflow</b></li>
+                                                <ul style="margin:5px 0px;">
+                                                    <li>Communication Tools:</li>
+                                                    <ul>
+                                                        <li>Slack Channel</li>
+                                                        <li>Trello Board</li>
+                                                    </ul>
+                                                </ul>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <!-- Third Column (4 wide) -->
+                                    <div class="four wide column">
+                                        <div class="ui raised secondary segment">
+                                            <h3 class="ui header">Note</h3>
+                                            <p>
+                                                These are our initial requirements, which we hammered out in a few meetings with KUB. 
+                                                This was the first step of our development process. As with all development, things change. 
+                                                We'll talk about a few of those in the "Implementation" tab (See above) and then compare the 
+                                                original requirements with our final product in the "Wrap-up" section.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -906,7 +944,7 @@ exit();
                         </div>
                         <!-- Project Design & Process -->
                         <div id="designRow">
-                            <div class="ui divided grid">
+                            <div class="ui divided relaxed stackable grid">
                                 <div class="row">
                                     <div class="two wide column">
                                         <i class="huge pencil alternate icon"></i>
@@ -935,7 +973,7 @@ exit();
                         </div>
                         <!-- Workflow and Pipeline Set-up -->
                         <div id="pipelineRow">
-                            <div class="ui divided grid">
+                            <div class="ui divided relaxed stackable grid">
                                 <div class="row">
                                     <div class="two wide column">
                                         <i class="huge cogs icon"></i>
@@ -952,7 +990,7 @@ exit();
                         </div>
                         <!-- Implementation Process -->
                         <div id="implementationRow">
-                            <div class="ui divided grid">
+                            <div class="ui divided relaxed stackable grid">
                                 <div class="row">
 
                                     <div class="two wide column">
@@ -977,7 +1015,7 @@ exit();
                         </div>
                         <!-- Wrap-up -->
                         <div id="finalRow">
-                            <div class="ui divided grid">
+                            <div class="ui divided relaxed stackable grid">
                                 <div class="row">
                                     <div class="two wide column">
                                         <i class="huge trophy icon"></i>
@@ -1026,10 +1064,9 @@ exit();
             </div>
             <div class="teal column">
                 <h3>About Us</h3>
-                <div class="item"
-                     href="https://kub.org">
+                <div class="item">
                     <i class="right triangle icon"></i>
-                    KUB
+                    <a href="https://kub.org">KUB</a>
                 </div>
                 <div class="item"
                      href="http://pstcc.edu">
