@@ -19,8 +19,8 @@
     <link rel="stylesheet"
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
-    <link rel="stylesheet" 
-          type="text/css" 
+    <link rel="stylesheet"
+          type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
 
     <link rel="stylesheet" type="text/css" href="css/demo_page.css" />
@@ -110,46 +110,69 @@
     <div class="ui vertical stripe segment mobile-nav-menu">
         <ul class="nav-list" style="color:white;">
             <li class="item">
-                <a href="/index.html" 
-                   class="nav-item">Home</a></li>
+                <a href="/index.html"
+                   class="nav-item">Home</a>
+            </li>
             <li class="item">
-                <a href="/demo-page.html" 
-                   class="nav-item">Try it!</a></li>
+                <a href="/demo-page.html"
+                   class="nav-item">Try it!</a>
+            </li>
             <li class="item">
-                <a href="https://github.com/OpenMTR/openmtr-api" 
-                   class="nav-item">openMTR Github</a></li>
+                <a href="https://github.com/OpenMTR/openmtr-api"
+                   class="nav-item">openMTR Github</a>
+            </li>
             <li class="item">
-                <a href="/documentation.html" class="nav-item">Documentation</a></li>
+                <a href="/documentation.html" class="nav-item">Documentation</a>
+            </li>
         </ul>
     </div>
     <!-- End Navbar -->
-    <!-- Hero Image -->
-    <img class="ui fluid image" src="/image/grass-placeholder.png">
-    <!-- End Hero Image -->
     <!-- Grid "Feature Boxes" -->
     <div class="ui basic segment"
          style="margin-top:0 !important;
                 margin-bottom:0 !important;">
-        <div class="ui four column center aligned very relaxed stackable grid">
+        <div class="ui four column center aligned very relaxed stackable grid"
+             style="border-bottom: ridge 7px;
+                    border-color:#00b377;">
             <div class="doubling four column row">
                 <div class="olive column">
-                    <div class="ui small image">
-                        <img src="/image/demo-snap.png">
+                    <div class="row">
+                        <div class="ui small image">
+                            <img src="/image/demo-snap.png">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2 class="inverted header">Take a Picture</h2>
                     </div>
                 </div>
                 <div class="green column">
-                    <div class="ui small image">
-                        <img src="/image/demo-upload.png">
+                    <div class="row">
+                        <div class="ui small image">
+                            <img src="/image/demo-upload.png">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2 class="inverted header">Upload it to OpenMTR</h2>
                     </div>
                 </div>
                 <div class="teal column">
-                    <div class="ui small image">
-                        <img src="/image/demo-submit.png">
+                    <div class="row">
+                        <div class="ui small image">
+                            <img src="/image/demo-submit.png">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2 class="inverted header">Enter details & Submit</h2>
                     </div>
                 </div>
                 <div class="blue column">
-                    <div class="ui small image">
-                        <img src="/image/demo-result.png">
+                    <div class="row">
+                        <div class="ui small image">
+                            <img src="/image/demo-result.png">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2 class="inverted header">Get your Meter Info</h2>
                     </div>
                 </div>
             </div>
@@ -159,159 +182,162 @@
     <!-- Demo Form -->
     <div class="ui raised segment"
          style="margin:0 !important;">
-        <div class="overlay"></div>
-        <div id="error_msg" class="ui error message">
-            <i class="close icon"></i>
-            <div id="title" class="header">
-                Error!
-            </div>
-            <p id="message">Something happened... That's all I know.
-            </p>
+        <div class="ui raised segment">
+    <div class="overlay"></div>
+    <div id="error_msg" class="ui error message">
+        <i class="close icon"></i>
+        <div id="title" class="header">
+            Error!
         </div>
-        <div class="ui two column very relaxed stackable grid">
-            <!--Left-hand Column - User Inputs-->
-            <div class="column">
-                <div id="dragNdrop" class="ui form">
-                    <div class="box">
-                        <div id="form_container">
-                            <div class="box__input">
-                                <input class="box__file" type="file" name="files[]" id="file" />
-                                <span id="downloadImage">
-                                    <i class="fas fa-download"></i>
-                                </span>
-                                <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
-                            </div>
-                            <div class="box__uploading">Uploading&hellip;</div>
-                            <div class="box__success">Done! 1 file uploaded.</div>
-                            <div class="box__error">Error! Try again.</div>
+        <p id="message">
+            Something happened... That's all I know.
+        </p>
+    </div>
+    <div class="ui two column very relaxed stackable grid">
+        <!--Left-hand Column - User Inputs-->
+        <div class="column">
+            <div id="dragNdrop" class="ui form">
+                <div class="box">
+                    <div id="form_container">
+                        <div class="box__input">
+                            <input class="box__file" type="file" name="files[]" id="file" />
+                            <span id="downloadImage">
+                                <i class="fas fa-download"></i>
+                            </span>
+                            <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
                         </div>
+                        <div class="box__uploading">Uploading&hellip;</div>
+                        <div class="box__success">Done! 1 file uploaded.</div>
+                        <div class="box__error">Error! Try again.</div>
                     </div>
-                    <span id="close">
-                        <i class="times circle outline icon"></i>
-                    </span>
-                    <img class="ui fluid image" src="">
                 </div>
+                <span id="close">
+                    <i class="times circle outline icon"></i>
+                </span>
+                <img class="ui fluid image" src="">
             </div>
-            <div class="column">
-                <div class="ui form">
-                    <div id="drop-area">
-                        <form class="my-form">
+        </div>
+        <div class="column">
+            <div class="ui form">
+                <div id="drop-area">
+                    <form class="my-form">
 
-                            <!-- EMAIL -->
-                            <div class="column">
-                                <div class="field">
-                                    <label>Enter your email: </label>
-                                    <div class="inline fields">
-                                        <div class="twelve wide field">
-                                            <div class="ui input">
-                                                <input id="email" type="text"
-                                                       placeholder="john_doe@email.com">
-                                            </div>
+                        <!-- EMAIL -->
+                        <div class="column">
+                            <div class="field">
+                                <label>Enter your email: </label>
+                                <div class="inline fields">
+                                    <div class="twelve wide field">
+                                        <div class="ui input">
+                                            <input id="email" type="text"
+                                                   placeholder="john_doe@email.com">
                                         </div>
-                                        <div id="email-question"
-                                             class="ui icon button"
-                                             style="color:#80bfff;
+                                    </div>
+                                    <div id="email-question"
+                                         class="ui icon button"
+                                         style="color:#80bfff;
                                                     background-color:#fff;"
-                                             data-tooltip="Why do we need this?"
-                                             data-position="top left">
-                                            <i class="question circle icon"></i>
-                                        </div>
+                                         data-tooltip="Why do we need this?"
+                                         data-position="top left">
+                                        <i class="question circle icon"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div id="advancedDiv" class="column">
-                                <a onclick="openMtrDemo.toggleAdvanced();">Other Options</a>
+                        </div>
+                        <div id="advancedDiv" class="column">
+                            <a onclick="openMtrDemo.toggleAdvanced();">Other Options</a>
+                        </div>
+                        <div class="ui divider"></div>
+
+                        <div id="advancedTab" style="margin-bottom: 1rem;">
+                            <!-- UPLOAD IMAGE HERE -->
+                            <div class="field">
+                                <label>Enter an image url: </label>
+                                <!-- ENTER URL HERE -->
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        http://
+                                    </div>
+                                    <input id="url" type="text"
+                                           placeholder="my_image_url.com">
+                                </div>
+                            </div>
+                            <div class="ui two column very relaxed stackable grid">
+                                <div class="column">
+                                    <div class="field">
+                                        <label>Number of Dials on Meter:</label>
+                                        <div id="digit_dropdown" class="ui selection dropdown">
+                                            <input id="digit-number" type="hidden" name="digit-number">
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text">Select</div>
+                                            <div class="menu">
+                                                <div class="item"
+                                                     data-value="4">4</div>
+                                                <div class="item"
+                                                     data-value="5">5</div>
+                                                <div class="item"
+                                                     data-value="6">6</div>
+                                                <div class="item"
+                                                     data-value="0">I don't know</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui divider"></div>
-
-                            <div id="advancedTab" style="margin-bottom: 1rem;">
-                                <!-- UPLOAD IMAGE HERE -->
-                                <div class="field">
-                                    <label>Enter an image url: </label>
-                                    <!-- ENTER URL HERE -->
-                                    <div class="ui labeled input">
-                                        <div class="ui label">
-                                            http://
-                                        </div>
-                                        <input id="url" type="text"
-                                               placeholder="my_image_url.com">
-                                    </div>
+                        </div>
+                        <div class="column">
+                            <div id="submit-image"
+                                 class="ui animated fade button"
+                                 type="submit">
+                                <div class="visible content">
+                                    <i class="right arrow icon"></i>
                                 </div>
-                                <div class="ui two column very relaxed stackable grid">
-                                    <div class="column">
-                                        <div class="field">
-                                            <label>Number of Dials on Meter:</label>
-                                            <div id="digit_dropdown" class="ui selection dropdown">
-                                                <input id="digit-number" type="hidden" name="digit-number">
-                                                <i class="dropdown icon"></i>
-                                                <div class="default text">Select</div>
-                                                <div class="menu">
-                                                    <div class="item"
-                                                         data-value="4">4</div>
-                                                    <div class="item"
-                                                         data-value="5">5</div>
-                                                    <div class="item"
-                                                         data-value="6">6</div>
-                                                    <div class="item"
-                                                         data-value="0">I don't know</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ui divider"></div>
-                            </div>
-                            <div class="column">
-                                <div id="submit-image"
-                                     class="ui animated fade button"
-                                     type="submit">
-                                    <div class="visible content">
-                                        <i class="right arrow icon"></i>
-                                    </div>
-                                    <div class="hidden content">
-                                        Submit
-                                    </div>
+                                <div class="hidden content">
+                                    Submit
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
 
-            </div>
         </div>
+    </div>
 
-        <!-- End Demo Form -->
-        <h4 class="ui horizontal divider header">
-            <i class="image icon"></i>
-            Example Images
-        </h4>
-        <!-- Example Photo List -->
-        <div class="ui container example-image-carousel">
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-1.jpg">
-            </div>
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-2.jpg">
-            </div>
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-3.jpg">
-            </div>
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-4.jpg">
-            </div>
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-5.jpg">
-            </div>
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-6.jpg">
-            </div>
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-7.jpg">
-            </div>
-            <div class="item">
-                <img class="ui small image" src="/image/test-meter-8.jpg">
-            </div>
+    <!-- End Demo Form -->
+    <h4 class="ui horizontal divider header">
+        <i class="image icon"></i>
+        Example Images
+    </h4>
+    <!-- Example Photo List -->
+    <div class="ui container example-image-carousel">
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-1.jpg">
         </div>
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-2.jpg">
+        </div>
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-3.jpg">
+        </div>
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-4.jpg">
+        </div>
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-5.jpg">
+        </div>
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-6.jpg">
+        </div>
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-7.jpg">
+        </div>
+        <div class="item">
+            <img class="ui small image" src="/image/test-meter-8.jpg">
+        </div>
+    </div>
+</div>
     </div>
     <!-- Colored Footer -->
     <div class="ui equal width center aligned padded very relaxed stackable grid"
@@ -327,11 +353,11 @@
                 </div>
                 <div class="item">
                     <i class="right triangle icon"></i>
-                    <a href="http://www.pstcc.edu/">PSTCC</a> 
+                    <a href="http://www.pstcc.edu/">PSTCC</a>
                 </div>
                 <div class="item">
                     <i class="right triangle icon"></i>
-                    <a href="#">Meet the Team</a>                  
+                    <a href="#">Meet the Team</a>
                 </div>
             </div>
             <div class="teal column">
@@ -426,11 +452,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/js/carousel.js"></script>
 
-<script src="js/openMtr-demo.js"></script>
-<script>
-    jQuery(document).ready(function() {
-        openMtrDemo.init();
-    });
-</script>
+    <script src="js/openMtr-demo.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            openMtrDemo.init();
+        });
+    </script>
 </body>
 </html>
