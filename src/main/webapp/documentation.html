@@ -511,14 +511,14 @@ namespace ConsoleApplicationTest
         static void Main(string[] args)
         {
            
-            Task<HttpResponseMessage> recognizeTask = Task.Run(() => UploadFileAsync("http://openmtr.azurewebsites.net/api/read_meter", "C:\\Users\\user\\Path\\To\\image.jpg"));
+            Task&ltHttpResponseMessage&gt recognizeTask = Task.Run(() => UploadFileAsync("http://openmtr.azurewebsites.net/api/read_meter", "C:\\Users\\user\\Path\\To\\image.jpg"));
             recognizeTask.Wait();
             string task_result = recognizeTask.Result.ToString();
             // use response          
            
         }
 
-        public static async Task<HttpResponseMessage> UploadFileAsync(string url,string path)
+        public static async Task&ltHttpResponseMessage&gt UploadFileAsync(string url,string path)
         {
             using (var client = new HttpClient())
             {
