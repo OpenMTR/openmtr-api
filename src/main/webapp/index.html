@@ -36,90 +36,113 @@
 
 
 <body>
-    <!-- Navbar -->
-    <div class="ui inverted vertical nav center aligned segment">
-        <div class="ui container desktop-header-menu">
-            <div class="ui inverted secondary menu">
-                <a class="item">
-                    <div class="ui small image">
-                        <img src="/image/logo-1-text.png">
-                    </div>
-                </a>
-                <a class="active item"
-                   href="/index.html">
-                    Home
-                </a>
-                <!-- Split to right -->
-                <div class="right menu">
-                    <!-- LINK TO GITHUB -->
-                    <a href="https://github.com/OpenMTR/openmtr-api"
-                       class="ui black massive icon button"
-                       data-tooltip="Check out the project on Github"
-                       data-position="bottom right"
-                       data-inverted="">
-                        <i class="github icon"></i>
-                    </a>
-                    <!-- LINK TO GITHUB ISSUES -->
-                    <a href="https://github.com/OpenMTR/openmtr-api/issues"
-                       class="ui black massive icon button"
-                       data-tooltip="Submit Bug Report"
-                       data-position="bottom right"
-                       data-inverted="">
-                        <i class="bug icon"></i>
-                    </a>
-                    <!-- LINK TO DEMO PAGE -->
-                    <a href="/demo-page.html"
-                       class="item">
-                        Try it Yourself!
-                    </a>
-                    <!-- LINK TO DOC PAGE -->
-                    <a href="/documentation.html"
-                       class="item">
-                        Documentation
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Menu DropDown -->
-        <div class="ui container mobile-header-menu">
-            <div class="ui inverted secondary menu">
-                <a href="/" class="item header">
-                    <div class="logo">
+    <div class="ui inverted vertical center aligned segment">
+        <!-- Navbar -->
+        <div class="ui inverted vertical nav center aligned segment">
+            <div class="ui container desktop-header-menu">
+                <div class="ui inverted secondary menu">
+                    <a class="item">
                         <div class="ui small image">
                             <img src="/image/logo-1-text.png">
                         </div>
-                    </div>
-                </a>
-                <div class="right menu">
-                    <a class="item menu-toggle">
-                        Menu
-                        <i class="caret down icon"></i>
                     </a>
+                    <a class="active item"
+                       href="/index.html">
+                        Home
+                    </a>
+                    <!-- Split to right -->
+                    <div class="right menu">
+                        <!-- LINK TO GITHUB -->
+                        <a href="https://github.com/OpenMTR/openmtr-api"
+                           class="ui black massive icon button"
+                           data-tooltip="Check out the project on Github"
+                           data-position="bottom right"
+                           data-inverted="">
+                            <i class="github icon"></i>
+                        </a>
+                        <!-- LINK TO GITHUB ISSUES -->
+                        <a href="https://github.com/OpenMTR/openmtr-api/issues"
+                           class="ui black massive icon button"
+                           data-tooltip="Submit Bug Report"
+                           data-position="bottom right"
+                           data-inverted="">
+                            <i class="bug icon"></i>
+                        </a>
+                        <!-- LINK TO DEMO PAGE -->
+                        <a href="/demo-page.html"
+                           class="item">
+                            Try it Yourself!
+                        </a>
+                        <!-- LINK TO DOC PAGE -->
+                        <a href="/documentation.html"
+                           class="item">
+                            Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu DropDown -->
+            <div class="ui container mobile-header-menu">
+                <div class="ui inverted secondary menu">
+                    <a href="/" class="item header">
+                        <div class="logo">
+                            <div class="ui small image">
+                                <img src="/image/logo-1-text.png">
+                            </div>
+                        </div>
+                    </a>
+                    <div class="right menu">
+                        <a class="item menu-toggle">
+                            Menu
+                            <i class="caret down icon"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Mobile Menu -->
+        <div class="ui vertical stripe segment mobile-nav-menu">
+            <ul class="nav-list" style="color:white;">
+                <li class="item">
+                    <a href="/index.html"
+                       class="nav-item">Home</a>
+                </li>
+                <li class="item">
+                    <a href="/demo-page.html"
+                       class="nav-item">Try it!</a>
+                </li>
+                <li class="item">
+                    <a href="https://github.com/OpenMTR/openmtr-api"
+                       class="nav-item">openMTR Github</a>
+                </li>
+                <li class="item">
+                    <a href="/documentation.html" class="nav-item">Documentation</a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Navbar -->
+        
+            <div class="ui text container">
+                <h1 class="ui inverted header"
+                    style="margin-top: 1.5em;
+                           margin-bottom: 0em;
+                           font-size: 4em;
+                           font-weight: normal;">
+                    Welcome to openMTR
+                </h1>
+                <h2 style="font-size: 1.8em;
+                           font-weight: normal;">
+                    A Smarter Meter Reader
+                </h2>
+                <div class="ui huge primary button"
+                     style="margin-bottom:3em;
+                            margin-top:1em;">
+                    Try it Now
+                    <i class="right arrow icon"></i>
+                </div>
+            </div>
+
     </div>
-    <!-- Mobile Menu -->
-    <div class="ui vertical stripe segment mobile-nav-menu">
-        <ul class="nav-list" style="color:white;">
-            <li class="item">
-                <a href="/index.html"
-                   class="nav-item">Home</a>
-            </li>
-            <li class="item">
-                <a href="/demo-page.html"
-                   class="nav-item">Try it!</a>
-            </li>
-            <li class="item">
-                <a href="https://github.com/OpenMTR/openmtr-api"
-                   class="nav-item">openMTR Github</a>
-            </li>
-            <li class="item">
-                <a href="/documentation.html" class="nav-item">Documentation</a>
-            </li>
-        </ul>
-    </div>
-    <!-- End Navbar -->
 
     <!-- Grid "Feature Boxes" -->
     <div class="ui equal width center aligned padded grid"
@@ -154,73 +177,84 @@
         </div>
     </div>
     <!-- End Feature Boxes -->
-    <!-- Expanded Features-->
     <div class="ui raised segment"
          style="margin:0 !important;">
-        <div class="ui very padded segment">
-            <div class="ui two column very relaxed stackable grid">
-                <div class="middle aligned column">
-                    <h1 style="color:#358ee0; text-align: right">
-                        Hassle-Free, Instant Results
-                    </h1>
-                    <p style="font-size:x-large; text-align: right">
-                        <b>We know that meters aren't pretty. </b>
-                        <br />They're messy, confusing, and impossible to understand.
-                    </p>
-                    <p style="font-size:x-large; text-align: right;color:#63b4ff">
-                        That's why we've created openMTR.
-                    </p>
+        <!-- Left/Right Features-->
+        <div class="ui raised segment">
+            <div class="ui raised segment">
+                <div class="ui two column very relaxed stackable grid">
+                    <div class="middle aligned column">
+                        <h1 style="color:#358ee0;
+                                   text-align: center">
+                            Hassle-Free, Instant Results
+                        </h1>
+                        <p style="font-size:x-large;
+                                  text-align: center">
+                            <b>We know that meters aren't pretty. </b>
+                            <br />They're messy, confusing, and impossible to understand.
+                        </p>
+                        <p style="font-size:x-large;
+                                  text-align: center;
+                                  color:#63b4ff">
+                            That's why we've created openMTR.
+                        </p>
+                    </div>
+                    <div class="middle aligned column">
+                        <img class="ui large centered image"
+                             src="/image/test-meter-2.jpg"
+                             style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
+                    </div>
                 </div>
-                <div class="middle aligned column">
-                    <img class="ui centered image"
-                         src="/image/test-meter-2.jpg"
-                         style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
+                <div class="ui section divider"></div>
+                <div class="ui two column very relaxed stackable grid">
+                    <div class="middle aligned column">
+                        <img class="ui large centered image"
+                             src="/image/test-meter-8.jpg"
+                             style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
+                    </div>
+                    <div class="middle aligned column">
+                        <h1 style="color:#358ee0;
+                                   text-align: center;">
+                            Free to Use, Easy to Understand
+                        </h1>
+                        <p style="font-size:x-large;
+                                  text-align: center;">
+                            openMTR allows you to upload a picture of your meter
+                            and instantly recieve the information you're looking for.
+                            <br />We've used image recogition technology to build a
+                            smarter meter-reader just for you.
+                        </p>
+                    </div>
+                </div>
+                <div class="ui section divider"></div>
+                <div class="ui two column very relaxed stackable grid">
+                    <div class="middle aligned column">
+                        <h1 style="color:#358ee0;
+                                   text-align: center">
+                            Open Source
+                        </h1>
+                        <p style="font-size:x-large;
+                                  text-align: center">
+                            It's important to us that technology is available and free to everyone, so
+                            we've created an open source API that you can incorporate into your project or business.
+                        </p>
+                        <p style="font-size:x-large;
+                                  text-align: center">
+                            Check out our <a href="/documentation.html">Documentation Page</a> for more information on integration.
+                        </p>
+                    </div>
+                    <div class="middle aligned column">
+                        <img class="ui large centered image"
+                             src="/image/test-meter-6.jpg"
+                             style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="ui very padded segment">
-            <div class="ui two column very relaxed stackable grid">
-                <div class="middle aligned column">
-                    <img class="ui centered image"
-                         src="/image/test-meter-8.jpg"
-                         style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
-                </div>
-                <div class="middle aligned column">
-                    <h1 style="color:#358ee0;">
-                        Free to Use, Easy to Understand
-                    </h1>
-                    <p style="font-size:x-large">
-                        openMTR allows you to quickly take a picture of your meter, upload it,
-                        and instantly recieve the information you're looking for.
-                        <br />We've used image recogition technology to build a
-                        smarter meter-reader just for you.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="ui very padded segment">
-            <div class="ui two column very relaxed stackable grid">
-                <div class="middle aligned column">
-                    <h1 style="color:#358ee0; text-align: right">
-                        Open Source
-                    </h1>
-                    <p style="font-size:x-large; text-align: right">
-                        It's important to us that technology is available and free to everyone, so
-                        we've created an open source API that you can incorporate into your project or business.
-                    </p>
-                    <p style="font-size:x-large; text-align: right">
-                        Check out our <a href="#">Documentation Page</a> for more information on integration.
-                    </p>
-                </div>
-                <div class="middle aligned column">
-                    <img class="ui centered image"
-                         src="/image/test-meter-6.jpg"
-                         style="box-shadow: 0 4px 8px 0 #6ebadd, 0 6px 20px 0 #6ebadd;">
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- End Left/Right Features -->
+        <!-- Try it Now! -->
 
+    </div>
     <!-- Colored Footer -->
     <div class="ui equal width center aligned padded very relaxed stackable grid"
          style="border-top: ridge 7px;
