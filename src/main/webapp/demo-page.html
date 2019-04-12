@@ -53,7 +53,7 @@
                 <div class="ui inverted secondary menu">
                     <a class="item">
                         <div class="ui small image">
-                            <img src="/image/logo-1-text.png">
+                            <img src="/image/logo-2-text.png">
                         </div>
                     </a>
                     <a href="/index.html"
@@ -108,383 +108,384 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu"
-             class="ui vertical stripe segment hidden">
-            <div class="ui vertical buttons">
-                <a class="ui olive labeled icon button"
-                   href="/index.html">
-                    <i class="home icon"></i>
-                    Home
-                </a>
-                <a class="ui teal labeled icon button"
-                   href="/demo-page.html">
-                    <i class="arrow alternate circle right icon"></i>
-                    Try openMTR
-                </a>
-                <a class="ui green labeled icon button"
-                   href="/documentation.html">
-                    <i class="list icon"></i>
-                    Documentation
-                </a>
-                <a class="ui blue labeled icon button"
-                   href="https://github.com/OpenMTR/openmtr-api">
-                    <i class="github icon"></i>
-                    Github
-                </a>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu"
+                 class="ui vertical stripe segment hidden">
+                <div class="ui vertical buttons">
+                    <a class="ui olive labeled icon button"
+                       href="/index.html">
+                        <i class="home icon"></i>
+                        Home
+                    </a>
+                    <a class="ui teal labeled icon button"
+                       href="/demo-page.html">
+                        <i class="arrow alternate circle right icon"></i>
+                        Try openMTR
+                    </a>
+                    <a class="ui green labeled icon button"
+                       href="/documentation.html">
+                        <i class="list icon"></i>
+                        Documentation
+                    </a>
+                    <a class="ui blue labeled icon button"
+                       href="https://github.com/OpenMTR/openmtr-api">
+                        <i class="github icon"></i>
+                        Github
+                    </a>
+                </div>
             </div>
+            <!-- End Mobile Menu-->
+            <!-- End Navbar -->
         </div>
-        <!-- End Mobile Menu-->
-        <!-- End Navbar -->
     </div>
-        <!-- Grid "Feature Boxes" -->
-        <div class="ui basic segment"
-             style="margin-top:0 !important;
+    <!-- Grid "Feature Boxes" -->
+    <div class="ui basic segment"
+         style="margin-top:0 !important;
                 margin-bottom:0 !important;">
-            <div class="ui four column center aligned very relaxed stackable grid"
-                 style="border-bottom: ridge 7px;
+        <div class="ui four column center aligned very relaxed stackable grid"
+             style="border-bottom: ridge 7px;
                     border-color:#00b377;">
-                <div class="doubling four column row">
-                    <div class="olive column">
-                        <div class="row">
-                            <div class="ui image">
-                                <img src="/image/demo-snap.png"
-                                     style="height:80px">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h2 class="inverted header">Take a Picture</h2>
+            <div class="doubling four column row">
+                <div class="olive column">
+                    <div class="row">
+                        <div class="ui image">
+                            <img src="/image/demo-snap.png"
+                                 style="height:80px">
                         </div>
                     </div>
-                    <div class="green column">
-                        <div class="row">
-                            <div class="ui image">
-                                <img src="/image/demo-upload.png"
-                                     style="height:80px">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h2 class="inverted header">Upload it to OpenMTR</h2>
-                        </div>
-                    </div>
-                    <div class="teal column">
-                        <div class="row"
-                             height="150">
-                            <div class="ui image">
-                                <img src="/image/demo-submit.png"
-                                     style="height:80px">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h2 class="inverted header">Enter details & Submit</h2>
-                        </div>
-                    </div>
-                    <div class="blue column">
-                        <div class="row"
-                             height="150">
-                            <div class="ui image">
-                                <img src="/image/demo-result.png"
-                                     style="height:80px">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h2 class="inverted header">Get your Meter Info</h2>
-                        </div>
+                    <div class="row">
+                        <h2 class="inverted header">Take a Picture</h2>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- End Feature Boxes -->
-        <!-- Demo Form -->
-        <div class="ui raised segment"
-             style="margin:0 !important;">
-            <div class="ui raised segment">
-                <div class="overlay"></div>
-                <div id="error_msg" class="ui error message">
-                    <i class="close icon"></i>
-                    <div id="title" class="header">
-                        Error!
-                    </div>
-                    <p id="message">
-                        Something happened... That's all I know.
-                    </p>
-                </div>
-                <div class="ui two column very relaxed stackable grid">
-                    <!--Left-hand Column - User Inputs-->
-                    <div class="column">
-                        <div id="dragNdrop" class="ui form">
-                            <div class="box">
-                                <div id="form_container">
-                                    <div class="box__input">
-                                        <input class="box__file" type="file" name="files[]" id="file" />
-                                        <span id="downloadImage">
-                                            <i class="fas fa-download"></i>
-                                        </span>
-                                        <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
-                                    </div>
-                                    <div class="box__uploading">Uploading&hellip;</div>
-                                    <div class="box__success">Done! 1 file uploaded.</div>
-                                    <div class="box__error">Error! Try again.</div>
-                                </div>
-                            </div>
-                            <span id="close">
-                                <i class="times circle outline icon"></i>
-                            </span>
-                            <img class="ui fluid image" src="">
+                <div class="green column">
+                    <div class="row">
+                        <div class="ui image">
+                            <img src="/image/demo-upload.png"
+                                 style="height:80px">
                         </div>
                     </div>
-                    <div class="column">
-                        <div class="ui form">
-                            <div id="drop-area">
-                                <form class="my-form">
-
-                                    <!-- EMAIL -->
-                                    <div class="column">
-                                        <div class="field">
-                                            <label>Enter your email: </label>
-                                            <div class="inline fields">
-                                                <div class="twelve wide field">
-                                                    <div class="ui input">
-                                                        <input id="email" type="text"
-                                                               placeholder="john_doe@email.com">
-                                                    </div>
-                                                </div>
-                                                <div id="email-question"
-                                                     class="ui icon button"
-                                                     style="color:#80bfff;
-                                                    background-color:#fff;"
-                                                     data-tooltip="Why do we need this?"
-                                                     data-position="top left">
-                                                    <i class="question circle icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Advanced Options -->
-                                    <div id="advancedDiv" class="column">
-                                        <a onclick="openMtrDemo.toggleAdvanced();">Other Options</a>
-                                    </div>
-                                    <div class="ui divider"></div>
-
-                                    <div id="advancedTab" style="margin-bottom: 1rem;">
-                                        <!-- UPLOAD IMAGE HERE -->
-                                        <div class="field">
-                                            <label>Enter an image url: </label>
-                                            <!-- ENTER URL HERE -->
-                                            <div class="ui labeled input">
-                                                <div class="ui label">
-                                                    http://
-                                                </div>
-                                                <input id="url" type="text"
-                                                       placeholder="my_image_url.com">
-                                            </div>
-                                        </div>
-                                        <div class="ui two column very relaxed stackable grid">
-                                            <div class="column">
-                                                <div class="field">
-                                                    <label>Number of Dials on Meter:</label>
-                                                    <div id="digit_dropdown" class="ui selection dropdown">
-                                                        <input id="digit-number" type="hidden" name="digit-number">
-                                                        <i class="dropdown icon"></i>
-                                                        <div class="default text">Select</div>
-                                                        <div class="menu">
-                                                            <div class="item"
-                                                                 data-value="4">4</div>
-                                                            <div class="item"
-                                                                 data-value="5">5</div>
-                                                            <div class="item"
-                                                                 data-value="6">6</div>
-                                                            <div class="item"
-                                                                 data-value="0">I don't know</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="ui divider"></div>
-                                    </div>
-                                    <div class="column">
-                                        <button id="submit-image"
-                                                class="ui big blue animated fade button"
-                                                type="submit">
-                                            <div class="visible content">
-                                                Submit
-                                            </div>
-                                            <div class=" hidden content">
-                                                <i class="right arrow icon"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- End Demo Form -->
-                <h4 class="ui horizontal divider header">
-                    <i class="image icon"></i>
-                    Example Images
-                </h4>
-                <!-- Example Photo List -->
-                <div class="ui container example-image-carousel">
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-1.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-2.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-3.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-4.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-5.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-6.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-7.jpg">
-                    </div>
-                    <div class="item">
-                        <img class="ui small image" src="/image/test-meter-8.jpg">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Colored Footer -->
-        <div class="ui equal width center aligned padded very relaxed stackable grid"
-             style="border-top: ridge 7px;
-                border-color:#00b377;">
-            <!-- Boxes -->
-            <div class="row">
-                <div class="blue column">
-                    <h3>openMTR</h3>
-                    <div class="ui inverted link list">
-                        <a href="/index.html"
-                           class="item">
-                            Home
-                        </a>
-                        <div class="active item">Try it Yourself</div>
-                        <a href="/documentation.html"
-                           class="item">
-                            Documentation
-                        </a>
+                    <div class="row">
+                        <h2 class="inverted header">Upload it to OpenMTR</h2>
                     </div>
                 </div>
                 <div class="teal column">
-                    <h3>openMTR Team</h3>
-                    <div class="ui inverted link list">
-                        <a href="https://www.kub.org"
-                           class="item">
-                            KUB
-                        </a>
-                        <a href="http://www.pstcc.edu"
-                           class="item">
-                            PSTCC
-                        </a>
-                        <a href="https://github.com/OpenMTR/openmtr-api"
-                           class="item">
-                            Our Github
-                        </a>
-                    </div>
-                </div>
-                <!-- Logo Icons -->
-                <div class="green column">
-                    <div class="ui three column grid">
-                        <div class="ui column">
-                            <a href="https://azure.microsoft.com/en-us/product-categories/devops/"
-                               class="ui tiny image"
-                               data-tooltip="Azure Devops">
-                                <img src="/image/devops-logo.png" />
-                            </a>
-                        </div>
-                        <div class="ui column">
-                            <a href="https://maven.apache.org/"
-                               class="ui small image"
-                               data-tooltip="Maven">
-                                <img src="/image/maven-logo.png" />
-                            </a>
-                        </div>
-                        <div class="ui column">
-                            <a href="https://www.codacy.com/"
-                               class="ui tiny image "
-                               data-tooltip="Codacy">
-                                <img src="/image/codacy-logo.png" />
-                            </a>
+                    <div class="row"
+                         height="150">
+                        <div class="ui image">
+                            <img src="/image/demo-submit.png"
+                                 style="height:80px">
                         </div>
                     </div>
+                    <div class="row">
+                        <h2 class="inverted header">Enter details & Submit</h2>
+                    </div>
                 </div>
-                <div class="olive column">
-                    <div class="ui small image">
-                        <img src="/image/logo-1.png">
+                <div class="blue column">
+                    <div class="row"
+                         height="150">
+                        <div class="ui image">
+                            <img src="/image/demo-result.png"
+                                 style="height:80px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2 class="inverted header">Get your Meter Info</h2>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Colored Footer -->
-        <!-- Results Modal -->
-        <div id="results-modal" class="ui modal">
-            <i class="close icon"></i>
-            <div class="header">
-                Your Meter Reading
-            </div>
-            <div class="image content">
-                <div class="ui medium image">
-                    <img id="uploadedFile" src="/image/water-meter-1.jpg">
+    </div>
+    <!-- End Feature Boxes -->
+    <!-- Demo Form -->
+    <div class="ui raised segment"
+         style="margin:0 !important;">
+        <div class="ui raised segment">
+            <div class="overlay"></div>
+            <div id="error_msg" class="ui error message">
+                <i class="close icon"></i>
+                <div id="title" class="header">
+                    Error!
                 </div>
-                <div class="description">
-                    <div class="ui header">Meter Read:</div>
-                    <p id="meterRead">Here is the Meter Read</p>
-                    <div class="ui header">Meter Type:</div>
-                    <p id="meterType">Here is the Meter Type</p>
-                    <div class="ui header">Processing Time:</div>
-                    <p id="processingTime">Here is the Processing Time</p>
+                <p id="message">
+                    Something happened... That's all I know.
+                </p>
+            </div>
+            <div class="ui two column very relaxed stackable grid">
+                <!--Left-hand Column - User Inputs-->
+                <div class="column">
+                    <div id="dragNdrop" class="ui form">
+                        <div class="box">
+                            <div id="form_container">
+                                <div class="box__input">
+                                    <input class="box__file" type="file" name="files[]" id="file" />
+                                    <span id="downloadImage">
+                                        <i class="fas fa-download"></i>
+                                    </span>
+                                    <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
+                                </div>
+                                <div class="box__uploading">Uploading&hellip;</div>
+                                <div class="box__success">Done! 1 file uploaded.</div>
+                                <div class="box__error">Error! Try again.</div>
+                            </div>
+                        </div>
+                        <span id="close">
+                            <i class="times circle outline icon"></i>
+                        </span>
+                        <img class="ui fluid image" src="">
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui form">
+                        <div id="drop-area">
+                            <form class="my-form">
+
+                                <!-- EMAIL -->
+                                <div class="column">
+                                    <div class="field">
+                                        <label>Enter your email: </label>
+                                        <div class="inline fields">
+                                            <div class="twelve wide field">
+                                                <div class="ui input">
+                                                    <input id="email" type="text"
+                                                           placeholder="john_doe@email.com">
+                                                </div>
+                                            </div>
+                                            <div id="email-question"
+                                                 class="ui icon button"
+                                                 style="color:#80bfff;
+                                                    background-color:#fff;"
+                                                 data-tooltip="Why do we need this?"
+                                                 data-position="top left">
+                                                <i class="question circle icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Advanced Options -->
+                                <div id="advancedDiv" class="column">
+                                    <a onclick="openMtrDemo.toggleAdvanced();">Other Options</a>
+                                </div>
+                                <div class="ui divider"></div>
+
+                                <div id="advancedTab" style="margin-bottom: 1rem;">
+                                    <!-- UPLOAD IMAGE HERE -->
+                                    <div class="field">
+                                        <label>Enter an image url: </label>
+                                        <!-- ENTER URL HERE -->
+                                        <div class="ui labeled input">
+                                            <div class="ui label">
+                                                http://
+                                            </div>
+                                            <input id="url" type="text"
+                                                   placeholder="my_image_url.com">
+                                        </div>
+                                    </div>
+                                    <div class="ui two column very relaxed stackable grid">
+                                        <div class="column">
+                                            <div class="field">
+                                                <label>Number of Dials on Meter:</label>
+                                                <div id="digit_dropdown" class="ui selection dropdown">
+                                                    <input id="digit-number" type="hidden" name="digit-number">
+                                                    <i class="dropdown icon"></i>
+                                                    <div class="default text">Select</div>
+                                                    <div class="menu">
+                                                        <div class="item"
+                                                             data-value="4">4</div>
+                                                        <div class="item"
+                                                             data-value="5">5</div>
+                                                        <div class="item"
+                                                             data-value="6">6</div>
+                                                        <div class="item"
+                                                             data-value="0">I don't know</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui divider"></div>
+                                </div>
+                                <div class="column">
+                                    <button id="submit-image"
+                                            class="ui big blue animated fade button"
+                                            type="submit">
+                                        <div class="visible content">
+                                            Submit
+                                        </div>
+                                        <div class=" hidden content">
+                                            <i class="right arrow icon"></i>
+                                        </div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- End Demo Form -->
+            <h4 class="ui horizontal divider header">
+                <i class="image icon"></i>
+                Example Images
+            </h4>
+            <!-- Example Photo List -->
+            <div class="ui container example-image-carousel">
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-1.jpg">
+                </div>
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-2.jpg">
+                </div>
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-3.jpg">
+                </div>
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-4.jpg">
+                </div>
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-5.jpg">
+                </div>
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-6.jpg">
+                </div>
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-7.jpg">
+                </div>
+                <div class="item">
+                    <img class="ui small image" src="/image/test-meter-8.jpg">
                 </div>
             </div>
         </div>
-        <!-- End Results Modal -->
-        <!-- Email Modal -->
-        <div id="email-privacy-modal" class="ui modal">
-            <i class="close icon"></i>
-            <div class="header">
-                Why do you need my email?
+    </div>
+    <!-- Colored Footer -->
+    <div class="ui equal width center aligned padded very relaxed stackable grid"
+         style="border-top: ridge 7px;
+                border-color:#00b377;">
+        <!-- Boxes -->
+        <div class="row">
+            <div class="blue column">
+                <h3>openMTR</h3>
+                <div class="ui inverted link list">
+                    <a href="/index.html"
+                       class="item">
+                        Home
+                    </a>
+                    <div class="active item">Try it Yourself</div>
+                    <a href="/documentation.html"
+                       class="item">
+                        Documentation
+                    </a>
+                </div>
             </div>
-            <div class="content">
-                <div class="ui header">Your Privacy is Important to Us</div>
-                <p>
-                    Here at OpenMTR, we <b>completely understand</b> people can be hesitant about providing
-                    information online. The reason we're asking is for documentation and data gathering only.
-                    In order to improve our application, we keep metrics about the number of users, successes,
-                    processing time, etc. And email is one of the ways we track that.
-                </p>
-                <p>
-                    We promise never to sell your information, send you spam, or do anything we might find
-                    annoying, should we be in your shoes.
-                </p>
-                <p>
-                    Thank you so much for your participation. We want to make this the highest quality we can
-                    - so we can give you the most accurate results!
-                </p>
+            <div class="teal column">
+                <h3>openMTR Team</h3>
+                <div class="ui inverted link list">
+                    <a href="https://www.kub.org"
+                       class="item">
+                        KUB
+                    </a>
+                    <a href="http://www.pstcc.edu"
+                       class="item">
+                        PSTCC
+                    </a>
+                    <a href="https://github.com/OpenMTR/openmtr-api"
+                       class="item">
+                        Our Github
+                    </a>
+                </div>
             </div>
-
+            <!-- Logo Icons -->
+            <div class="green column">
+                <div class="ui three column grid">
+                    <div class="ui column">
+                        <a href="https://azure.microsoft.com/en-us/product-categories/devops/"
+                           class="ui tiny image"
+                           data-tooltip="Azure Devops">
+                            <img src="/image/devops-logo.png" />
+                        </a>
+                    </div>
+                    <div class="ui column">
+                        <a href="https://maven.apache.org/"
+                           class="ui small image"
+                           data-tooltip="Maven">
+                            <img src="/image/maven-logo.png" />
+                        </a>
+                    </div>
+                    <div class="ui column">
+                        <a href="https://www.codacy.com/"
+                           class="ui tiny image "
+                           data-tooltip="Codacy">
+                            <img src="/image/codacy-logo.png" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="olive column">
+                <div class="ui small image">
+                    <img src="/image/logo-2-black.png">
+                </div>
+            </div>
         </div>
-        <!-- End Email Modal -->
+    </div>
+    <!-- End Colored Footer -->
+    <!-- Results Modal -->
+    <div id="results-modal" class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Your Meter Reading
+        </div>
+        <div class="image content">
+            <div class="ui medium image">
+                <img id="uploadedFile" src="/image/water-meter-1.jpg">
+            </div>
+            <div class="description">
+                <div class="ui header">Meter Read:</div>
+                <p id="meterRead">Here is the Meter Read</p>
+                <div class="ui header">Meter Type:</div>
+                <p id="meterType">Here is the Meter Type</p>
+                <div class="ui header">Processing Time:</div>
+                <p id="processingTime">Here is the Processing Time</p>
+            </div>
+        </div>
+    </div>
+    <!-- End Results Modal -->
+    <!-- Email Modal -->
+    <div id="email-privacy-modal" class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Why do you need my email?
+        </div>
+        <div class="content">
+            <div class="ui header">Your Privacy is Important to Us</div>
+            <p>
+                Here at OpenMTR, we <b>completely understand</b> people can be hesitant about providing
+                information online. The reason we're asking is for documentation and data gathering only.
+                In order to improve our application, we keep metrics about the number of users, successes,
+                processing time, etc. And email is one of the ways we track that.
+            </p>
+            <p>
+                We promise never to sell your information, send you spam, or do anything we might find
+                annoying, should we be in your shoes.
+            </p>
+            <p>
+                Thank you so much for your participation. We want to make this the highest quality we can
+                - so we can give you the most accurate results!
+            </p>
+        </div>
+
+    </div>
+    <!-- End Email Modal -->
 
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-        <script type="text/javascript" src="/js/carousel.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script type="text/javascript" src="/js/carousel.js"></script>
 
-        <script src="js/openMtr-demo.js"></script>
-        <script>
-            jQuery(document).ready(function () {
-                openMtrDemo.init();
-            });
-        </script>
+    <script src="js/openMtr-demo.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            openMtrDemo.init();
+        });
+    </script>
 </body>
 </html>
