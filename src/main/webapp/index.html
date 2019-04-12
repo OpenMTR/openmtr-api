@@ -36,8 +36,10 @@
 
 
 <body>
-    <!-- Black "Masthead" Segment -->
-    <div class="ui inverted vertical center aligned segment">
+
+    <div class="ui inverted vertical center aligned segment"
+         style="padding-top:0;
+                padding-bottom:0;">
         <!-- Navbar -->
         <div class="ui inverted vertical nav center aligned segment">
             <div class="ui container desktop-header-menu">
@@ -102,25 +104,32 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="ui vertical stripe segment hidden">
-            <ul class="nav-list" style="color:white;">
-                <li class="item">
-                    <a href="/index.html"
-                       class="nav-item">Home</a>
-                </li>
-                <li class="item">
-                    <a href="/demo-page.html"
-                       class="nav-item">Try it!</a>
-                </li>
-                <li class="item">
-                    <a href="https://github.com/OpenMTR/openmtr-api"
-                       class="nav-item">openMTR Github</a>
-                </li>
-                <li class="item">
-                    <a href="/documentation.html" class="nav-item">Documentation</a>
-                </li>
-            </ul>
+        <div id="mobile-menu"
+             class="ui vertical stripe segment hidden">
+            <div class="ui vertical buttons">
+                <a class="ui olive labeled icon button"
+                   href="/index.html">
+                    <i class="home icon"></i>
+                    Home
+                </a>
+                <a class="ui teal labeled icon button"
+                   href="/demo-page.html">
+                    <i class="arrow alternate circle right icon"></i>
+                    Try openMTR
+                </a>
+                <a class="ui green labeled icon button"
+                   href="/documentation.html">
+                    <i class="list icon"></i>
+                    Documentation
+                </a>
+                <a class="ui blue labeled icon button"
+                   href="https://github.com/OpenMTR/openmtr-api">
+                    <i class="github icon"></i>
+                    Github
+                </a>
+            </div>
         </div>
+        <!-- End Mobile Menu-->
         <!-- End Navbar -->
         <!-- Masthead Content -->
         <div class="ui text container">
@@ -135,6 +144,7 @@
                            font-weight: normal;">
                 A Smarter Meter Reader
             </h2>
+
             <a href="/demo-page.html">
                 <div class="ui huge primary button"
                      style="margin-bottom:3em;
@@ -145,7 +155,9 @@
             </a>
         </div>
     </div>
-    <!-- End Navbar -->
+    <!-- End Masthead -->
+<!-- End Navbar -->
+
     <!-- Grid "Feature Boxes" -->
     <div class="ui equal width center aligned padded grid"
          style="border-bottom: ridge 7px;
