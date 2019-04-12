@@ -18,7 +18,9 @@
         padding: 150px 100px;
         text-align: center;
     }
-
+    .box-image {
+	height:80px;
+    }
 }
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 761px) and (max-width: 979px) {
@@ -67,6 +69,10 @@ and (orientation : landscape) {
         position: relative;
         padding: 100px 100px;
         text-align: center;
+    }
+    .mobile-box-text {
+        visibility: hidden;
+	height: 0px;
     }
 
 }
