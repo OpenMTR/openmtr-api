@@ -21,8 +21,8 @@
           href="/css/responsive-navbar.css">
     <link rel="stylesheet"
           type="text/css"
-          href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/documentation.css">
+          href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/documentation.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous">
@@ -1055,7 +1055,6 @@ exit();
                                 </div>
                             </div>
                         </div>
-
                         <!-- Workflow and Pipeline Set-up -->
                         <div id="pipelineRow">
                             <div class="ui divided grid">
@@ -1121,6 +1120,42 @@ exit();
                                             Hours Logged Chart
                                             Blog snippet and Link
                                         </p>
+
+                                        <h2>API</h2>
+                                        <p>
+                                            What is Jax-RS? Jax-RS is nothing more than a specification, interfaces, and annotations offered by Java EE. What does it look like?<br/>
+                                            Here is the annotation for the main endpoint<br/>
+                                            <img src="image/jax-rs-1.png" class="mt-1"><br/>
+                                            And these are the annotations for uploading a image through the API<br/>
+                                            <img src="image/jax-rs-2.png" class="mt-1"><br/>
+                                            Without these the API would have been a lot harder to create.
+                                            <br/><br/>
+                                            Now that you know a little about Jax-RS, let dive into the heart of the API. When you send a POST request to the API the first thing that happens is
+                                            Jax-RS take the input fields and assigns them to the properties inside of the Post Class. The fields are then validated to make sure the email address is valid,
+                                            the number of dials on the meter face is a valid string (if supplied), and there has been a image uploaded. Once all those validations have passed, the image is then
+                                            saved to disk and a <a href="https://stackoverflow.com/a/4019863" target="_blank" title="What is a byte array?">byte array</a> is extracted. This byte array is then
+                                            sent to the OpenMeter library along with the number of dials on the meter face. *Note: If the user did supply the number of dials on the meter face, then the API
+                                            will use that format for the read, if the user did not supply the number of dials on the meter face, then the API will loop through from six dials, down to four dials,
+                                            unless a valid read is returned.* <br/>
+                                            <br/>
+                                            Here is the response when interacting directly with the API<br/>
+                                            <img src="image/postman-response.png" class="mt-1">
+                                        </p>
+                                        <h2>Azure</h2>
+                                        <p>
+                                            We had never worked with Azure and were excited to hear one of the requirements were to implement out project on Azure. This was a learning curve not only for us but also
+                                            for the KUB team. Currently KUB hosts their webapps on in-house servers and they wanted to explore the possibility of moving a lot of their webapps to the cloud. Before they
+                                            just pick the webapps up and move them, they wanted to see what problems they might face, and is this the best solution.
+                                        </p>
+                                        <p>
+                                            We started off with the Free tier in the Azure web app. This was fine at first, but we found out later on that there were some pretty big limitations to
+                                            the Azure free tier. When the app hasn't seen any calls in awhile, the server will unload the app to save processing power. When a user tries to vist the site
+                                            the app will be spun up and served to the client. This results in a pretty considerable delay, but after that inital wait, the user is free to browse through
+                                            the site with no problems. Another limitation to the Free Tier is that our App requires close to a Gig worth of RAM just to get going, the free tier maxed out
+                                            at one Gig of RAM every hour. In the end we bumped the subscription up to the Basic 1 paid tier. This removed those quota's and allowed us to start seeing results.
+                                            Even at the Basic 1 tier there is still a lag when the server hasn't been used in awhile. Azure still unloads the webapp when not in use to save resources.
+                                        </p>
+
                                     </div>
                                 </div>
                             </div>
@@ -1147,12 +1182,14 @@ exit();
                     </div>
                 </div>
 
+
                 <!-- "Version Notes" Content -->
                 <div class="ui segment"
                      id="versionContent">
                     <h1>What's New in Version #.##</h1>
                     <p>placeholder for Version Updates</p>
                 </div>
+
             </div>
         </div>
     </div>
