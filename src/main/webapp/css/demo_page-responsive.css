@@ -14,7 +14,6 @@
 @media (min-width: 980px) and (max-width: 1199px) {
     .box {
         font-size: 1.25rem;
-        background-color: #c8dadf;
         position: relative;
         padding: 150px 100px;
         text-align: center;
@@ -25,7 +24,6 @@
 @media (min-width: 761px) and (max-width: 979px) {
     .box {
         font-size: 1.25rem;
-        background-color: #c8dadf;
         position: relative;
         padding: 100px 100px;
         text-align: center;
@@ -40,7 +38,6 @@ and (max-device-width : 1024px)
 and (orientation : portrait) {
     .box {
         font-size: 1.25rem;
-        background-color: #c8dadf;
         position: relative;
         padding: 100px 100px;
         text-align: center;
@@ -54,7 +51,6 @@ and (max-device-width : 1024px)
 and (orientation : landscape) {
     .box {
         font-size: 1.25rem;
-        background-color: #c8dadf;
         position: relative;
         padding: 50px 100px;
         text-align: center;
@@ -68,7 +64,6 @@ and (orientation : landscape) {
 @media (max-width: 760px) {
     .box {
         font-size: 1.25rem;
-        background-color: #c8dadf;
         position: relative;
         padding: 100px 100px;
         text-align: center;
@@ -79,7 +74,6 @@ and (orientation : landscape) {
 @media (max-width: 480px) {
     .box {
         font-size: 1.25rem;
-        background-color: #c8dadf;
         position: relative;
         padding: 50px 50px;
         text-align: center;
