@@ -125,7 +125,7 @@
                     </a>
                     <a class="ui green labeled icon button"
                        href="/documentation.html">
-                        <i class="list icon"></i>
+                        <i class="code branch icon"></i>
                         Documentation
                     </a>
                     <a class="ui blue labeled icon button"
@@ -212,80 +212,85 @@
                 </p>
             </div>
             <div class="ui two column very relaxed stackable grid">
-                <!--Left-hand Column - User Inputs-->
-                <div class="column">
-                    <div id="dragNdrop" class="ui form">
-                        <div class="box">
-                            <div id="form_container">
-                                <div class="box__input">
-                                    <input class="box__file" type="file" name="files[]" id="file" />
-                                    <span id="downloadImage">
-                                        <i class="fas fa-download"></i>
-                                    </span>
-                                    <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
+                <!--Left-hand Column (Drag n Drop) -->
+                <div class="eight wide column">
+                    <div class="ui teal raised segment"
+                         style="background-color:#ddf3ff;">
+                        <div id="dragNdrop" class="ui form">
+                            <div class="box">
+                                <div id="form_container">
+                                    <div class="box__input">
+                                        <input class="box__file" type="file" name="files[]" id="file" />
+                                        <span id="downloadImage">
+                                            <i class="fas fa-download"></i>
+                                        </span>
+                                        <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>. </label>
+                                    </div>
+                                    <div class="box__uploading">Uploading&hellip;</div>
+                                    <div class="box__success">Done! 1 file uploaded.</div>
+                                    <div class="box__error">Error! Try again.</div>
                                 </div>
-                                <div class="box__uploading">Uploading&hellip;</div>
-                                <div class="box__success">Done! 1 file uploaded.</div>
-                                <div class="box__error">Error! Try again.</div>
                             </div>
+                            <span id="close">
+                                <i class="times circle outline icon"></i>
+                            </span>
+                            <img class="ui fluid image" src="">
                         </div>
-                        <span id="close">
-                            <i class="times circle outline icon"></i>
-                        </span>
-                        <img class="ui fluid image" src="">
                     </div>
                 </div>
-                <div class="column">
-                    <div class="ui form">
-                        <div id="drop-area">
-                            <form class="my-form">
-
-                                <!-- EMAIL -->
-                                <div class="column">
-                                    <div class="field">
-                                        <label>Enter your email: </label>
-                                        <div class="inline fields">
-                                            <div class="twelve wide field">
-                                                <div class="ui input">
-                                                    <input id="email" type="text"
-                                                           placeholder="john_doe@email.com">
+                <!-- Right-hand Column -->
+                <div class="eight wide column">
+                    <div class="ui teal raised segment"
+                         style="background-color:#ddf3ff;">
+                        <div class="ui form">
+                            <div id="drop-area">
+                                <form class="my-form">
+                                    <!-- EMAIL -->
+                                    <div class="column">
+                                        <div class="field">
+                                            <label>Enter your email: </label>
+                                            <div class="inline fields">
+                                                <div class="fifteen wide field">
+                                                    <div class="ui input">
+                                                        <input id="email" type="text"
+                                                               placeholder="john_doe@email.com">
+                                                    </div>
+                                                </div>
+                                                <div id="email-question"
+                                                     class="ui circular icon button"
+                                                     style="color:#2684CF;
+                                                     background-color:#ddf3ff;"
+                                                     data-tooltip="Why do we need this?"
+                                                     data-position="top left">
+                                                    <i class="question circle icon"></i>
                                                 </div>
                                             </div>
-                                            <div id="email-question"
-                                                 class="ui icon button"
-                                                 style="color:#80bfff;
-                                                    background-color:#fff;"
-                                                 data-tooltip="Why do we need this?"
-                                                 data-position="top left">
-                                                <i class="question circle icon"></i>
-                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Advanced Options -->
-                                <div id="advancedDiv" class="column">
-                                    <a onclick="openMtrDemo.toggleAdvanced();">Other Options</a>
-                                </div>
-                                <div class="ui divider"></div>
-
-                                <div id="advancedTab" style="margin-bottom: 1rem;">
-                                    <!-- UPLOAD IMAGE HERE -->
-                                    <div class="field">
-                                        <label>Enter an image url: </label>
-                                        <!-- ENTER URL HERE -->
-                                        <div class="ui labeled input">
-                                            <div class="ui label">
-                                                http://
-                                            </div>
-                                            <input id="url" type="text"
-                                                   placeholder="my_image_url.com">
-                                        </div>
+                                    <!-- Advanced Options -->
+                                    <div id="advancedDiv" 
+                                         class="column"
+                                         style="margin-top: 0;">
+                                        <a onclick="openMtrDemo.toggleAdvanced();"><b>Other Options</b></a>
                                     </div>
-                                    <div class="ui two column very relaxed stackable grid">
+                                    <div class="ui section divider"></div>
+                                    <div id="advancedTab" style="margin-bottom: 1rem;">
+                                        <!-- UPLOAD IMAGE HERE -->
+                                        <div class="field">
+                                            <label>Enter an image url: </label>
+                                            <!-- ENTER URL HERE -->
+                                            <div class="ui labeled input">
+                                                <div class="ui label">
+                                                    http://
+                                                </div>
+                                                <input id="url" type="text"
+                                                       placeholder="my_image_url.com">
+                                            </div>
+                                        </div>
                                         <div class="column">
                                             <div class="field">
                                                 <label>Number of Dials on Meter:</label>
-                                                <div id="digit_dropdown" class="ui selection dropdown">
+                                                <div id="digit_dropdown" class="ui fluid selection dropdown">
                                                     <input id="digit-number" type="hidden" name="digit-number">
                                                     <i class="dropdown icon"></i>
                                                     <div class="default text">Select</div>
@@ -302,25 +307,25 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="ui section divider"></div>
                                     </div>
-                                    <div class="ui divider"></div>
-                                </div>
-                                <div class="column">
-                                    <button id="submit-image"
-                                            class="ui big blue animated fade button"
-                                            type="submit">
-                                        <div class="visible content">
-                                            Submit
-                                        </div>
-                                        <div class=" hidden content">
-                                            <i class="right arrow icon"></i>
-                                        </div>
-                                    </button>
-                                </div>
-                            </form>
+                                    <!-- SUBMIT button -->
+                                    <div class="column">
+                                        <button id="submit-image"
+                                                class="ui fluid aligned big blue animated fade button"
+                                                type="submit">
+                                            <div class="visible content">
+                                                Submit
+                                            </div>
+                                            <div class="hidden content">
+                                                <i class="right arrow icon"></i>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
