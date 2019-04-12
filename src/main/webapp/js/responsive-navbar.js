@@ -1,30 +1,29 @@
 // JQuery for responsive Navbar
 
-    function toggleNavMenu() {
-        $('.mobile-nav-menu').toggleClass('open');
-    }
+$(document).ready(function () {
+    var mobile = {
+        navOpen: 0,
+        init() {
+            var self = this;
+            var mobileNav  = $("div#mobile-menu");
+            $('.menu-toggle').on('click', function (evt) {
+                evt.stopPropagation();
+                if (self.navOpen === 0) {
+                    mobileNav.slideDown(500);
+                    self.navOpen = 1;
+                }
+                else {
+                    mobileNav.slideUp(500);
+                    self.navOpen = 0;
+                }
+            });
 
-    function navMenuIsOpen() {
-        return $('.mobile-nav-menu').hasClass('open');
-}
+        }
 
-    $(document).ready(function () {
-        $('.menu-toggle').on('click', function (evt) {
-            toggleNavMenu();
-            evt.stopPropagation();
-        });
-    $('.mobile-nav-menu').on('click', function (evt) {
-        evt.stopPropagation();
-    });
-        $(window).on('click', function () {
-            if (navMenuIsOpen()) {
-        toggleNavMenu();
-    }
-});
-        $(window).resize(function () {
-            if (window.innerWidth > 645 && navMenuIsOpen()) {
-        toggleNavMenu();
-    }
-});
+
+
+    };
+
+    mobile.init();
 });
 

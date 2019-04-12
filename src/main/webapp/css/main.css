@@ -9,6 +9,18 @@
     flex-grow: 1;
 }
 
+.hidden {
+    display: none;
+}
+div#mobile-menu ul {
+    padding-left: inherit;
+}
+div#mobile-menu ul li {
+    list-style: none;
+    margin: 1px 0px;
+    text-align: center;
+}
+
     .hidden.menu {
       display: none;
     }
@@ -34,9 +46,9 @@
       font-weight: normal;
     }
 
-    .ui.vertical.stripe {
-      padding: 8em 0em;
-    }
+    /*.ui.vertical.stripe {*/
+      /*padding: 8em 0em;*/
+    /*}*/
     .ui.vertical.stripe h3 {
       font-size: 2em;
     }
