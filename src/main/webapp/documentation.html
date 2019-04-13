@@ -463,10 +463,96 @@ fi
                                     <div class="fourteen wide column">
                                         <pre>
                                         <code class="java">
-    Placeholder Code
+/* ====================================================================
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Apache Software Foundation.  For more
+ * information on the Apache Software Foundation, please see
+ * &lthttp://www.apache.org/&gt.
+ *
+ */
 
-    # test
-    echo 'hello there'
+/* 
+ * Libraries required are :
+ * httpclient-4.5.8.jar
+ * httpcore-4.4.11.jar
+ * httpmime-4.5.8.jar
+ * commons-logging-1.2.jar
+ */
+ 
+import java.io.File;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+
+
+/**
+ * Example how to use multipart/form encoded POST request.
+*/
+public class ClientMultipartFormPost {
+
+    public static void main(String[] args) throws Exception {
+       
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpPost httppost = new HttpPost("http://openmtr.azurewebsites.net/api/read_meter");
+
+            FileBody photo = new FileBody(new File("C:\\Users\\Username\\pathto\\image.jpg"));
+            StringBody email = new StringBody("example@email.com", ContentType.TEXT_PLAIN);
+            StringBody numberOfDials = new StringBody("9999", ContentType.TEXT_PLAIN);
+
+            HttpEntity reqEntity = MultipartEntityBuilder.create()
+                    .addPart("file", photo)
+                    .addPart("email", email)
+                    .addPart("numberOfDials", numberOfDials)
+                    .build();
+            
+            httppost.setEntity(reqEntity);
+            System.out.println("executing request " + httppost.getRequestLine());
+            CloseableHttpResponse response = httpclient.execute(httppost);
+            try {
+                System.out.println("----------------------------------------");
+                System.out.println(response.getStatusLine());
+                HttpEntity resEntity = response.getEntity();
+                if (resEntity != null) {                                   
+                    String json_string = EntityUtils.toString(response.getEntity());
+                    System.out.println(json_string); 
+                }
+            } finally {
+                response.close();
+            }
+        } finally {
+            httpclient.close();
+        }
+    }
+
+}
+
                                                 </code>
                                                 </pre>
                                     </div>
