@@ -136,14 +136,14 @@
                 </div>
             </div>
             <!-- End Mobile Menu-->
-            <!-- End Navbar -->
         </div>
+        <!-- End Navbar -->
     </div>
     <!-- Grid "Feature Boxes" -->
     <div class="ui basic segment"
          style="margin-top:0 !important;
                 margin-bottom:0 !important;">
-        <div class="ui four column center aligned very relaxed doubling grid"
+        <div class="ui four column center aligned very relaxed grid"
              style="border-bottom: ridge 7px;
                     border-color:#00b377;">
             <div class="four column row">
@@ -151,7 +151,7 @@
                     <div class="row">
                         <div class="ui image">
                             <img src="/image/demo-snap.png"
-                                 style="height:80px">
+                                 style="height:40px">
                         </div>
                     </div>
                     <div class="row mobile-box-text">
@@ -162,7 +162,7 @@
                     <div class="row">
                         <div class="ui image">
                             <img src="/image/demo-upload.png"
-                                 style="height:80px">
+                                 style="height:40px">
                         </div>
                     </div>
                     <div class="row mobile-box-text">
@@ -174,7 +174,7 @@
                          height="150">
                         <div class="ui image">
                             <img src="/image/demo-submit.png"
-                                 style="height:80px">
+                                 style="height:40px">
                         </div>
                     </div>
                     <div class="row mobile-box-text">
@@ -186,7 +186,7 @@
                          height="150">
                         <div class="ui image">
                             <img src="/image/demo-result.png"
-                                 style="height:80px">
+                                 style="height:40px">
                         </div>
                     </div>
                     <div class="row mobile-box-text">
@@ -197,9 +197,42 @@
         </div>
     </div>
     <!-- End Feature Boxes -->
-    <!-- Demo Form -->
-    <div class="ui raised segment"
+    <!-- Main Content -->
+    <div class="ui raised center aligned segment"
          style="margin:0 !important;">
+        <div class="ui medium image">
+            <img src="/image/logo-2.png" />
+        </div>
+        <div class="ui divider"></div>
+        <h1 class="ui blue header"
+            style="margin-top: 0.5em;
+                        margin-bottom: 0em;
+                        font-size: 3em;
+                        font-weight: normal;">
+            Try It Now
+        </h1>
+        <div class="ui stackable grid">
+            <div class="four wide column"></div>
+            <div class="eight wide column">
+                <h1 class="ui header"
+                    style="margin-top: 0.7em;
+                           margin-bottom: 0em;
+                           font-size: 1.7em;
+                           font-weight: normal;">
+                    The OpenMTR Cloud API is a web service running in the cloud
+                    that analyzes images of utility meters and responds with the meter read,
+                    as well as meter type and processing time.
+                </h1>
+            </div>
+            <div class="four wide column"></div>
+        </div>
+        <div class="ui divider"></div>
+        <h3 class="ui header"
+            style="margin-top: 0.5em;
+                   font-weight: normal;">
+            Upload your own images, or select an image below to see the results from previous image analysis using the OpenMTR Cloud API.
+        </h3>
+        <!-- Demo Form -->
         <div class="ui raised segment">
             <div class="overlay"></div>
             <div id="error_msg" class="ui error message">
@@ -268,7 +301,7 @@
                                         </div>
                                     </div>
                                     <!-- Advanced Options -->
-                                    <div id="advancedDiv" 
+                                    <div id="advancedDiv"
                                          class="column"
                                          style="margin-top: 0;">
                                         <a onclick="openMtrDemo.toggleAdvanced();"><b>Other Options</b></a>
@@ -328,13 +361,12 @@
                     </div>
                 </div>
             </div>
-
             <!-- End Demo Form -->
+            <!-- Example Photos -->
             <h4 class="ui horizontal divider header">
                 <i class="image icon"></i>
                 Example Images
             </h4>
-            <!-- Example Photo List -->
             <div class="ui container example-image-carousel">
                 <div class="item">
                     <img class="ui small image" src="/image/test-meter-1.jpg">
@@ -363,6 +395,7 @@
             </div>
         </div>
     </div>
+
     <!-- Colored Footer -->
     <div class="ui equal width center aligned padded very relaxed stackable grid"
          style="border-top: ridge 7px;
