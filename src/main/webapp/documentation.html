@@ -573,10 +573,37 @@ public class ClientMultipartFormPost {
                                     <div class="fourteen wide column">
                                         <pre>
                                         <code class="python">
-    Placeholder Code
+"""
+Capstone 2019 OpenMtr-Api
+By: James Willhoite
+Apr 14, 2019
+"""
+import requests
+import json
 
-    # test
-    echo 'hello there'
+base_url = "http://openmtr.azurewebsites.net/api/read_meter"
+
+files = {'file': open('/path/to/image.jpg', 'rb')}
+data = {
+    'email': 'john.smith@johnsmith.com',    # Required
+    'numberOfDials': '9999',                # Optional but returns reading faster
+    #  'url': 'http://theurl.com'           # Use only if downloading from a URL
+}
+
+response = requests.post(
+    url=base_url,
+    data=data,
+    files=files
+)
+meter_read = json.loads(response.text)
+if meter_read["error"]:
+    print("Error!: " + meter_read["error_msg"])
+    exit(1)
+else:
+    print("Your meter read is: " + meter_read["meter_read"]["read"] + " type of meter is: " +
+          meter_read["meter_read"]["type"] + " total proccessing time is: " +
+          meter_read["processing_time"]["milliseconds"] + " milliseconds")
+
                                         </code>
                                         </pre>
                                     </div>
