@@ -114,6 +114,9 @@ div#drop-area div#advancedDiv a {
 div#advancedTab {
     display: none;
 }
+div#exampleImages img {
+    cursor: pointer;
+}
 
 
 

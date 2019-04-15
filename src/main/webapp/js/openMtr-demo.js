@@ -26,11 +26,6 @@ var openMtrDemo = {
         self.dragNdropListeners();
         self.formListeners();
 
-        jQuery("#submit-image").click(function () {
-            //jQuery("#results-modal").modal("show");
-            self.readMeter();
-        });
-
         jQuery("#email-question").click(function () {
             jQuery("#email-privacy-modal").modal("show");
         });
@@ -51,8 +46,17 @@ var openMtrDemo = {
     demoListeners() {
         var self = this;
         //Listen for the click on the submit button
-        jQuery("div#formSubmit").on("click", function() {
+        jQuery("button#submit-image").on("click", function(e) {
+            e.preventDefault();
              self.readMeter();
+        });
+
+        jQuery("div#exampleImages img").on("click", function() {
+            var read = jQuery(this).attr("data-read");
+            var type = jQuery(this).attr("data-type");
+            var time = jQuery(this).attr("data-time");
+            var img = jQuery(this).attr("src");
+            self.displayModal(read,  type,  time,  img);
         });
     },
 
@@ -115,6 +119,15 @@ var openMtrDemo = {
             jQuery("div#dragNdrop span#close").fadeIn("fast");
         };
         reader.readAsDataURL(self.droppedFiles[0]);
+    },
+
+    displayModal(read, type, time, img) {
+        var modal = jQuery("div#results-modal");
+        modal.find("p#meterRead").html(read);
+        modal.find("p#meterType").html(type);
+        modal.find("p#processingTime").html(time);
+        modal.find("img#uploadedFile").attr("src", img);
+        modal.modal("show");
     },
 
     formListeners() {
@@ -304,6 +317,7 @@ var openMtrDemo = {
         }
     },
 
+    errorMsgID: null,
     displayErrorMsg(title, text, level) {
         var self = this;
         var errorMsg = jQuery("div#error_msg");
