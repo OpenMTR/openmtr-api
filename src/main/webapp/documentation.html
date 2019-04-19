@@ -1114,39 +1114,50 @@ exit();
                                             </div>
                                         </div>
                                         <p>
-                                            Design Docs:
+                                            We met with KUB weekly throughout the project, and after establishing requirements,
+                                            we began designing the layout of the project. We wanted to lay out how we wanted the
+                                            project to proceed in term of our activities, as well as design the application. We made documents
+                                            on a high level, and drilled in for some functional detail. The front-end design went
+                                            through many iterations, and changed continually until the end of the project.
                                         </p>
-                                        <!--
-                            src="/image/schedule.png"src="image/style-doc-page.png""/image/design-sketch.jpg"
-
-                                                                <div class="ui modal"
-                                                                     id="mock-up modal">
-                                                                    <div class="header">Header</div>
-                                                                    <div class="image content">
-                                                                        <img class="image"
-                                                                             src="image/style-doc-page.png">
-                                                                        <div class="description">
-                                                                            <p>A picture</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>-->
-                                        <ul class="ui list">
-                                            <li>Network Diagram</li>
-                                            <ul>
-                                                <li>A Network Diagram is a visual representation of a project's schedule.</li>
-                                                <li>It represents a project's critical path as well as the scope for the project.</li>
-                                            </ul>
-                                            <li>Top-level visual</li>
-                                            <li>Use Case -> DFD mid level</li>
-                                            <li>DB Design</li>
-                                            <li>Tech Stack</li>
-                                            <li>Proj Schedule Plan</li>
-                                        </ul>
                                         <div class="ui divider"></div>
+                                        <!-- Network Diagram -->
                                         <div class="ui raised segment">
+                                            <div class="ui teal right ribbon label">An overhead view of the Project</div>
                                             <div class="ui image">
                                                 <img src="/image/network-diagram.png" />
                                             </div>
+                                        </div>
+                                        <div class="ui raised segment">
+                                            <div class="ui image">
+                                                <div class="ui teal right ribbon label">Some of the first GUI sketches</div>
+                                                <img src="/image/design-sketch.jpg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Third Column (4 wide) -->
+                                    <div class="four wide column">
+                                        <div class="ui image">
+                                            <div class="ui teal right ribbon label">Project Schedule</div>
+                                            <img src="/image/schedule.png" />
+                                        </div>
+                                        <div class="ui image">
+                                            <div class="ui teal right ribbon label">Early Demo Page Design</div>
+                                            <img src="/image/sketch-demo.jpg" />
+                                        </div>
+                                        <div class="ui divider"></div>
+                                        <div class="ui image">
+                                            <div class="ui teal right ribbon label">Early Doc Page Mock-up</div>
+                                            <img src="/image/style-doc-page.png" />
+                                        </div>
+                                        <div class="ui divider"></div>
+                                        <div class="ui image">
+                                            <div class="ui teal right ribbon label">Initial Database Design</div>
+                                            <img src="/image/white-board-DB.jpg" />
+                                        </div>
+                                        <div class="ui image">
+                                            <div class="ui teal right ribbon label">Database Diagram</div>
+                                            <img src="/image/white-board-DB.jpg" />
                                         </div>
                                     </div>
                                 </div>
@@ -1344,15 +1355,15 @@ exit();
                                             </p>
                                             <p>
                                                 We started off with the Free tier in the Azure web app. This gave us an opportunity to discover the
-                                                limitations of the Azure free tier. For example: When the app hasn't seen any calls in awhile, 
-                                                the server will unload the app to save processing power. When a user tries to vist the site the 
-                                                app will be spun up and served to the client. This results in a pretty considerable delay, 
+                                                limitations of the Azure free tier. For example: When the app hasn't seen any calls in awhile,
+                                                the server will unload the app to save processing power. When a user tries to vist the site the
+                                                app will be spun up and served to the client. This results in a pretty considerable delay,
                                                 but after that inital wait, the user is free to browse through the site with no problems.
                                             </p>
                                             <p>
                                                 Another limitation to the Free Tier is that the it maxes out at 1 Gig of RAM/hour.
-                                                openMTR requires almost a Gig worth of RAM just to get going, so in the end we bumped the subscription up to the Basic 1 paid tier. 
-                                                This removed those quotas and allowed us to start seeing results. However, at the Basic 1 tier there is still a lag when the server 
+                                                openMTR requires almost a Gig worth of RAM just to get going, so in the end we bumped the subscription up to the Basic 1 paid tier.
+                                                This removed those quotas and allowed us to start seeing results. However, at the Basic 1 tier there is still a lag when the server
                                                 hasn't been used in awhile, as Azure still unloads the webapp when not in use.
                                             </p>
                                         </div>
@@ -1362,7 +1373,7 @@ exit();
                                         <!-- Empty for Now -->
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                         </div>
                         <!-- Wrap-up -->
                         <div id="finalRow">
