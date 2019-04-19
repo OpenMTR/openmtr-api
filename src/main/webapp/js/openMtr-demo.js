@@ -203,6 +203,7 @@ var openMtrDemo = {
             }
             formData.append("url", url.val());
             appendURL = "/url";
+            jQuery("div#results-modal img#uploadedFile").attr("src", url.val());
         }
 
 
