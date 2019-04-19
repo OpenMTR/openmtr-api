@@ -73,22 +73,32 @@ public class GetRequest extends ApiRequest {
 		return this.isError();
 	}
 
-	protected void createImageFileName(String imageExtension) {
+	protected void createImageFileName() {
 		Date date = new Date();
-		this.image = new File(this.getImageFolderLocation() + date.getTime() + imageExtension);
+		this.image = new File(this.getImageFolderLocation() + date.getTime() + ".jpg");
 	}
 
 	private void downloadImage(String url) throws FileNotFoundException {
 		try {
-			this.createImageFileName(this.getExtensionFromFiletype(this.determineFileType(new URL(url).openStream())));
-			Files.copy(new URL(url).openStream(), Paths.get(this.getImageFile().getPath()),
-					StandardCopyOption.REPLACE_EXISTING);
-			if (!this.getImageFile().exists()) {
-				throw new FileNotFoundException("Could not download image from URL: " + url);
+			this.createImageFileName();
+			String ext = this.determineFileType(new URL(url).openStream());
+			System.out.println("File type: " + ext);
+			if(ext.equalsIgnoreCase("png")) {
+				this.convertPngToJpg(this.extractByteArray(new URL(url).openStream()), this.image);
 			}
-			if (this.determineFileType(this.getImageFile().getPath()) == null) {
-				this.getImageFile().delete();
-				throw new IOException("File downloaded was not an image");
+			else if(ext.equalsIgnoreCase("jpeg")) {
+				Files.copy(new URL(url).openStream(), Paths.get(this.getImageFile().getPath()),
+						StandardCopyOption.REPLACE_EXISTING);
+				if (!this.getImageFile().exists()) {
+					throw new FileNotFoundException("Could not download image from URL: " + url);
+				}
+				if (this.determineFileType(this.getImageFile().getPath()) == null) {
+					this.getImageFile().delete();
+					throw new IOException("File downloaded was not an image");
+				}
+			}
+			else {
+				throw new IOException("Image must be either png or jpg");
 			}
 		} catch (Exception ex) {
 			throw new FileNotFoundException(ex.getMessage());

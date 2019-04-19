@@ -71,10 +71,21 @@ public class PostRequest extends ApiRequest{
 	
 	protected boolean processImage() {
 		try {
-			this.setImageFile(this.getExtensionFromFiletype(this.determinFileType(getImageByteArray())));
-			FileOutputStream fos = new FileOutputStream(this.image);
-			fos.write(getImageByteArray());
-			fos.close();
+			this.setImageFile();
+			String ext = this.determinFileType(getImageByteArray());
+			System.out.println("Extension is: " + ext);
+			if( ext.equalsIgnoreCase("image/png")) {
+				this.convertPngToJpg(getImageByteArray(), this.image);
+			}
+			else if( ext.equalsIgnoreCase("image/jpeg")) {
+				FileOutputStream fos = new FileOutputStream(this.image);
+				fos.write(getImageByteArray());
+				fos.close();
+			}
+			else {
+				this.setErrorMsg("Image type must be jpg.");
+				return false;
+			}
 		} catch (IOException ex) {
 			this.setErrorMsg("Could not save file");
 			return false;

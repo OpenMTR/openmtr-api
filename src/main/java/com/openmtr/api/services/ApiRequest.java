@@ -1,5 +1,6 @@
 package com.openmtr.api.services;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -84,9 +85,9 @@ public abstract class ApiRequest {
 		return this.servletContext.getRealPath("/") + "uploadedImages/";
 	}
 
-	protected void setImageFile(String extension) {
+	protected void setImageFile() {
 		Date d = new Date();
-		this.image = new File(this.getImageFolderLocation() + d.getTime() + extension);
+		this.image = new File(this.getImageFolderLocation() + d.getTime() + ".jpg");
 	}
 
 	protected File getImageFile() {
@@ -182,6 +183,24 @@ public abstract class ApiRequest {
 	protected byte[] extractByteArray(InputStream is) throws IOException {
 		byte[] imgBytes = IOUtils.toByteArray(is);
 		return imgBytes;
+	}
+	
+	protected boolean convertPngToJpg(byte[] pngFile, File jpgFile) {
+		try {
+			InputStream in = new ByteArrayInputStream(pngFile);
+			BufferedImage bufferedImage = ImageIO.read(in);
+			
+			BufferedImage newBufferedImage = new BufferedImage(bufferedImage.getWidth(),
+					bufferedImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+			  newBufferedImage.createGraphics().drawImage(bufferedImage, 0, 0, Color.WHITE, null);
+			  
+		  ImageIO.write(newBufferedImage, "jpg", jpgFile);
+		  this.extractByteArray();
+		} catch (IOException e) {
+			System.out.println("Could not convert PNG to JPEG. " + e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 }
