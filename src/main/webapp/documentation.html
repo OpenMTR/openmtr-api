@@ -51,32 +51,32 @@
                         <div class="ui small image">
                             <img src="/image/logo-2-text.png">
                         </div>
-                </a>
-                <a class="item"
-                   href="/index.html">
-                    Home
-                </a>
-                <div class="right menu">
-                    <!-- LINK TO GITHUB -->
-                    <a href="https://github.com/OpenMTR/openmtr-api"
-                       class="ui black massive icon button"
-                       data-tooltip="Check out the project on Github"
-                       data-position="bottom right"
-                       data-inverted="">
-                        <i class="github icon"></i>
                     </a>
-                    <!-- LINK TO GITHUB ISSUES -->
-                    <a href="https://github.com/OpenMTR/openmtr-api/issues"
-                       class="ui black massive icon button"
-                       data-tooltip="Submit Bug Report"
-                       data-position="bottom right"
-                       data-inverted="">
-                        <i class="bug icon"></i>
+                    <a class="item"
+                       href="/index.html">
+                        Home
                     </a>
-                    <!-- LINK TO DEMO PAGE -->
-                    <a href="/demo-page.html"
-                       class="item">
-                        Try it Yourself!
+                    <div class="right menu">
+                        <!-- LINK TO GITHUB -->
+                        <a href="https://github.com/OpenMTR/openmtr-api"
+                           class="ui black massive icon button"
+                           data-tooltip="Check out the project on Github"
+                           data-position="bottom right"
+                           data-inverted="">
+                            <i class="github icon"></i>
+                        </a>
+                        <!-- LINK TO GITHUB ISSUES -->
+                        <a href="https://github.com/OpenMTR/openmtr-api/issues"
+                           class="ui black massive icon button"
+                           data-tooltip="Submit Bug Report"
+                           data-position="bottom right"
+                           data-inverted="">
+                            <i class="bug icon"></i>
+                        </a>
+                        <!-- LINK TO DEMO PAGE -->
+                        <a href="/demo-page.html"
+                           class="item">
+                            Try it Yourself!
                         </a>
                         <!-- LINK TO DOC PAGE -->
                         <a href="/documentation.html"
@@ -95,16 +95,16 @@
                         <div class="ui small image">
                             <img src="/image/logo-2-text.png">
                         </div>
-                  </div>
-                    </a>
-                    <div class="right menu">
-                        <a class="item menu-toggle">
-                            Menu
-                            <i class="caret down icon"></i>
-                        </a>
                     </div>
+                </a>
+                <div class="right menu">
+                    <a class="item menu-toggle">
+                        Menu
+                        <i class="caret down icon"></i>
+                    </a>
                 </div>
-            </div>      
+            </div>
+        </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu"
              class="ui vertical stripe segment hiddenMenu">
@@ -253,7 +253,7 @@
                                 </div>
                                 <div class="ui ten wide column">
                                     <h3 class="ui header">
-                                        <i class= "camera icon"></i>
+                                        <i class="camera icon"></i>
                                         <div class="content">
                                             Picture Best Practices
                                         </div>
@@ -579,8 +579,8 @@ public class ClientMultipartFormPost {
                                     <div class="two wide column">
                                         <h3>Python</h3>
                                         <!-- Field "email" and "file", optional "numberOfDials"
-                            response json string
-                            -->
+                                        response json string
+                                        -->
                                     </div>
                                     <div class="fourteen wide column">
                                         <pre>
@@ -701,8 +701,8 @@ namespace ConsoleApplicationTest
                                     <div class="two wide column">
                                         <h3>PHP</h3>
                                         <!-- Field "email" and "file", optional "numberOfDials"
-                            response json string
-                            -->
+                                        response json string
+                                        -->
                                     </div>
                                     <div class="fourteen wide column">
                                         <pre>
@@ -1119,7 +1119,7 @@ exit();
                                             project to proceed in term of our activities, as well as design the application. We made documents
                                             on a high level, and drilled in for some functional detail. The front-end design went
                                             through many iterations, and changed continually until the end of the project.
-                                        </p>
+                                      </p>
                                         <div class="ui divider"></div>
                                         <!-- Network Diagram -->
                                         <div class="ui raised segment">
@@ -1278,8 +1278,8 @@ exit();
                                         </p>
                                         <div class="ui divider"></div>
                                         <!-- API Segment -->
-                                        <div class="ui raised segment">
-                                            <h2>API</h2>
+                                        <div class="ui raised olive segment">
+                                            <h2 class="ui olive header">API</h2>
                                             <h5 class="ui subheader">Working with JAX-RS - <i>James Willhoite</i></h5>
                                             <p>
                                                 What is Jax-RS? Jax-RS is a combination of specifications, interfaces,
@@ -1343,9 +1343,8 @@ exit();
                                             </div>
                                         </div>
                                         <!-- Azure Segment -->
-                                        <div class="ui raised segment">
-                                            <h2>Azure</h2>
-                                            <img class="ui medium right floated image" src="/image/azure-release-steps.png">
+                                        <div class="ui raised olive segment">
+                                            <h2 class="ui olive header">Azure</h2>
                                             <p>
                                                 We were excited to hear one of the requirements was to implement out project on Azure.
                                                 Jenny had some familiarity with Cloud-based services through AWS, but Azure was very new to us.
@@ -1366,6 +1365,62 @@ exit();
                                                 This removed those quotas and allowed us to start seeing results. However, at the Basic 1 tier there is still a lag when the server
                                                 hasn't been used in awhile, as Azure still unloads the webapp when not in use.
                                             </p>
+                                        </div>
+                                        <!--  Pipeline Segment  -->
+                                        <div class="ui raised olive segment">
+                                            <h2 class="ui olive header">
+                                                CI/CD Pipeline
+                                            </h2>
+                                            <p>
+                                                <b>Continuous Integration/Continuous Delivery</b> was a new concept for our team. KUB stressed the
+                                                importance of learning the process, it being a core workflow tool used in modern development teams.
+                                                There was definitely a learning curve, and it took a while for the team to find the right setup.
+                                                Some complications we ran into were simple fixes, but difficult to find, such as using <b style="color: blue">**/*/</b> vs <b style="color: blue">**\*\</b>.
+                                                Forward slash is common in Linux environments, but Azure prefers the back slash for Windows environments.
+                                            </p>
+                                            <div class="ui raised inverted segment">
+
+                                                <img class="ui large fluid image" src="/image/azure-release-steps.png">
+                                            </div>
+                                            <p>
+                                                The most rewarding part of this portion was being able to watch a pull request turn into a working
+                                                application just minutes after being reviewed. This part of our project really aided in allowing the
+                                                team to have a continuous workflow throughout the whole project. We were able to watch each new version of
+                                                the application build with Maven in real-time, and instantly knew if the requests we were making for changes
+                                                were functioning as we thought, or if we needed to go back and fix something.
+                                            </p>
+                                            <div class="ui raised middle aligned inverted segment">
+                                                <p>
+                                                    Devops Release Example:
+                                                </p>
+                                                <p>
+                                                    When something is merged into master, it triggers a release through the pipeline
+                                                    to deploy the artifact as an Azure webapp.
+                                                </p>
+                                                <img class="ui fluid image" src="/image/devops-release88.png">
+                                            </div>
+                                        </div>
+                                        <!-- Database Segment  -->
+                                        <div class="ui raised olive segment">
+                                            <h2 class="ui olive header">Database</h2>
+                                            <p>
+                                                Our database is hosted on an Azure SQL Server as a SQL database. This was fairly straightforward to create,
+                                                and pricing was relatively straightfoward for it. The base cost of having a database is currently $5/month,
+                                                then additional costs are incurred with usage. With this model, the database will continue to be inexpensive
+                                                until it begins to be used regularly, and retains easy scalability, depending on budget.
+                                            </p>
+                                            <p>
+                                                One benefit we found to hosting this database on Azure is that it is very secure. Azure Access Control uses
+                                                the "principle of least privilege" in every aspect of user access. This means if someone wants to be a
+                                                database contributor, they MUST be assigned that role before they can do so. Basically all users default to
+                                                read-only until assigned otherwise.
+                                            </p>
+                                            <div class="ui raised inverted segment">
+                                                <p>
+                                                    The final version of the database fields used to store information on each request sent through the API
+                                                </p>
+                                                <img class="ui image" src="/image/prod-db-schema.PNG">
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- Third Column (4 wide) -->
@@ -1476,18 +1531,19 @@ exit();
             <!-- Logo Olive Box (Right) -->
             <div class="olive column">
                 <div class="ui small image">
-                    <img src="/image/logo-2-black.png"/>
+                    <img src="/image/logo-2-black.png" />
+                </div>
             </div>
         </div>
     </div>
-    <!-- End Colored Footer -->
+        <!-- End Colored Footer -->
 
-    <script src="/js/openMtr-documentation.js"></script>
-    <script src="js/scrollToTop.js"></script>
-    <script>
-        jQuery(document).ready(function () {
-            openMtrDoc.init();
-        });
-    </script>
+        <script src="/js/openMtr-documentation.js"></script>
+        <script src="js/scrollToTop.js"></script>
+        <script>
+            jQuery(document).ready(function () {
+                openMtrDoc.init();
+            });
+        </script>
 </body>
 </html>
