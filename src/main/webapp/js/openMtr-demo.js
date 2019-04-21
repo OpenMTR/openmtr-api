@@ -18,6 +18,7 @@ var mobilecheck = (function() {
 }());
 var openMtrDemo = {
 
+    imgHeight: 0.0,
     init() {
         var self = this;
 
@@ -25,6 +26,8 @@ var openMtrDemo = {
         self.demoListeners();
         self.dragNdropListeners();
         self.formListeners();
+
+        self.imgHeight = jQuery("div#dragNdrop").height();
 
         jQuery("#email-question").click(function () {
             jQuery("#email-privacy-modal").modal("show");
@@ -64,6 +67,7 @@ var openMtrDemo = {
         var self = this;
         var form = jQuery("div#dragNdrop .box");
         var input = form.find("input#file");
+        var url = jQuery("form.my-form input#url");
         var droppedFiles = false;
         //user allows drag n drop
         if(isAdvancedUpload && !mobilecheck) {
@@ -99,10 +103,9 @@ var openMtrDemo = {
 
         jQuery("div#dragNdrop span#close i").on("click", function() {
             self.droppedFiles = null;
-            jQuery("div#dragNdrop span#close").fadeOut("fast");
-            jQuery("div#dragNdrop img").attr("src", "").css("max-height", "0px");
+            url.val("");
+            jQuery("div#dragNdrop img").attr("src", "");
             form.removeClass("upload-ready file-dropped");
-            jQuery("div#dragNdrop .box").fadeIn("fast");
         });
 
 
@@ -113,10 +116,7 @@ var openMtrDemo = {
         var reader = new FileReader();
         reader.onload = function(e) {
             jQuery("div#results-modal img#uploadedFile").attr("src", e.target.result);
-            var height = jQuery("div#dragNdrop").height();
-            jQuery("div#dragNdrop .box").fadeOut("fast");
-            jQuery("div#dragNdrop img").attr("src", e.target.result).css("max-height", height);
-            jQuery("div#dragNdrop span#close").fadeIn("fast");
+            jQuery("div#dragNdrop img").attr("src", e.target.result);
         };
         reader.readAsDataURL(self.droppedFiles[0]);
     },
@@ -157,7 +157,33 @@ var openMtrDemo = {
             {
                 jQuery(this).parent().parent().removeClass("error");
             }
+        }).on("blur", function () {
+            var imgUrl = jQuery(this).val();
+            if (self.validateUrl(imgUrl)) {
+                jQuery("div#dragNdrop img").attr("src", imgUrl);
+            }
         });
+
+        jQuery("div#dragNdrop img")
+            .on("load", function () {
+
+                jQuery("div#dragNdrop .box").fadeOut("fast");
+                jQuery("div#dragNdrop span#close").fadeIn("fast");
+                jQuery(this).css("max-height", self.imgHeight + "px");
+                self.hideErrorMsg();
+            })
+            .on("error", function () {
+                jQuery("div#dragNdrop .box").fadeIn("fast");
+                jQuery("div#dragNdrop span#close").fadeOut("fast");
+                jQuery(this)
+                    .attr("src", "")
+                    .css("max-height", 0);
+
+                if (url.val() > "") {
+                    self.displayErrorMsg("Error", "The url given does not contain an image. Please try again.");
+                }
+
+            });
     },
 
     validateEmail(email) {
