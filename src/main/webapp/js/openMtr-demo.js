@@ -96,6 +96,9 @@ var openMtrDemo = {
         else {
             form.find("input[type='file']").on("change", function (e) {
                 self.droppedFiles = e.currentTarget.files;
+                if ("FileReader" in window) {
+                    self.displayImg();
+                }
                 form.addClass("has-success");
             });
         }
