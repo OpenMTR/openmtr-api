@@ -720,14 +720,15 @@ namespace ConsoleApplicationTest
                                     </div>
                                     <div class="fourteen wide column">
                                         <pre>
-                                        <code class="PHP">
+                                        <code class="HTML">
 
-// Capstone 2019                              
-// Please visit our GitHub page for more info.
-// https://github.com/OpenMTR/openmtr-api     
+/**********************************************
+ * Capstone 2019                              *
+ * Please visit our GitHub page for more info.*
+ * https://github.com/OpenMTR/openmtr-api     *
+ **********************************************/
 
-
-$url = "http://openmtr.azurewebsites.net/api/read_meter"; //Append /url to give a URL for the image
+$url = "http://openmtr.azurewebsites.net/api/read_meter"; /*Append /url to give a URL for the image*/
 $imageToUpload = "/path/to/image.jpg";
 
 if(!file_exists($imageToUpload)) {
@@ -736,9 +737,9 @@ if(!file_exists($imageToUpload)) {
 }
 $fields = array(
     "file" => new CURLFile($imageToUpload),
-    "url" => "http://some_url.com", //If URL then Omit file
+    "url" => "http://some_url.com", /*If URL then Omit file*/
     "email" => "someone@domain.com",
-    "numberOfDials" => "999999" //Optional
+    "numberOfDials" => "999999" /*Optional*/
 );
 
 $ch = curl_init($url);
